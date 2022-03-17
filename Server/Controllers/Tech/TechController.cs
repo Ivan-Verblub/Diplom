@@ -7,6 +7,7 @@ using Server.Controllers.Models;
 using Server.MySQL;
 using Server.MySQL.Tables.Filter;
 using System.Data;
+using System.Web;
 
 namespace Server.Controllers.Tech
 {
@@ -34,7 +35,7 @@ namespace Server.Controllers.Tech
             }
         }
 
-        private void Search(SOptions op, int[] contexts)
+        private Models.Char[] Search(SOptions op, int[] contexts)
         {
             foreach (var context in contexts)
             {
@@ -45,8 +46,9 @@ namespace Server.Controllers.Tech
                 var dt = st.ContextT.Select(filter);
                 UriBuilder builder = new UriBuilder();
                 builder.Host = "google.com";
-                builder.Query = $"search?q=";
-                string url = "https://www.google.com/search?q=%D0%9A%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0+dpi+%3D+1000+stie%3A+dns-shop.ru";
+                builder.Query = $"search?q=" +
+                    $"{HttpUtility.UrlEncode("")}";
+                string url = builder.ToString();
                 List<string> links = new List<string>();
                 var chromeOptions = new ChromeOptions();
                 using (var driver = new ChromeDriver(chromeOptions))
@@ -66,6 +68,7 @@ namespace Server.Controllers.Tech
                     }
                 }
             }
+            return null;
         }
 
         private string Parse(string html)
