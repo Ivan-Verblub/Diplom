@@ -13,10 +13,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class SCatController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public Scat[] SelectSC()
         {
-            var dt = StaticTables.ScatT.Select();
+            var dt = st.ScatT.Select();
             var scat = new Scat[dt.Rows.Count];
             int i = 0;
             foreach(var row in dt.Select())
@@ -33,7 +34,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public Scat[] SelectSC(ScatFilter scatf)
         {
-            var dt = StaticTables.ScatT.Select(scatf);
+            var dt = st.ScatT.Select(scatf);
             var scat = new Scat[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -50,7 +51,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<Scat>> InsertSC(Scat scat)
         {
-            string er = StaticTables.ScatT.Insert(scat);
+            string er = st.ScatT.Insert(scat);
             if(er == "")
                 return CreatedAtAction(nameof(this.SelectSC), scat);
             return BadRequest(er);
@@ -60,7 +61,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<Scat>> Delete(Scat scat)
         {
-            string er = StaticTables.ScatT.Delete(scat);
+            string er = st.ScatT.Delete(scat);
             if (er == "")
                 return CreatedAtAction(nameof(this.SelectSC), scat);
             return BadRequest(er);
@@ -69,7 +70,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<Scat>> UpdateSC(Scat scat)
         {
-            string er = StaticTables.ScatT.Update(scat);
+            string er = st.ScatT.Update(scat);
             if (er == "")
                 return CreatedAtAction(nameof(this.SelectSC), scat);
             return BadRequest(er);

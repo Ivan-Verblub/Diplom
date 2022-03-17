@@ -13,10 +13,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class RequestController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public Request[] Select()
         {
-            var dt = StaticTables.RequestT.Select();
+            var dt = st.RequestT.Select();
             var request = new Request[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -27,9 +28,7 @@ namespace Server.Controllers.Tables
                     Name = row.Field<string>("name"),
                     File = Convert.ToBase64String(row.Field<byte[]>("File")),
                     IdLearning = row.Field<int>("idlearninghistroy"),
-                    Comment = row.Field<string>("comment"),
-                    IdUser = row.Field<int>("iduser"),
-                    Login = row.Field<string>("string")
+                    Comment = row.Field<string>("comment")
                 };
                 i++;
             }
@@ -39,7 +38,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public Request[] Select(RequestFilter requestF)
         {
-            var dt = StaticTables.RequestT.Select(requestF);
+            var dt = st.RequestT.Select(requestF);
             var request = new Request[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -50,9 +49,7 @@ namespace Server.Controllers.Tables
                     Name = row.Field<string>("name"),
                     File = Convert.ToBase64String(row.Field<byte[]>("File")),
                     IdLearning = row.Field<int>("idlearninghistroy"),
-                    Comment = row.Field<string>("comment"),
-                    IdUser = row.Field<int>("iduser"),
-                    Login = row.Field<string>("string")
+                    Comment = row.Field<string>("comment")
                 };
                 i++;
             }
@@ -62,7 +59,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<Request>> Insert(Request request)
         {
-            string er = StaticTables.RequestT.Insert(request);
+            string er = st.RequestT.Insert(request);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), request);
             return BadRequest(er);
@@ -71,7 +68,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<Request>> Update(Request request)
         {
-            string er = StaticTables.RequestT.Update(request);
+            string er = st.RequestT.Update(request);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), request);
             return BadRequest(er);
@@ -80,7 +77,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<Request>> Delete(Request request)
         {
-            string er = StaticTables.RequestT.Delete(request);
+            string er = st.RequestT.Delete(request);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), request);
             return BadRequest(er);

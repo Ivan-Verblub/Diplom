@@ -14,10 +14,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class SLocationController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public SLocation[] Select()
         {
-            var dt = StaticTables.SLocationT.Select();
+            var dt = st.SLocationT.Select();
             var sLocation = new SLocation[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -35,7 +36,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public SLocation[] SelectF(SLocationFilter sLocationf)
         {
-            var dt = StaticTables.SLocationT.Select(sLocationf);
+            var dt = st.SLocationT.Select(sLocationf);
             var sLocation = new SLocation[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -53,7 +54,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<SLocation>> Insert(SLocation sLocation)
         {
-            string er = StaticTables.SLocationT.Insert(sLocation);
+            string er = st.SLocationT.Insert(sLocation);
             if (er == "")
                 return CreatedAtAction(nameof(Select), sLocation);
             return BadRequest(er);
@@ -62,7 +63,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<SLocation>> Delete(SLocation sLocation)
         {
-            string er = StaticTables.SLocationT.Delete(sLocation);
+            string er = st.SLocationT.Delete(sLocation);
             if (er == "")
                 return CreatedAtAction(nameof(Select), sLocation);
             return BadRequest(er);
@@ -71,7 +72,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<SLocation>> Update(SLocation sLocation)
         {
-            string er = StaticTables.SLocationT.Update(sLocation);
+            string er = st.SLocationT.Update(sLocation);
             if (er == "")
                 return CreatedAtAction(nameof(Select), sLocation);
             return BadRequest(er);

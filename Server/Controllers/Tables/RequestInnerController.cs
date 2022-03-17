@@ -13,10 +13,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class RequestInnerController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public RequestInner[] Select()
         {
-            var dt = StaticTables.RequestInnerT.Select();
+            var dt = st.RequestInnerT.Select();
             var requestInner = new RequestInner[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -25,7 +26,6 @@ namespace Server.Controllers.Tables
                 {
                     Id = row.Field<int>("idrequestinner"),
                     Name = row.Field<string>("name"),
-                    Chars = row.Field<string>("char"),
                     Cost = row.Field<float>("cost"),
                     IdCat = row.Field<int>("idcat"),
                     Cat = row.Field<string>("name1"),
@@ -41,7 +41,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public RequestInner[] Select(RequestInnerFilter requestInnerF)
         {
-            var dt = StaticTables.RequestInnerT.Select(requestInnerF);
+            var dt = st.RequestInnerT.Select(requestInnerF);
             var requestInner = new RequestInner[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -50,7 +50,6 @@ namespace Server.Controllers.Tables
                 {
                     Id = row.Field<int>("idrequestinner"),
                     Name = row.Field<string>("name"),
-                    Chars = row.Field<string>("char"),
                     Cost = row.Field<float>("cost"),
                     IdCat = row.Field<int>("idcat"),
                     Cat = row.Field<string>("name"),
@@ -66,7 +65,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<RequestInner>> Insert(RequestInner request)
         {
-            string er = StaticTables.RequestInnerT.Insert(request);
+            string er = st.RequestInnerT.Insert(request);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), request);
             return BadRequest(er);
@@ -75,7 +74,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<RequestInner>> Update(RequestInner request)
         {
-            string er = StaticTables.RequestInnerT.Update(request);
+            string er = st.RequestInnerT.Update(request);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), request);
             return BadRequest(er);
@@ -84,7 +83,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<RequestInner>> Delete(RequestInner request)
         {
-            string er = StaticTables.RequestInnerT.Delete(request);
+            string er = st.RequestInnerT.Delete(request);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), request);
             return BadRequest(er);

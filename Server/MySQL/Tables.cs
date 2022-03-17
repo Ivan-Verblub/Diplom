@@ -15,7 +15,7 @@ namespace Server.MySQL
                 return _instance;
             }
         }
-        private static StaticTables? _instance;
+        private static StaticTables _instance;
         private StaticTables()
         {
 
@@ -37,7 +37,8 @@ namespace Server.MySQL
         public Table<Request, RequestFilter> RequestT { get; set; }
         public Table<RequestInner, RequestInnerFilter> RequestInnerT { get; set; }
         public Table<Scat, ScatFilter> ScatT { get; set; }
-
+        public Table<SearchContext, SearchContext> SearchContextT { get; set; }
+        public Table<SearchNames, SearchNames> SearchNamesT { get; set; }
         public Table<SLocation, SLocationFilter> SLocationT { get; set; }
         public Table<SStatus, SStatusFilter> SStatusT { get; set; }
 

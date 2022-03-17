@@ -13,10 +13,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class DataController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public DatasTable[] Select()
         {
-            var dt = StaticTables.DataT.Select();
+            var dt = st.DataT.Select();
             var data = new DatasTable[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -37,7 +38,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public DatasTable[] Select(DatasFilter dataF)
         {
-            var dt = StaticTables.DataT.Select(dataF);
+            var dt = st.DataT.Select(dataF);
             if(dt == null)
                 return null;
             var data = new DatasTable[dt.Rows.Count];
@@ -60,7 +61,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<DatasTable>> Insert(DatasTable data)
         {
-            string er = StaticTables.DataT.Insert(data);
+            string er = st.DataT.Insert(data);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), data);
             return BadRequest(er);
@@ -69,7 +70,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<DatasTable>> Update(DatasTable data)
         {
-            string er = StaticTables.DataT.Update(data);
+            string er = st.DataT.Update(data);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), data);
             return BadRequest(er);
@@ -78,7 +79,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<DatasTable>> Delete(DatasTable data)
         {
-            string er = StaticTables.DataT.Delete(data);
+            string er = st.DataT.Delete(data);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), data);
             return BadRequest(er);

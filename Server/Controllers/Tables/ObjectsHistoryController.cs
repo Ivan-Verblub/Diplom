@@ -13,10 +13,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class ObjectsHistoryController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public ObjectsHistory[] Select()
         {
-            var dt = StaticTables.ObjectsHistoryT.Select();
+            var dt = st.ObjectsHistoryT.Select();
             var objectsHistory = new ObjectsHistory[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -41,7 +42,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public ObjectsHistory[] Select(ObjectsHistoryFilter objectsF)
         {
-            var dt = StaticTables.ObjectsHistoryT.Select(objectsF);
+            var dt = st.ObjectsHistoryT.Select(objectsF);
             var objectsHistory = new ObjectsHistory[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -66,7 +67,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<ObjectsHistory>> Insert(ObjectsHistory objects)
         {
-            string er = StaticTables.ObjectsHistoryT.Insert(objects);
+            string er = st.ObjectsHistoryT.Insert(objects);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), objects);
             return BadRequest(er);
@@ -75,7 +76,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<ObjectsHistory>> Update(ObjectsHistory objects)
         {
-            string er = StaticTables.ObjectsHistoryT.Update(objects);
+            string er = st.ObjectsHistoryT.Update(objects);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), objects);
             return BadRequest(er);
@@ -84,7 +85,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<ObjectsHistory>> Delete(ObjectsHistory objects)
         {
-            string er = StaticTables.ObjectsHistoryT.Delete(objects);
+            string er = st.ObjectsHistoryT.Delete(objects);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), objects);
             return BadRequest(er);

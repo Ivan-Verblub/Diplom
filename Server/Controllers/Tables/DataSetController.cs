@@ -14,10 +14,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class DataSetController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public DataSet[] Select()
         {
-            var dt = StaticTables.DataSetT.Select();
+            var dt = st.DataSetT.Select();
             var dataSet = new DataSet[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -34,7 +35,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public DataSet[] SelectF(DataSetFilter dataSetF)
         {
-            var dt = StaticTables.DataSetT.Select(dataSetF);
+            var dt = st.DataSetT.Select(dataSetF);
             var dataSet = new DataSet[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -52,7 +53,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<DataSet>> Insert(DataSet dataSet)
         {
-            string er = StaticTables.DataSetT.Insert(dataSet);
+            string er = st.DataSetT.Insert(dataSet);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), dataSet);
             return BadRequest(er);
@@ -60,7 +61,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<DataSet>> Update(DataSet dataSet)
         {
-            string er = StaticTables.DataSetT.Update(dataSet);
+            string er = st.DataSetT.Update(dataSet);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), dataSet);
             return BadRequest(er);
@@ -68,7 +69,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<DataSet>> Delete(DataSet dataSet)
         {
-            string er = StaticTables.DataSetT.Delete(dataSet);
+            string er = st.DataSetT.Delete(dataSet);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), dataSet);
             return BadRequest(er);

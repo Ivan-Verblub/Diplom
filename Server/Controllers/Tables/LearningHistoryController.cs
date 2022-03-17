@@ -13,10 +13,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class LearningHistoryController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public LearningHistory[] Select()
         {
-            var dt = StaticTables.LearningHistoryT.Select();
+            var dt = st.LearningHistoryT.Select();
             var learningHistories = new LearningHistory[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -39,7 +40,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public LearningHistory[] Select(LearningHistoryFilter learningHistoryF)
         {
-            var dt = StaticTables.LearningHistoryT.Select(learningHistoryF);
+            var dt = st.LearningHistoryT.Select(learningHistoryF);
             var learningHistories = new LearningHistory[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -62,7 +63,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<LearningHistory>> Insert(LearningHistory learningHistory)
         {
-            string er = StaticTables.LearningHistoryT.Insert(learningHistory);
+            string er = st.LearningHistoryT.Insert(learningHistory);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), learningHistory);
             return BadRequest(er);
@@ -71,7 +72,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<LearningHistory>> Update(LearningHistory learningHistory)
         {
-            string er = StaticTables.LearningHistoryT.Update(learningHistory);
+            string er = st.LearningHistoryT.Update(learningHistory);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), learningHistory);
             return BadRequest(er);
@@ -80,7 +81,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<LearningHistory>> Delete(LearningHistory learningHistory)
         {
-            string er = StaticTables.LearningHistoryT.Delete(learningHistory);
+            string er = st.LearningHistoryT.Delete(learningHistory);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), learningHistory);
             return BadRequest(er);

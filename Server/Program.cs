@@ -1,25 +1,33 @@
 using Server.MySQL;
-using Server.MySQL.Tables;
-using Server.MySQL.Tables.Table;
 
 class Programm
 {
     public static void Main(string[] args)
     {
-        StaticTables.Connector = new Connector("localhost","root","qwerty");
-        if(!StaticTables.Connector.Open())
+        var st = StaticTables.Instance;
+        st.Connector = new Connector("localhost","root","qwerty");
+        if(!st.Connector.Open())
             Environment.Exit(0);
-        StaticTables.ActualT = new(StaticTables.Connector);
-        StaticTables.DataSetT = new(StaticTables.Connector);
-        StaticTables.DataT = new(StaticTables.Connector);
-        StaticTables.LearningHistoryT = new(StaticTables.Connector);
-        StaticTables.ObjectsT = new(StaticTables.Connector);
-        StaticTables.ObjectsHistoryT = new(StaticTables.Connector);
-        StaticTables.RequestT = new(StaticTables.Connector);
-        StaticTables.RequestInnerT = new(StaticTables.Connector);
-        StaticTables.ScatT = new(StaticTables.Connector);
-        StaticTables.SLocationT = new(StaticTables.Connector);
-        StaticTables.SStatusT = new(StaticTables.Connector);
+        st.ActualT = new(st.Connector);
+        st.CharsOT = new(st.Connector);
+        st.CharsRT = new(st.Connector);
+        st.ContextT = new(st.Connector);
+        st.ContextableT = new(st.Connector);
+        st.ContextsT = new(st.Connector);
+        st.DataSetT = new(st.Connector);
+        st.DataT = new(st.Connector);
+        st.LearningHistoryT = new(st.Connector);
+        st.ObjectsT = new(st.Connector);
+        st.ObjectsHistoryT = new(st.Connector);
+        st.OptionsT = new(st.Connector);
+        st.PathsT = new(st.Connector);
+        st.RequestT = new(st.Connector);
+        st.RequestInnerT = new(st.Connector);
+        st.ScatT = new(st.Connector);
+        st.SearchContextT = new(st.Connector);
+        st.SearchNamesT = new(st.Connector);
+        st.SLocationT = new(st.Connector);
+        st.SStatusT = new(st.Connector);
         
 
         var builder = WebApplication.CreateBuilder(args);

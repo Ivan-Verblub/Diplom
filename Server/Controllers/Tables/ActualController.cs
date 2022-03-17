@@ -13,10 +13,12 @@ namespace Server.Controllers.Tables
     [Route("Table/[controller]")]
     public class ActualController : Controller
     {
+        private StaticTables st = StaticTables.Instance;
+
         [HttpGet("Select")]
         public Actual[] Select()
         {
-            var dt = StaticTables.ActualT.Select();
+            var dt = st.ActualT.Select();
             var actual = new Actual[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -38,7 +40,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public Actual[] Select(ActualFilter actualF)
         {
-            var dt = StaticTables.ActualT.Select(actualF);
+            var dt = st.ActualT.Select(actualF);
             var actual = new Actual[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -60,7 +62,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<Actual>> Insert(Actual actual)
         {
-            string er = StaticTables.ActualT.Insert(actual);
+            string er = st.ActualT.Insert(actual);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), actual);
             return BadRequest(er);
@@ -69,7 +71,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<Actual>> Update(Actual actual)
         {
-            string er = StaticTables.ActualT.Update(actual);
+            string er = st.ActualT.Update(actual);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), actual);
             return BadRequest(er);
@@ -78,7 +80,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<Actual>> Delete(Actual actual)
         {
-            string er = StaticTables.ActualT.Delete(actual);
+            string er = st.ActualT.Delete(actual);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), actual);
             return BadRequest(er);

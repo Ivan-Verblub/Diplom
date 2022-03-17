@@ -13,10 +13,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class SStatusController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public SStatus[] Select()
         {
-            var dt = StaticTables.SStatusT.Select();
+            var dt = st.SStatusT.Select();
             var sStatus = new SStatus[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -34,7 +35,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public SStatus[] Select(SStatusFilter sStatusF)
         {
-            var dt = StaticTables.SStatusT.Select(sStatusF);
+            var dt = st.SStatusT.Select(sStatusF);
             var sStatus = new SStatus[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -52,7 +53,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<SStatus>> Insert(SStatus sStatus)
         {
-            string er = StaticTables.SStatusT.Insert(sStatus);
+            string er = st.SStatusT.Insert(sStatus);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), sStatus);
             return BadRequest(er);
@@ -61,7 +62,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<SStatus>> Delete(SStatus sStatus)
         {
-            string er = StaticTables.SStatusT.Delete(sStatus);
+            string er = st.SStatusT.Delete(sStatus);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), sStatus);
             return BadRequest(er);
@@ -70,7 +71,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<SStatus>> Update(SStatus sStatus)
         {
-            string er = StaticTables.SStatusT.Update(sStatus);
+            string er = st.SStatusT.Update(sStatus);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), sStatus);
             return BadRequest(er);

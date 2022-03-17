@@ -13,10 +13,11 @@ namespace Server.Controllers.Tables
     [ApiController]
     public class ObjectsController : ControllerBase
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpGet("Select")]
         public Objects[] Select()
         {
-            var dt = StaticTables.ObjectsT.Select();
+            var dt = st.ObjectsT.Select();
             var objects = new Objects[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -44,7 +45,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Select")]
         public Objects[] Select(ObjectsFilter objectsF)
         {
-            var dt = StaticTables.ObjectsT.Select(objectsF);
+            var dt = st.ObjectsT.Select(objectsF);
             var objects = new Objects[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -72,7 +73,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Insert")]
         public async Task<ActionResult<Objects>> Insert(Objects objects)
         {
-            string er = StaticTables.ObjectsT.Insert(objects);
+            string er = st.ObjectsT.Insert(objects);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), objects);
             return BadRequest(er);
@@ -81,7 +82,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Update")]
         public async Task<ActionResult<Objects>> Update(Objects objects)
         {
-            string er = StaticTables.ObjectsT.Update(objects);
+            string er = st.ObjectsT.Update(objects);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), objects);
             return BadRequest(er);
@@ -90,7 +91,7 @@ namespace Server.Controllers.Tables
         [HttpPost("Delete")]
         public async Task<ActionResult<Objects>> Delete(Objects objects)
         {
-            string er = StaticTables.ObjectsT.Delete(objects);
+            string er = st.ObjectsT.Delete(objects);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), objects);
             return BadRequest(er);
