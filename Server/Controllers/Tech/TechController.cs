@@ -19,7 +19,6 @@ namespace Server.Controllers.Tech
         [HttpPost("UUUUU")]
         public void Select(Names n)
         {
-            Search(null);
             var filter = new SearchNamesFilter();
             filter.IdSearch = n.Id;
             var names = st.SearchNamesT.Select(filter);
@@ -29,32 +28,42 @@ namespace Server.Controllers.Tech
                 {
                     if(name.Field<int>("idSearchNames") == ns.Id)
                     {
-                        Search(ns);
+                        Search(ns,n.ContextId);
                     }
                 }
             }
         }
 
-        private void Search(SOptions op)
+        private void Search(SOptions op, int[] contexts)
         {
-
-            string url = "https://www.google.com/search?q=%D0%9A%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0+dpi+%3D+1000+stie%3A+dns-shop.ru";
-            List<string> links = new List<string>();
-            var chromeOptions = new ChromeOptions();
-            using (var driver = new ChromeDriver(chromeOptions))
+            foreach (var context in contexts)
             {
-                driver.Url = url;
-                var html = driver.FindElements(By.XPath("//div[@class = \"g tF2Cxc\"]"));
-                for(int i = 0;i<count;i++)
-                foreach(var element in html)
+                var filter = new ContextFilter()
                 {
-                    links.Add(Parse(element.GetAttribute("outerHTML")));
-                }
-                
-                foreach(var item in links)
+                    Id = context
+                };
+                var dt = st.ContextT.Select(filter);
+                UriBuilder builder = new UriBuilder();
+                builder.Host = "google.com";
+                builder.Query = $"search?q=";
+                string url = "https://www.google.com/search?q=%D0%9A%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0+dpi+%3D+1000+stie%3A+dns-shop.ru";
+                List<string> links = new List<string>();
+                var chromeOptions = new ChromeOptions();
+                using (var driver = new ChromeDriver(chromeOptions))
                 {
-                    driver.Url = item;
-                    ContextableSearch(driver.FindElement(By.XPath("//body")).Text,0);
+                    driver.Url = url;
+                    var html = driver.FindElements(By.XPath("//div[@class = \"g tF2Cxc\"]"));
+                    for (int i = 0; i < count; i++)
+                        foreach (var element in html)
+                        {
+                            links.Add(Parse(element.GetAttribute("outerHTML")));
+                        }
+
+                    foreach (var item in links)
+                    {
+                        driver.Url = item;
+                        ContextableSearch(driver.FindElement(By.XPath("//body")).Text,0);
+                    }
                 }
             }
         }
