@@ -11,7 +11,9 @@ namespace Server.MySQL.Tables.Filter
         public int Type { get; set; }
 
         [FilterAtribute("value", "Options", FType.EQUAL)]
-        public int Value { get; set; }
+        public string? Value { get; set; }
+        [FilterAtribute("value", "Options", FType.LIKE)]
+        public string? ValueL { get; set; }
 
         [FilterAtribute("idContext", "Options", FType.EQUAL)]
         public int IdContext { get; set; }

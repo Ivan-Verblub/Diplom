@@ -28,7 +28,6 @@ class Programm
         st.SearchNamesT = new(st.Connector);
         st.SLocationT = new(st.Connector);
         st.SStatusT = new(st.Connector);
-        
 
         var builder = WebApplication.CreateBuilder(args);
 

@@ -1,0 +1,129 @@
+﻿using HtmlAgilityPack;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using Server.Controllers.Models;
+using Server.MySQL;
+using Server.MySQL.Tables.Filter;
+using System.Data;
+
+namespace Server.Controllers.Tech
+{
+    [Route("UUUUU/[controller]")]
+    [ApiController]
+    public class TechiController : ControllerBase
+    {
+        private const int count = 5;
+        private StaticTables st = StaticTables.Instance;
+        [HttpPost("UUUUU")]
+        public void Select(Names n)
+        {
+            Search(null);
+            var filter = new SearchNamesFilter();
+            filter.IdSearch = n.Id;
+            var names = st.SearchNamesT.Select(filter);
+            foreach(var name in names.Select())
+            {
+                foreach (var ns in n.Option)
+                {
+                    if(name.Field<int>("idSearchNames") == ns.Id)
+                    {
+                        Search(ns);
+                    }
+                }
+            }
+        }
+
+        private void Search(SOptions op)
+        {
+
+            string url = "https://www.google.com/search?q=%D0%9A%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0+dpi+%3D+1000+stie%3A+dns-shop.ru";
+            List<string> links = new List<string>();
+            var chromeOptions = new ChromeOptions();
+            using (var driver = new ChromeDriver(chromeOptions))
+            {
+                driver.Url = url;
+                var html = driver.FindElements(By.XPath("//div[@class = \"g tF2Cxc\"]"));
+                for(int i = 0;i<count;i++)
+                foreach(var element in html)
+                {
+                    links.Add(Parse(element.GetAttribute("outerHTML")));
+                }
+                
+                foreach(var item in links)
+                {
+                    driver.Url = item;
+                    ContextableSearch(driver.FindElement(By.XPath("//body")).Text,0);
+                }
+            }
+        }
+
+        private string Parse(string html)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+            return GetLink(doc.DocumentNode);
+        }
+        private Models.Char[] ContextableSearch(string html, int idContext)
+        {
+            List<Models.Char> chars = new List<Models.Char>();
+            var opF = new OptionsFilter()
+            {
+                IdContext = idContext
+            };
+            
+            var res = st.OptionsT.Select(opF);
+            foreach(DataRow row in res.Rows)
+            {
+                switch ((OpType)row.Field<int>("type"))
+                {
+                    case OpType.CLEAR:
+                        html.Replace(row.Field<string>("value"),"");
+                        break;
+                }
+
+            }
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+            var pathF = new PathsFilter()
+            {
+                IdContext = idContext,
+                Type = (int)PathType.TABLE
+            };
+            var path = st.PathsT.Select(pathF);
+            var tableNode = doc.DocumentNode.SelectNodes(path.Rows[0].Field<string?>("Path"))[0];
+
+            pathF.Type = (int)PathType.ROW;
+            path = st.PathsT.Select(pathF);
+            string? rowPath = path.Rows[0].Field<string?>("Path");
+            var rows = tableNode.SelectNodes(rowPath);
+
+            pathF.Type = (int)PathType.COLUMNVALUE;
+            path = st.PathsT.Select(pathF);
+            string? columnVPath = path.Rows[0].Field<string?>("Path");
+
+            pathF.Type = (int)PathType.COLUMNTITLE;
+            path = st.PathsT.Select(pathF);
+            string? columnTPath = path.Rows[0].Field<string?>("Path");
+
+            foreach (var item in rows)
+            {
+                chars.Add(new Models.Char() {
+                    Name = item.SelectNodes(columnTPath)[0].InnerText,
+                    Value = item.SelectNodes(columnVPath)[0].InnerText
+                });
+            }
+
+            return chars.ToArray();
+
+        }
+
+        private string GetLink(HtmlNode node)
+        {
+            if (node.Element("a") == null)
+                return GetLink(node.Element("div"));
+            return node.Element("a").Attributes["href"].Value;
+        }
+    }
+}

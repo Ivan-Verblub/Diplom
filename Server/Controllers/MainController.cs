@@ -13,6 +13,7 @@ namespace Server.Controllers
     [Route("[controller]")]
     public class MainController : Controller
     {
+        private StaticTables st = StaticTables.Instance;
         [HttpPost("DownloadUrl/{dataSet}")]
         public void DownloadUrl(string url, int dataSet)
         {
@@ -25,7 +26,7 @@ namespace Server.Controllers
                 data = Standart(url);
             foreach(var element in data)
             {
-                StaticTables.DataT.Insert(new()
+                st.DataT.Insert(new()
                 {
                     Feature = element,
                     IdDataSet = dataSet

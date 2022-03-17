@@ -19,4 +19,25 @@
         ISNULL = 7
     }
 
+    public enum PathType
+    {
+        TABLE = 1,
+        ROW = 2,
+        COLUMNVALUE = 3,
+        COLUMNTITLE = 4
+    }
+
+    public enum OpType
+    {
+        CLEAR = 1
+
+    }
+
+    public enum PathClass
+    { 
+        XPATH = 1
+    }
+
+
+
 }

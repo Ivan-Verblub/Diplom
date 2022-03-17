@@ -19,7 +19,7 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(2)]
         [DataAtribute]
         [DBAtribute(hide: false, table: "Options", field: "Value")]
-        public int Value { get; set; }
+        public string? Value { get; set; }
 
         [OrderAtribute(3)]
         [DataAtribute]

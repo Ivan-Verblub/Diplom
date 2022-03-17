@@ -6,7 +6,6 @@ using Server.MySQL.Tables;
 using Server.MySQL.Tables.Filter;
 using Server.MySQL.Tables.Table;
 using System.Data;
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Server.Controllers.Tables
 {

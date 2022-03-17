@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Server.Controllers.Tables
 {
-    [Route("api/[controller]")]
+    [Route("Table/[controller]")]
     [ApiController]
     public class ContextableController : ControllerBase
     {
