@@ -2,3 +2,6 @@
 
 # CA1051: Не объявляйте видимые поля экземпляров
 dotnet_diagnostic.CA1051.severity = none
+
+# CS8602: Разыменование вероятной пустой ссылки.
+dotnet_diagnostic.CS8602.severity = none

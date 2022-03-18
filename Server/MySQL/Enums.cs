@@ -29,7 +29,10 @@
 
     public enum OpType
     {
-        CLEAR = 1
+        REMOVE = 1,
+        LINKFORMAT = 2,
+        LINKADD = 3,
+        LINKISAVAILIBLE = 4
 
     }
 
