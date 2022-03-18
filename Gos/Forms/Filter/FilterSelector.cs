@@ -1,22 +1,68 @@
-﻿using System;
+﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Filter;
+using Gos.Server.Models.Table;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Gos.Forms.Filter
 {
-    public partial class FilterSelector<F> : UserControl where F : class
+    public partial class FilterSelector<F> : Form where F : class
     {
+        private List<PropertyInfo> props = new List<PropertyInfo>();
         public FilterSelector()
         {
             InitializeComponent();
             var props = typeof(F).GetProperties();
+            foreach(var prop in props)
+            {
+                string name;
+                var local = prop.GetCustomAttributes(typeof(Localize), true).Cast<Localize>().First();
+                if (local == null)
+                    name = local.Name;
+                else
+                    name = prop.Name;
+                var cb = new CheckBox()
+                {
+                    Text = name,
+                    Name = prop.Name
+                };
+
+                flowLayoutPanel1.Controls.Add(cb);
+            }
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
             
+            foreach(var cb in Controls)
+            {
+                if(cb.GetType() == typeof(CheckBox))
+                {
+                    props.Add(typeof(F).GetProperty(((ComboBox)cb).Name));
+                }
+            }
+            var filt = new Filters<Scat,ScatFilter>(props)
+            {
+                TopLevel = false,
+                Dock = DockStyle.Fill
+            };
+            Parent.Controls.Add(filt);
+            Parent.Controls.Remove(this);
+            filt.Show();
+            Close();
         }
     }
 }

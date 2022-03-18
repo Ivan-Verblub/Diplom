@@ -66,8 +66,20 @@
     <Compile Include="Forms\DataForm.Designer.cs">
       <DependentUpon>DataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Filter\FilterSelector.cs">
+    <Compile Include="Forms\Filter\FilterField.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Filter\FilterField.Designer.cs">
+      <DependentUpon>FilterField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Filter\Filters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Filter\Filters.Designer.cs">
+      <DependentUpon>Filters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Filter\FilterSelector.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Filter\FilterSelector.Designer.cs">
       <DependentUpon>FilterSelector.cs</DependentUpon>
@@ -87,8 +99,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\Atribute\API.cs" />
+    <Compile Include="Server\Atribute\Filter.cs" />
+    <Compile Include="Server\Atribute\Key.cs" />
     <Compile Include="Server\Atribute\Localize.cs" />
     <Compile Include="Server\DataTableParser.cs" />
+    <Compile Include="Server\Enums.cs" />
     <Compile Include="Server\Models\Filter\ActualFilter.cs" />
     <Compile Include="Server\Models\Filter\CharListObjectsFilter.cs" />
     <Compile Include="Server\Models\Filter\CharListRequestFilter.cs" />
@@ -132,6 +147,12 @@
     <Compile Include="Server\Requester.cs" />
     <EmbeddedResource Include="Forms\DataForm.resx">
       <DependentUpon>DataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Filter\FilterField.resx">
+      <DependentUpon>FilterField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Filter\Filters.resx">
+      <DependentUpon>Filters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Filter\FilterSelector.resx">
       <DependentUpon>FilterSelector.cs</DependentUpon>

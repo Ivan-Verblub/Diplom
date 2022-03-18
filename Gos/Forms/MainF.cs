@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Gos.Forms.Filter;
+using Gos.Server.Models.Filter;
+using Gos.Server.Models.Table;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +15,7 @@ namespace Gos.Forms
 {
     public partial class MainF : Form
     {
+
         public MainF()
         {
             InitializeComponent();
@@ -19,7 +23,7 @@ namespace Gos.Forms
             vMenu.Dock = DockStyle.Fill;
             vMenu.TopLevel = false;
             splitContainer1.Panel1.Controls.Add(vMenu);
-            vMenu.OnClickBtn1 += ShowData;
+            vMenu.Click += ShowData;
             vMenu.Show();
         }
 
@@ -30,11 +34,19 @@ namespace Gos.Forms
 
         private void ShowData()
         {
-            DataForm dataForm = new DataForm();
+            var dataForm = new DataForm<Scat>();
             dataForm.TopLevel = false;
             dataForm.Dock = DockStyle.Fill;
-            splitContainer1.Panel2.Controls.Add(dataForm);
+            splitContainer2.Panel1.Controls.Add(dataForm);
             dataForm.Show();
+
+            var fs = new FilterSelector<ScatFilter>()
+            {
+                TopLevel = false,
+                Dock = DockStyle.Fill
+            };
+            splitContainer2.Panel2.Controls.Add(fs);
+            fs.Show();
         }
     }
 }
