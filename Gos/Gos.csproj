@@ -34,8 +34,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
-    <Reference Include="System.Text.Json, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,16 +60,88 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\DataForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\DataForm.Designer.cs">
+      <DependentUpon>DataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Filter\FilterSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Filter\FilterSelector.Designer.cs">
+      <DependentUpon>FilterSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainF.Designer.cs">
+      <DependentUpon>MainF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\VMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VMenu.Designer.cs">
+      <DependentUpon>VMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\Atribute\API.cs" />
+    <Compile Include="Server\Atribute\Localize.cs" />
+    <Compile Include="Server\DataTableParser.cs" />
+    <Compile Include="Server\Models\Filter\ActualFilter.cs" />
+    <Compile Include="Server\Models\Filter\CharListObjectsFilter.cs" />
+    <Compile Include="Server\Models\Filter\CharListRequestFilter.cs" />
+    <Compile Include="Server\Models\Filter\ContextableFilter.cs" />
+    <Compile Include="Server\Models\Filter\ContextFilter.cs" />
+    <Compile Include="Server\Models\Filter\ContextsFilter.cs" />
+    <Compile Include="Server\Models\Filter\DataSetFilter.cs" />
+    <Compile Include="Server\Models\Filter\DatasFilter.cs" />
+    <Compile Include="Server\Models\Filter\LearningHistoryFilter.cs" />
+    <Compile Include="Server\Models\Filter\ObjectsFilter.cs" />
+    <Compile Include="Server\Models\Filter\ObjectsHistoryFilter.cs" />
+    <Compile Include="Server\Models\Filter\OptionsFilter.cs" />
+    <Compile Include="Server\Models\Filter\PathsFilter.cs" />
+    <Compile Include="Server\Models\Filter\RequestFilter.cs" />
+    <Compile Include="Server\Models\Filter\RequestInnerFilter.cs" />
+    <Compile Include="Server\Models\Filter\ScatFilter.cs" />
+    <Compile Include="Server\Models\Filter\SearchContextFilter.cs" />
+    <Compile Include="Server\Models\Filter\SearchNamesFilter.cs" />
+    <Compile Include="Server\Models\Filter\SLocationFilter.cs" />
+    <Compile Include="Server\Models\Filter\SStatusFilter.cs" />
+    <Compile Include="Server\Models\Table\Actual.cs" />
+    <Compile Include="Server\Models\Table\CharListObjects.cs" />
+    <Compile Include="Server\Models\Table\CharListRequest.cs" />
+    <Compile Include="Server\Models\Table\Context.cs" />
+    <Compile Include="Server\Models\Table\Contextable.cs" />
+    <Compile Include="Server\Models\Table\Contexts.cs" />
+    <Compile Include="Server\Models\Table\DataSet.cs" />
+    <Compile Include="Server\Models\Table\DatasTable.cs" />
+    <Compile Include="Server\Models\Table\LearningHistory.cs" />
+    <Compile Include="Server\Models\Table\Objects.cs" />
+    <Compile Include="Server\Models\Table\ObjectsHistory.cs" />
+    <Compile Include="Server\Models\Table\Options.cs" />
+    <Compile Include="Server\Models\Table\Paths.cs" />
+    <Compile Include="Server\Models\Table\Request.cs" />
+    <Compile Include="Server\Models\Table\RequestInner.cs" />
+    <Compile Include="Server\Models\Table\Scat.cs" />
+    <Compile Include="Server\Models\Table\SearchContext.cs" />
+    <Compile Include="Server\Models\Table\SearchNames.cs" />
+    <Compile Include="Server\Models\Table\SLocation.cs" />
+    <Compile Include="Server\Models\Table\SStatus.cs" />
     <Compile Include="Server\Requester.cs" />
+    <EmbeddedResource Include="Forms\DataForm.resx">
+      <DependentUpon>DataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Filter\FilterSelector.resx">
+      <DependentUpon>FilterSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainF.resx">
+      <DependentUpon>MainF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VMenu.resx">
+      <DependentUpon>VMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -66,6 +151,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

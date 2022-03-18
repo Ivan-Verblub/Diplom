@@ -61,6 +61,7 @@ namespace Server.MySQL
             }
 
             _command.CommandText = builder.ToString();
+            Console.WriteLine(_command.CommandText);
             DataTable dt = new DataTable();
             _adapter.Fill(dt);
             return dt;

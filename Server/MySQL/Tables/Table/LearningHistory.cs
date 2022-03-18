@@ -2,7 +2,7 @@
 
 namespace Server.MySQL.Tables
 {
-    [TableAtribute(new string[] { "learninghistroy", "dataset","user" })]
+    [TableAtribute(new string[] { "learninghistroy", "dataset" })]
     public class LearningHistory
     {
         [OrderAtribute(0)]

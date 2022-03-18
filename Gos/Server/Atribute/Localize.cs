@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 
 namespace Gos.Server.Atribute
 {
-    [System.AttributeUsage(AttributeTargets.Class
+    [System.AttributeUsage(AttributeTargets.Property
         , AllowMultiple = true)]
-    internal class API : Attribute, IDisposable
+    internal class Localize : Attribute, IDisposable
     {
-        public string APIRoute => _apiRoute;
-        private string _apiRoute;
+        public string Name => _name;
+        private string _name;
 
-        public API(string apiRoute)
-        { 
-            _apiRoute = apiRoute;
+        public Localize(string name)
+        {
+            _name = name;
         }
 
         public void Dispose()
         {
         }
+
     }
 }

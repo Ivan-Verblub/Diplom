@@ -8,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Gos
+namespace Gos.Forms.Filter
 {
-    public partial class Form1 : Form
+    public partial class FilterSelector<F> : UserControl where F : class
     {
-        public Form1()
+        public FilterSelector()
         {
             InitializeComponent();
+            var props = typeof(F).GetProperties();
+            
         }
     }
 }

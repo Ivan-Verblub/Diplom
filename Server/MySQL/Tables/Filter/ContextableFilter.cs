@@ -9,15 +9,19 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute("date", "learninghistroy", FType.EQUAL)]
         public DateTime Date { get; set; }
+        [RangeAtribute(0,0)]
         [FilterAtribute("date", "learninghistroy", FType.GREATEREQUAL)]
         public DateTime DateG { get; set; }
+        [RangeAtribute(0, 1)]
         [FilterAtribute("date", "learninghistroy", FType.LESSEREQUAL)]
         public DateTime DateL { get; set; }
 
         [FilterAtribute("iteration", "learninghistroy", FType.EQUAL)]
         public int Iter { get; set; }
+        [RangeAtribute(1, 0)]
         [FilterAtribute("iteration", "learninghistroy", FType.GREATEREQUAL)]
         public int IterG { get; set; }
+        [RangeAtribute(1, 1)]
         [FilterAtribute("iteration", "learninghistroy", FType.LESSEREQUAL)]
         public int IterL { get; set; }
 
