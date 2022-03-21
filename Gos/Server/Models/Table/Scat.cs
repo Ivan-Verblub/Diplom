@@ -6,8 +6,10 @@ namespace Gos.Server.Models.Table
     public class Scat
     {
         [Localize("Код")]
+        [Key(true)]
         public int idCat { get; set; }
         [Localize("Название")]
+        [Key(false)]
         public string name { get; set; }
     }
 }

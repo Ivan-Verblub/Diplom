@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Gos.Forms.Filter
 {
-    public partial class FilterSelector<F> : Form where F : class
+    public partial class FilterSelector<T,F> : Form where F : class where T : class
     {
         private List<PropertyInfo> props = new List<PropertyInfo>();
         public FilterSelector()
@@ -47,14 +47,15 @@ namespace Gos.Forms.Filter
         private void button1_Click(object sender, EventArgs e)
         {
             
-            foreach(var cb in Controls)
+            foreach(var cb in flowLayoutPanel1.Controls)
             {
                 if(cb.GetType() == typeof(CheckBox))
                 {
-                    props.Add(typeof(F).GetProperty(((ComboBox)cb).Name));
+                    if(((CheckBox)cb).Checked)
+                        props.Add(typeof(F).GetProperty(((CheckBox)cb).Name));
                 }
             }
-            var filt = new Filters<Scat,ScatFilter>(props)
+            var filt = new Filters<T,F>(props)
             {
                 TopLevel = false,
                 Dock = DockStyle.Fill

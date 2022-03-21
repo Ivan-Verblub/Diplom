@@ -1,6 +1,6 @@
 ﻿namespace Gos.Forms.Filter
 {
-    partial class FilterSelector<F>
+    partial class FilterSelector<T,F>
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -52,7 +52,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(218, 38);
             this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
+            this.button1.Text = "Выбрать фильтры";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

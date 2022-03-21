@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Net;
 using System.Text.Json;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gos.Server.Atribute;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Gos.Server
 {
@@ -41,9 +42,14 @@ namespace Gos.Server
         }
         public T[] Select(F filter)
         {
-            var request = WebRequest.Create(_url + route + "/Select");
+            var request = WebRequest.Create(_url + "/" + route + "/Select");
             request.Method = "POST";
-            string filterJson = JsonSerializer.Serialize<F>(filter);
+            var options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                WriteIndented = true
+            };
+            string filterJson = JsonSerializer.Serialize<F>(filter,options);
             var bytes = UnicodeEncoding.UTF8.GetBytes(filterJson);
             request.ContentLength = bytes.Length;
             request.ContentType = "application/json";
@@ -65,9 +71,14 @@ namespace Gos.Server
         {
             try
             {
-                var request = WebRequest.Create(_url + route + "/Insert");
+                var request = WebRequest.Create(_url + "/" + route + "/Insert");
                 request.Method = "POST";
-                string filterJson = JsonSerializer.Serialize<T>(table);
+                var options = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                    WriteIndented = true
+                };
+                string filterJson = JsonSerializer.Serialize<T>(table,options);
                 var bytes = UnicodeEncoding.UTF8.GetBytes(filterJson);
                 request.ContentLength = bytes.Length;
                 request.ContentType = "application/json";
@@ -93,9 +104,14 @@ namespace Gos.Server
         {
             try
             {
-                var request = WebRequest.Create(_url + route + "/Update");
+                var request = WebRequest.Create(_url + "/" + route + "/Update");
                 request.Method = "POST";
-                string filterJson = JsonSerializer.Serialize<T>(table);
+                var options = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                    WriteIndented = true
+                };
+                string filterJson = JsonSerializer.Serialize<T>(table,options);
                 var bytes = UnicodeEncoding.UTF8.GetBytes(filterJson);
                 request.ContentLength = bytes.Length;
                 request.ContentType = "application/json";
@@ -121,9 +137,14 @@ namespace Gos.Server
         {
             try
             {
-                var request = WebRequest.Create(_url + route + "/Delete");
+                var request = WebRequest.Create(_url + "/" + route + "/Delete");
                 request.Method = "POST";
-                string filterJson = JsonSerializer.Serialize<T>(table);
+                var options = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                    WriteIndented = true
+                };
+                string filterJson = JsonSerializer.Serialize<T>(table,options);
                 var bytes = UnicodeEncoding.UTF8.GetBytes(filterJson);
                 request.ContentLength = bytes.Length;
                 request.ContentType = "application/json";

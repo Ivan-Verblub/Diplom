@@ -1,6 +1,6 @@
 ﻿namespace Gos.Forms
 {
-    partial class DataForm<T>
+    partial class DataForm<T,F>
     {
         /// <summary>
         /// Required designer variable.

@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Server.MySQL.Atributes.Table;
 using Server.MySQL.Tables;
+using Server.MySQL.Tables.Info;
 using System.Data;
 using System.Text;
 
@@ -372,6 +373,7 @@ namespace Server.MySQL
         {
             if (null == ((ByteArray)Attribute.GetCustomAttribute(field, typeof(ByteArray))))
             {
+
                 builder.Append('\'');
                 if (field.PropertyType == typeof(DateTime))
                     builder.Append(

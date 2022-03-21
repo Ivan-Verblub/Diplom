@@ -33,21 +33,26 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(372, 150);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(243, 61);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // FilterField
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "FilterField";
-            this.Size = new System.Drawing.Size(372, 150);
+            this.Size = new System.Drawing.Size(243, 61);
             this.Load += new System.EventHandler(this.FilterField_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

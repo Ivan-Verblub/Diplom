@@ -14,8 +14,9 @@ using System.Windows.Forms;
 
 namespace Gos.Forms
 {
-    public partial class DataForm<T> : Form where T : class
+    public partial class DataForm<T,F> : Form where T : class where F : class
     {
+        EventController ec = EventController.Instance;
         public DataForm()
         {
             InitializeComponent();
@@ -23,7 +24,8 @@ namespace Gos.Forms
             var props = typeof(T).GetProperties();
             foreach (var prop in props)
             {
-                var atribute = prop.GetCustomAttributes(typeof(Localize),true).Cast<Localize>().First();
+                var atribute = prop.GetCustomAttributes(typeof(Localize),true)
+                    .Cast<Localize>().First();
                 string name = prop.Name;
                 if(atribute != null)
                     name = atribute.Name;
@@ -39,9 +41,26 @@ namespace Gos.Forms
 
         private void DataForm_Load(object sender, EventArgs e)
         {
-            using(var requester = new Requester<Scat,ScatFilter>("https://localhost:5001"))
+            ec.UpdateTable += UpdateTable;
+            ec.UpdateFilterTable += UpdateFilterTable;
+            using(var requester = new Requester<T,F>("https://localhost:5001"))
             {
                 dataGridView1.DataSource = DataTableParser.Parse(requester.Select());               
+            }
+        }
+
+        private void UpdateTable(object sender, EventArgs e)
+        {
+            using (var requester = new Requester<T, F>("https://localhost:5001"))
+            {
+                dataGridView1.DataSource = DataTableParser.Parse(requester.Select());
+            }
+        }
+        private void UpdateFilterTable(object sender, EventArgs e)
+        {
+            using (var requester = new Requester<T, F>("https://localhost:5001"))
+            {
+                dataGridView1.DataSource = DataTableParser.Parse(requester.Select((F)sender));
             }
         }
     }

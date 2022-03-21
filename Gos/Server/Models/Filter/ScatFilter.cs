@@ -1,14 +1,16 @@
 ﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Table;
 
 namespace Gos.Server.Models.Filter
 {
     public class ScatFilter
     {
-        [Localize("Id")]
+        [Localize("Код категории")]
         public int IdCat { get; set; }
-        [Localize("Name")]
+        [Localize("Название категории")]
         public string Name { get; set; }
-        [Localize("NameL")]
+        [Localize("Примерное название категории")]
+        [Atribute.Filter(Filtration.LIKE)]
         public string NameL { get; set; }
     }
 }

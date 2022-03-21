@@ -16,65 +16,104 @@ namespace Gos.Forms.Filter
     public partial class FilterField<Table,Filt> : UserControl 
         where Table : class where Filt : class
     {
+        EventController ec = EventController.Instance;
         public Control Data { get; set; }
-        public FilterField(Type type)
+        public FilterField(PropertyInfo type)
         {
             InitializeComponent();
-
+            var local = type.GetCustomAttribute<Localize>();
+            Name = type.Name;
+            string name;
+            if (local == null)
+                name = type.Name;
+            else
+                name = local.Name;
             var lab = new Label()
             {
-                Text = ""    
+                Text = name 
             };
             flowLayoutPanel1.Controls.Add(lab);
-            if (type == typeof(string))
+
+            var able = type.GetCustomAttribute<Typeable>();
+            if (able == null)
             {
-                Data = new TextBox();
-            }
-            else if (type == typeof(DateTime))
-            {
-                Data = new DateTimePicker();
-            }
-            else if (type == typeof(int))
-            {
-                Data = new TextBox();
-                ((TextBox)Data).KeyPress += (o, e) =>
+                if (type.PropertyType == typeof(string))
                 {
-                    if (((e.KeyChar < '0') || (e.KeyChar > '9')) && (e.KeyChar != 8))
-                        e.Handled = true;
-                };
-            }
-            else if (type == typeof(float))
-            {
-                Data = new TextBox();
-                ((TextBox)Data).KeyPress += (o, e) =>
+                    Data = new TextBox();
+                    ((TextBox)Data).TextChanged += (o, e) =>
+                    {
+                        ec.InvokeEditFilterTable();
+                    };
+                }
+                else if (type.PropertyType == typeof(DateTime))
                 {
-                    if (((e.KeyChar < '0') || (e.KeyChar > '9')) && (e.KeyChar != 8) && (e.KeyChar != ','))
-                        e.Handled = true;
-                };
+                    Data = new DateTimePicker();
+                    ((DateTimePicker)Data).ValueChanged += (o, e) =>
+                    {
+                        ec.InvokeEditFilterTable();
+                    };
+                }
+                else if (type.PropertyType == typeof(int))
+                {
+                    Data = new TextBox();
+                    ((TextBox)Data).KeyPress += (o, e) =>
+                    {
+                        if (((e.KeyChar < '0') || (e.KeyChar > '9')) && (e.KeyChar != 8))
+                            e.Handled = true;
+                    };
+                    ((TextBox)Data).TextChanged += (o, e) =>
+                    {
+                        ec.InvokeEditFilterTable();
+                    };
+                }
+                else if (type.PropertyType == typeof(float))
+                {
+                    Data = new TextBox();
+                    ((TextBox)Data).KeyPress += (o, e) =>
+                    {
+                        if (((e.KeyChar < '0') || (e.KeyChar > '9')) && (e.KeyChar != 8) && (e.KeyChar != ','))
+                            e.Handled = true;
+                    };
+                    ((TextBox)Data).TextChanged += (o, e) =>
+                    {
+                        ec.InvokeEditFilterTable();
+                    };
+                }
             }
             else
             {
-                using (var requster = new Requester<Table,Filt>("https://localhost:5001"))
+                var f = able.FType;
+                var t = able.TType;
+                var requester = typeof(Requester<,>).MakeGenericType(t, f).
+                    GetConstructor(new Type[] { typeof(string)}).
+                    Invoke(new object[] { "https://localhost:5001" });
+                var result = requester.GetType().
+                    GetMethod("Select", Type.EmptyTypes).Invoke(requester, null);
+                Data = new ComboBox();
+                ((ComboBox)Data).DataSource =
+                    (DataTable)typeof(DataTableParser).GetMethod("Parse").
+                    MakeGenericMethod(result.GetType().GetElementType())
+                    .Invoke(null,new object[] { result});
+                var props = typeof(Table).GetProperties();
+                foreach (var prop in props)
                 {
-                    var result = requster.Select();
-                    ((ComboBox)Data).DataSource = DataTableParser.Parse(result);
-                    var props = typeof(Table).GetProperties();
-                    foreach (var prop in props)
+                    var aribute = prop.GetCustomAttribute<Key>(true);
+                    if (aribute != null)
                     {
-                        var aribute = prop.GetCustomAttribute<Key>(true);
-                        if (aribute != null)
+                        if (aribute.IsKey)
                         {
-                            if (aribute.IsKey)
-                            {
-                                ((ComboBox)Data).ValueMember = prop.Name;
-                            }
-                            else
-                            {
-                                ((ComboBox)Data).DisplayMember = prop.Name;
-                            }
+                            ((ComboBox)Data).ValueMember = prop.Name;
+                        }
+                        else
+                        {
+                            ((ComboBox)Data).DisplayMember = prop.Name;
                         }
                     }
                 }
+                ((ComboBox)Data).SelectedValueChanged += (o, e) =>
+                {
+                    ec.InvokeEditFilterTable();
+                };
             }
             flowLayoutPanel1.Controls.Add(Data);
         }
