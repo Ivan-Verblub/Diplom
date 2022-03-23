@@ -19,6 +19,10 @@ namespace Server.Controllers.Tables
         public Actual[] Select()
         {
             var dt = st.ActualT.Select();
+            if(dt.Rows.Count==0)
+            {
+                return null;
+            }
             var actual = new Actual[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

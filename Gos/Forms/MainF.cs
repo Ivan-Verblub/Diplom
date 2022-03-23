@@ -37,16 +37,24 @@ namespace Gos.Forms
             var dataForm = new DataForm<Scat,ScatFilter>();
             dataForm.TopLevel = false;
             dataForm.Dock = DockStyle.Fill;
-            splitContainer2.Panel1.Controls.Add(dataForm);
+            splitContainer4.Panel2.Controls.Add(dataForm);
             dataForm.Show();
 
-            var fs = new FilterSelector<Scat,ScatFilter>()
+            var fs = new FilterSelector<Scat, ScatFilter>()
             {
                 TopLevel = false,
                 Dock = DockStyle.Fill
             };
             splitContainer3.Panel1.Controls.Add(fs);
             fs.Show();
+
+            var fis = new FieldSelector<Scat>()
+            {
+                TopLevel = false,
+                Dock = DockStyle.Fill
+            };
+            splitContainer3.Panel2.Controls.Add(fis);
+            fis.Show();
         }
 
         private void splitContainer3_SplitterMoved(object sender, SplitterEventArgs e)

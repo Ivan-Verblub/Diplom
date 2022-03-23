@@ -64,6 +64,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Changing\ChangingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Changing\ChangingForm.Designer.cs">
+      <DependentUpon>ChangingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Changing\DataField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Changing\DataField.Designer.cs">
+      <DependentUpon>DataField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +83,12 @@
       <DependentUpon>DataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\EventController.cs" />
+    <Compile Include="Forms\FieldSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FieldSelector.Designer.cs">
+      <DependentUpon>FieldSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Filter\FilterField.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -151,8 +169,17 @@
     <Compile Include="Server\Models\Table\SLocation.cs" />
     <Compile Include="Server\Models\Table\SStatus.cs" />
     <Compile Include="Server\Requester.cs" />
+    <EmbeddedResource Include="Forms\Changing\ChangingForm.resx">
+      <DependentUpon>ChangingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Changing\DataField.resx">
+      <DependentUpon>DataField.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DataForm.resx">
       <DependentUpon>DataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FieldSelector.resx">
+      <DependentUpon>FieldSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Filter\FilterField.resx">
       <DependentUpon>FilterField.cs</DependentUpon>

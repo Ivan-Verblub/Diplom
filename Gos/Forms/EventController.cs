@@ -38,5 +38,11 @@ namespace Gos.Forms
         {
             EditFilterTable.Invoke(this, EventArgs.Empty);
         }
+
+        public event EventHandler<EventArgs> FieldTable;
+        public void InvokeFieldTable(object field)
+        {
+            EditFilterTable.Invoke(field, EventArgs.Empty);
+        }
     }
 }

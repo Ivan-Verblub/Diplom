@@ -63,5 +63,9 @@ namespace Gos.Forms
                 dataGridView1.DataSource = DataTableParser.Parse(requester.Select((F)sender));
             }
         }
+        private void FieldTable(object sender, EventArgs e)
+        {
+            dataGridView1.Columns[((CheckBox)sender).Name].Visible = ((CheckBox)sender).Checked;
+        }
     }
 }
