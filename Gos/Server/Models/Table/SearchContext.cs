@@ -5,8 +5,13 @@ namespace Gos.Server.Models.Table
     [API("Tables/SearchContext")]
     public class SearchContext
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
+        [Localize("Код")]
+        [AI]
+        [Key(true)]
+        [Invisible]
+        public int id { get; set; }
+        [Localize("Название контекста")]
+        [Key(false)]
+        public string name { get; set; }
     }
 }

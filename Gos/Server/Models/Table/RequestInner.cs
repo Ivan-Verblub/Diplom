@@ -1,24 +1,43 @@
 ﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Filter;
 
 namespace Gos.Server.Models.Table
 {
     [API("Tables/RequestInner")]
     public class RequestInner
     {
-        public int Id { get; set; }
+        [Localize("Код")]
+        [AI]
+        [Key(true)]
+        [Invisible]
+        public int id { get; set; }
 
-        public string Name { get; set; }
+        [Localize("Название")]
+        [Key(false)]
+        public string name { get; set; }
 
-        public float Cost { get; set; }
+        [Localize("Стоимость")]
+        public float cost { get; set; }
 
-        public int IdCat { get; set; }
+        [Localize("Код категории")]
+        [Typeable(typeof(Scat),typeof(ScatFilter))]
+        [Invisible]
+        public int idCat { get; set; }
 
-        public string Cat { get; set; }
+        [Localize("Категория")]
+        [AI]
+        public string cat { get; set; }
 
-        public int IdRequest { get; set; }
+        [Localize("Код ТЗ")]
+        [Typeable(typeof(Request), typeof(RequestFilter))]
+        [Invisible]
+        public int idRequest { get; set; }
 
-        public string RName { get; set; }
+        [Localize("Название ТЗ")]
+        [AI]
+        public string rName { get; set; }
 
-        public int Count { get; set; }
+        [Localize("Количество")]
+        public int count { get; set; }
     }
 }

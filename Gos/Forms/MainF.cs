@@ -15,7 +15,6 @@ namespace Gos.Forms
 {
     public partial class MainF : Form
     {
-
         public MainF()
         {
             InitializeComponent();
@@ -32,29 +31,44 @@ namespace Gos.Forms
 
         }
 
-        private void ShowData()
+        private void ShowData(Type table,Type filter)
         {
-            var dataForm = new DataForm<Scat,ScatFilter>();
+            if(splitContainer4.Panel2.Controls.Count != 0)
+                ((Form)splitContainer4.Panel2.Controls[0]).Close();
+            if (splitContainer3.Panel1.Controls.Count != 0)
+                ((Form)splitContainer3.Panel1.Controls[0]).Close();
+            if (splitContainer3.Panel2.Controls.Count != 0)
+                ((Form)splitContainer3.Panel2.Controls[0]).Close();
+            if (splitContainer4.Panel1.Controls.Count != 0)
+                ((Form)splitContainer4.Panel1.Controls[0]).Close();
+            var dataForm = (Form)typeof(DataForm<,>).MakeGenericType(table, filter)
+                .GetConstructor(Type.EmptyTypes).Invoke(null);
             dataForm.TopLevel = false;
             dataForm.Dock = DockStyle.Fill;
             splitContainer4.Panel2.Controls.Add(dataForm);
             dataForm.Show();
-
-            var fs = new FilterSelector<Scat, ScatFilter>()
-            {
-                TopLevel = false,
-                Dock = DockStyle.Fill
-            };
+            
+            var fs = (Form)typeof(FilterSelector<,>).MakeGenericType(table, filter)
+                .GetConstructor(Type.EmptyTypes).Invoke(null);
+            fs.TopLevel = false;
+                fs.Dock = DockStyle.Fill;
             splitContainer3.Panel1.Controls.Add(fs);
             fs.Show();
-
-            var fis = new FieldSelector<Scat>()
-            {
-                TopLevel = false,
-                Dock = DockStyle.Fill
-            };
+            
+            var fis = (Form)typeof(FieldSelector<>).MakeGenericType(table)
+                .GetConstructor(Type.EmptyTypes).Invoke(null);
+            fis.TopLevel = false;
+            fis.Dock = DockStyle.Fill;
             splitContainer3.Panel2.Controls.Add(fis);
             fis.Show();
+
+            var bs = (Form)typeof(Buttons<,>).MakeGenericType(table, filter)
+                .GetConstructor(new Type[] { typeof(DataForm<,>).MakeGenericType(table, filter) })
+                .Invoke(new object[] { dataForm });
+            bs.TopLevel = false;
+            bs.Dock = DockStyle.Fill;
+            splitContainer4.Panel1.Controls.Add(bs);
+            bs.Show();
         }
 
         private void splitContainer3_SplitterMoved(object sender, SplitterEventArgs e)

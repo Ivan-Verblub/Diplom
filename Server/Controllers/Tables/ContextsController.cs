@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Server.Controllers.Tables
 {
-    [Route("Table/[controller]")]
+    [Route("Tables/[controller]")]
     [ApiController]
     public class ContextsController : ControllerBase
     {
@@ -16,6 +16,10 @@ namespace Server.Controllers.Tables
         public Contexts[] Select()
         {
             var dt = st.ContextsT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var context = new Contexts[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -37,6 +41,10 @@ namespace Server.Controllers.Tables
         public Contexts[] Select(ContextsFilter contextF)
         {
             var dt = st.ContextsT.Select(contextF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var context = new Contexts[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

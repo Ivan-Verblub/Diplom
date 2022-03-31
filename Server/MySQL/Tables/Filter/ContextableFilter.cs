@@ -45,8 +45,6 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute("idSearchContext", "Contextable", FType.EQUAL)]
         public int IdSearch { get; set; }
-        [FilterAtribute("idSearchContext", "Contextable", FType.ISNULL)]
-        public int IdSearchN { get; set; }
 
         [FilterAtribute("name", "SearchContext", FType.EQUAL)]
         public string? SearchName { get; set; }

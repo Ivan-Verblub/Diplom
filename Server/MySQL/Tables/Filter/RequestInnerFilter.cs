@@ -16,14 +16,6 @@ namespace Server.MySQL.Tables.Filter
             table: "requestinner", filtType: FType.LIKE)]
         public string? NameL { get; set; }
 
-        [FilterAtribute(field: "char",
-            table: "requestinner", filtType: FType.EQUAL)]
-        public string? Chars { get; set; }
-
-        [FilterAtribute(field: "char",
-            table: "requestinner", filtType: FType.LIKE)]
-        public string? CharsL { get; set; }
-
         [FilterAtribute(field: "cost",
             table: "requestinner", filtType: FType.EQUAL)]
         public float Cost { get; set; }

@@ -18,6 +18,10 @@ namespace Server.Controllers.Tables
         public SStatus[] Select()
         {
             var dt = st.SStatusT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var sStatus = new SStatus[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -36,6 +40,10 @@ namespace Server.Controllers.Tables
         public SStatus[] Select(SStatusFilter sStatusF)
         {
             var dt = st.SStatusT.Select(sStatusF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var sStatus = new SStatus[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

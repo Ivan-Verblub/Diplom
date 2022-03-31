@@ -3,43 +3,64 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using Server.Controllers.Models;
 using Server.ML;
 using Server.MySQL;
+using Server.MySQL.Tables;
 using Server.MySQL.Tables.Filter;
 using System.Data;
+using System.Text;
 using System.Web;
 
 namespace Server.Controllers.Tech
 {
-    [Route("[controller]")]
+    [Route("Tech/[controller]")]
     [ApiController]
     public class TechController : ControllerBase
     {
         private const int count = 5;
         private StaticTables st = StaticTables.Instance;
-        private ML.ML ml;
+        private ML.ML ml = ML.ML.Instance;
         private Names? names;
-        [HttpPost("Select")]
-        public Models.Char[] Select(Names n)
+        [HttpPost("Select/{id}")]
+        public Models.Char[] Select(int id, SOptions[] ops)
         {
-            this.names = n;
-            var filter = new SearchNamesFilter();
-            filter.IdSearch = n.Id;
-            var names = st.SearchNamesT.Select(filter);
-            ml = new ML.ML(0);
-            var fAct = new ActualFilter()
+            var na = new Names();
+            var contextableF = new ContextableFilter()
             {
-                IdActual = n.IdAct,
+                Id = id
             };
-            var dt = st.ActualT.Select(fAct); 
-            ml.Load(dt.Rows[0].Field<byte[]>("conf"));
-            Models.Char[] chars= new Models.Char[1];
-            foreach(var name in names.Select())
+            var cont = st.ContextableT.Select(contextableF);
+            na.Id = cont.Select()[0].Field<int>("idSearchContext");
+            na.Option = ops;
+            var actF = new ActualFilter()
             {
-                foreach (var option in n.Option)
+                IdLearn = id
+            };
+            var act = st.ActualT.Select(actF);
+            na.IdAct = act.Select()[0].Field<int>("idactual");
+            List<int> contexts = new();
+            var contsF = new ContextsFilter()
+            {
+                IdContextable = id
+            };
+            foreach (var item in st.ContextsT.Select(contsF).Select())
+            {
+                contexts.Add(item.Field<int>("idContext"));
+            }
+            na.ContextId = contexts.ToArray();
+
+            this.names = na;
+            var filter = new SearchNamesFilter();
+            filter.IdSearch = this.names.Id;
+            var names = st.SearchNamesT.Select(filter);
+            Models.Char[] chars = new Models.Char[1];
+            foreach (var name in names.Select())
+            {
+                foreach (var option in this.names.Option)
                 {
-                    if(name.Field<int>("idSearchNames") == option.Id)
+                    if (name.Field<int>("idSearchNames") == option.Id)
                     {
                         chars = Search(option);
                     }
@@ -48,7 +69,199 @@ namespace Server.Controllers.Tech
             return chars;
         }
 
-        //Дополни не контекстным поиском, кинь срань, которая рабоать не будет)))00)00
+        [HttpPost("Select/Link/{id}/{context}")]
+        public Models.Char[] SelectLink(int id,int context,string url)
+        {
+            var na = new Names();
+            var contextableF = new ContextableFilter()
+            {
+                Id = id
+            };
+            var cont = st.ContextableT.Select(contextableF);
+            na.Id = cont.Select()[0].Field<int>("idSearchContext");
+            var actF = new ActualFilter()
+            {
+                IdLearn = id
+            };
+            var act = st.ActualT.Select(actF);
+            na.IdAct = act.Select()[0].Field<int>("idactual");
+            List<int> contexts = new();
+            var contsF = new ContextsFilter()
+            {
+                IdContextable = id
+            };
+            foreach (var item in st.ContextsT.Select(contsF).Select())
+            {
+                contexts.Add(item.Field<int>("idContext"));
+            }
+            this.names = na;
+            var fAct = new ActualFilter()
+            {
+                IdActual = this.names.IdAct,
+            };
+            var dt = st.ActualT.Select(fAct);
+            ml.Load(dt.Rows[0].Field<byte[]>("conf"));
+            na.ContextId = contexts.ToArray();
+            this.names = na;
+            Models.Char[] chars;
+            chars = GetCharsLink(context,url);
+            return chars;
+        }
+
+        [HttpPost("Select/Name/{id}")]
+        public Models.Char[] SelectByName(int id,string name)
+        {
+            var na = new Names();
+            var contextableF = new ContextableFilter()
+            {
+                Id = id
+            };
+            var cont = st.ContextableT.Select(contextableF);
+            na.Id = cont.Select()[0].Field<int>("idSearchContext");
+            var actF = new ActualFilter()
+            {
+                IdLearn = id
+            };
+            var act = st.ActualT.Select(actF);
+            na.IdAct = act.Select()[0].Field<int>("idactual");
+            List<int> contexts = new();
+            var contsF = new ContextsFilter()
+            {
+                IdContextable = id
+            };
+            foreach (var item in st.ContextsT.Select(contsF).Select())
+            {
+                contexts.Add(item.Field<int>("idContext"));
+            }
+            na.ContextId = contexts.ToArray();
+
+            this.names = na;
+            var filter = new SearchNamesFilter();
+            filter.IdSearch = this.names.Id;
+            var names = st.SearchNamesT.Select(filter);
+            var fAct = new ActualFilter()
+            {
+                IdActual = this.names.IdAct,
+            };
+            var dt = st.ActualT.Select(fAct);
+            ml.Load(dt.Rows[0].Field<byte[]>("conf"));
+            Models.Char[] chars;
+            chars = GetCharsName(name);
+            return chars;
+        }
+
+        private Models.Char[] GetCharsName(string name)
+        {
+            List<Models.Char> result = new List<Models.Char>();
+            foreach (var context in names.ContextId)
+            {
+                var filter = new ContextFilter()
+                {
+                    Id = context
+                };
+                var dt = st.ContextT.Select(filter);
+
+                StringBuilder builder = new();
+                builder.Append("https://www.google.com/search");
+                string query =
+                    HttpUtility.UrlEncode($"{name} " +
+                    $"site: {dt.Rows[0].Field<string>("Domen")}");
+                builder.Append($"?q={query}");
+
+                var edgeOptions = new EdgeOptions();
+                using (var driver = new EdgeDriver(edgeOptions))
+                {
+                    driver.Url = builder.ToString();
+                    var html = driver.FindElements(By.XPath("//div[@class = \"g tF2Cxc\"]//a"));
+                    string list = "";
+                    foreach (var element in html)
+                    {
+                        var temp = element.GetProperty("href");
+                        var upd = Link(temp,context);
+                        if (upd != null)
+                        {
+                            list = upd;
+                            break;
+                        }
+
+                    }
+                    driver.Url = list;
+
+                    var filterO = new OptionsFilter()
+                    {
+                        IdContext = context,
+                        Type = (int)OpType.DELAY
+                    };
+                    var dtO = st.OptionsT.Select(filterO);
+                    if (dtO.Rows.Count != 0)
+                    {
+                        Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
+                    }
+                    var chars = ContextableSearch(driver.FindElement(By.XPath("//body")).GetAttribute("outerHTML"), context);
+                    result.AddRange(chars);
+
+                }
+                for (int i = 0; i<result.Count; i++)
+                {
+                    var prediction = ml.Predcit(new()
+                    {
+                        Feature = result[i].Name +";"+result[i].Value
+                    });
+                    if (prediction.PredictedLabel == "Unuse")
+                    {
+                        result.Remove(result[i]);
+                        i--;
+                    }
+                }
+            }
+            return result.ToArray();
+        }
+
+        private Models.Char[] GetCharsLink(int context, string url)
+        {
+            List<Models.Char> result = new List<Models.Char>();
+            var filter = new ContextFilter()
+            {
+                Id = context
+            };
+            var dt = st.ContextT.Select(filter);
+            var edgeOptions = new EdgeOptions();
+            using (var driver = new EdgeDriver(edgeOptions))
+            {
+                driver.Url = url;
+                var filterO = new OptionsFilter()
+                {
+                    IdContext = context,
+                    Type = (int)OpType.DELAY
+                };
+                var dtO = st.OptionsT.Select(filterO);
+                if (dtO.Rows.Count != 0)
+                {
+                    Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
+                }
+                var chars = ContextableSearch(driver.FindElement(By.XPath("//body")).GetAttribute("outerHTML"), context);
+                result.AddRange(chars);
+            }
+            for(int i = 0;i<result.Count;i++)
+            {
+                var prediction = ml.Predcit(new()
+                {
+                    Feature = result[i].Name +";"+result[i].Value
+                });
+                if (prediction.PredictedLabel == "Unuse")
+                {
+                    result.Remove(result[i]);
+                    i--;
+                }
+            }
+            return result.ToArray();
+        }
+
+
+        //Дополни не контекстным поиском
+        //Поиск наименований, создать методы по ссылками и именнам, несколько нейронок
+        //Которые будут опредлять степень равности характеристик и похожести имен
+        //(Возможно второй месяц?)
         private Models.Char[] Search(SOptions op)
         {
             List<Models.Char> result = new List<Models.Char>();
@@ -66,47 +279,90 @@ namespace Server.Controllers.Tech
                 };
                 var sdt = st.SearchNamesT.Select(sFilter);
 
-                UriBuilder builder = new UriBuilder();
-                builder.Host = "google.com";
-                string query = 
+                StringBuilder builder = new();
+                builder.Append("https://www.google.com/search");
+                string query =
                     HttpUtility.UrlEncode($"{sdt.Rows[0].Field<string>("name")} " +
-                    $"{op.Option} site: {dt.Rows[0].Field<string>("Domen")}");
-                builder.Query = $"search?q={query}";
+                    $"site: {dt.Rows[0].Field<string>("Domen")}");
+                builder.Append($"?q={query}");
 
-                List<string> links = new List<string>();
-                var chromeOptions = new ChromeOptions();
-                using (var driver = new ChromeDriver(chromeOptions))
+                var edgeOptions = new EdgeOptions();
+                using (var driver = new EdgeDriver(edgeOptions))
                 {
                     driver.Url = builder.ToString();
-                    var html = driver.FindElements(By.XPath("//div[@class = \"g tF2Cxc\"]"));
-                    for (int i = 0; i <
-                        ((count > html.Count)? html.Count : count); i++)
-                        foreach (var element in html)
+                    var html = driver.FindElements(By.XPath("//div[@class = \"g tF2Cxc\"]//a"));
+                    var filterO = new OptionsFilter()
+                    {
+                        IdContext = context,
+                        Type = (int)OpType.LINKISSEARCH
+                    };
+                    var option = st.OptionsT.Select(filterO);
+
+                    string list = "";
+                    foreach (var element in html)
+                    {
+                        var temp = element.GetProperty("href");
+                        if (temp.Contains(option.Select()[0].Field<string>("value")))
                         {
-                            driver.Url = Parse(element.GetAttribute("outerHTML"));
-                            string? link = Link(driver.Url,context);
-                            if (link != null)
-                                links.Add(link);
+                            list = temp;
+                            break;
                         }
 
-                    foreach (var item in links)
-                    {
-                        driver.Url = item;
-                        var chars = 
-                            ContextableSearch(driver.FindElement(By.XPath("//body")).Text,0);
-                        result.AddRange(chars);
                     }
-                }
-                foreach (var res in result)
-                {
-                    Data data = new()
+                    driver.Url = list;
+                    var pathF = new PathsFilter()
                     {
-                        Feature = res.Value + "\n" + res.Name
+                        IdContext = context,
+                        Type = (int)PathType.SEARCH
                     };
-                    var pretiction = ml.Predcit(data);
-                    //При обучении измени строку
-                    if (pretiction.PredictedLabel == "")
-                        result.Remove(res);
+                    var path = st.PathsT.Select(pathF);
+
+                    var search = driver.FindElement(
+                        By.XPath(path.Rows[0].Field<string>("Path")));
+                    search.SendKeys(op.Option);
+
+                    pathF = new PathsFilter()
+                    {
+                        IdContext = context,
+                        Type = (int)PathType.SUBMIT
+                    };
+                    path = st.PathsT.Select(pathF);
+                    var submit = driver.FindElement(
+                        By.XPath(path.Rows[0].Field<string>("Path")));
+                    submit.Click();
+
+                    filterO = new OptionsFilter()
+                    {
+                        IdContext = context,
+                        Type = (int)OpType.DELAY
+                    };
+                    var dtO = st.OptionsT.Select(filterO);
+                    if (dtO.Rows.Count != 0)
+                    {
+                        Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
+                    }
+                    pathF = new PathsFilter()
+                    {
+                        IdContext = context,
+                        Type = (int)PathType.CELL
+                    };
+                    path = st.PathsT.Select(pathF);
+                    var elemensLink = driver.FindElements(By.XPath(path.Rows[0].Field<string?>("Path")));
+                    pathF = new PathsFilter()
+                    {
+                        IdContext = context,
+                        Type = (int)PathType.CELLNAME
+                    };
+                    path = st.PathsT.Select(pathF);
+                    var elemensNames = driver.FindElements(By.XPath(path.Rows[0].Field<string?>("Path")));
+                    for(int i = 0;i<elemensLink.Count;i++)
+                    {
+                        result.Add(new()
+                        {
+                            Name = elemensNames[i].Text,
+                            Value = elemensLink[i].GetDomProperty("href")
+                        });
+                    }
                 }
             }
             return result.ToArray();
@@ -122,7 +378,7 @@ namespace Server.Controllers.Tech
             var dt = st.OptionsT.Select(filter);
             if (dt.Rows.Count != 0)
             {
-                if (link.Contains(dt.Rows[0].Field<string>("value")))
+                if (!link.Contains(dt.Rows[0].Field<string>("value")))
                     return null;
             }
 
@@ -197,9 +453,10 @@ namespace Server.Controllers.Tech
 
             foreach (var item in rows)
             {
+                var local = HtmlNode.CreateNode(item.OuterHtml);
                 chars.Add(new Models.Char() {
-                    Name = item.SelectNodes(columnTPath)[0].InnerText,
-                    Value = item.SelectNodes(columnVPath)[0].InnerText
+                    Name = local.SelectNodes(columnTPath)[0].InnerText,
+                    Value = local.SelectNodes(columnVPath)[0].InnerText
                 });
             }
 

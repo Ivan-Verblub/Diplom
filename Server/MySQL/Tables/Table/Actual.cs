@@ -19,7 +19,7 @@ namespace Server.MySQL.Tables.Table
         [ByteArray]
         [OrderAtribute(2)]
         [DataAtribute]
-        [DBAtribute(hide: false, table: "actual", field: "conf")]
+        [DBAtribute(hide: false, table: "actual", field: "Conf")]
         public string? Conf { get; set; }
 
         [OrderAtribute(3)]
@@ -29,12 +29,10 @@ namespace Server.MySQL.Tables.Table
         public int IdLearningHistory { get; set; }
 
         [OrderAtribute(4)]
-        [DataAtribute]
         [DBAtribute(hide: false, table: "learninghistroy", field: "comment")]
         public string? Comment { get; set; }
 
         [OrderAtribute(5)]
-        [DataAtribute]
         [DBAtribute(hide: false, table: "learninghistroy", field: "version")]
         public string? Version { get; set; }
     }

@@ -1,33 +1,57 @@
 ﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Filter;
 
 namespace Gos.Server.Models.Table
 {
     [API("Tables/Objects")]
     public class Objects
     {
-        public string InvNumber { get; set; }
+        [Localize("Инвентарный номер")]
+        [Key(true)]
+        public string invNumber { get; set; }
 
-        public string Name { get; set; }
+        [Localize("Название")]
+        [Key(false)]
+        public string name { get; set; }
 
-        public string Chars { get; set; }
+        [Localize("Стоимость")]
+        public float cost { get; set; }
 
-        public float Cost { get; set; }
+        [Localize("Код статуса")]
+        [Typeable(typeof(SStatus),typeof(SStatusFilter))]
+        [Invisible]
+        public int idStatus { get; set; }
 
-        public int IdStatus { get; set; }
+        [Localize("Статус")]
+        [AI]
+        public string status { get; set; }
 
-        public string Status { get; set; }
+        [Localize("Код расположения")]
+        [Typeable(typeof(SLocation),typeof(SLocationFilter))]
+        [Invisible]
+        public int idLocation { get; set; }
 
-        public int IdLocation { get; set; }
+        [Localize("Расположение")]
+        [AI]
+        public string location { get; set; }
 
-        public string Location { get; set; }
+        [Typeable(typeof(Scat),typeof(ScatFilter))]
+        [Localize("Код категории")]
+        [Invisible]
+        public int idCat { get; set; }
 
-        public int IdCat { get; set; }
+        [Localize("Категория")]
+        [AI]
+        public string cat { get; set; }
 
-        public string Cat { get; set; }
+        [Typeable(typeof(Request),typeof(RequestFilter))]
+        [Localize("Код ТЗ")]
+        [Invisible]
+        public int idRequest { get; set; }
 
-        public int IdRequest { get; set; }
-
-        public string RName { get; set; }
+        [Localize("Название ТЗ")]
+        [AI]
+        public string rName { get; set; }
 
     }
 }

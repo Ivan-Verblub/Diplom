@@ -6,6 +6,8 @@ namespace Gos.Server.Models.Filter
     public class ScatFilter
     {
         [Localize("Код категории")]
+        [Key(true)]
+        [Invisible]
         public int IdCat { get; set; }
         [Localize("Название категории")]
         public string Name { get; set; }

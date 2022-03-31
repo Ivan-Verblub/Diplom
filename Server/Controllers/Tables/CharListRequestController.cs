@@ -16,6 +16,10 @@ namespace Server.Controllers.Tables
         public CharListRequest[] Select()
         {
             var dt = st.CharsRT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var charList = new CharListRequest[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -36,6 +40,10 @@ namespace Server.Controllers.Tables
         public CharListRequest[] Select(CharListRequestFilter listF)
         {
             var dt = st.CharsRT.Select(listF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var charList = new CharListRequest[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

@@ -17,6 +17,8 @@ namespace Gos.Server
             {
                 dt.Columns.Add(prop.Name, prop.PropertyType);
             }
+            if (table == null)
+                return dt;
             foreach (var row in table)
             {
                 var rw = dt.NewRow();

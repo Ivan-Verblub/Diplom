@@ -11,9 +11,19 @@ namespace Server.ML
         private IDataView _test;
         private IDataView _train;
         private ITransformer _model;
-        public ML(int seed)
+        public static ML Instance
+        { 
+            get
+            {
+                if (_instance == null)
+                    _instance = new ML();
+                return _instance;
+            }
+        }
+        private static ML _instance;
+        private ML()
         {
-            _mlContext = new MLContext(seed);
+            _mlContext = new MLContext(0);
         }
 
         public void LoadData(string dataSet, float split)
@@ -79,7 +89,7 @@ namespace Server.ML
                         Environment.SpecialFolder.MyDocuments),
                     $"{DateTime.Now.Ticks}.zip");
             File.WriteAllBytes(path,bytes);
-            _mlContext.Model.Load(path,out schema);
+            _model = _mlContext.Model.Load(path,out schema);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Server.Controllers
     public class MainController : Controller
     {
         private StaticTables st = StaticTables.Instance;
-        [HttpPost("DownloadUrl/{dataSet}")]
+        [HttpPost("DownloadUrl/{url}/{dataSet}")]
         public void DownloadUrl(string url, int dataSet)
         {
             string[] data = new string[0];

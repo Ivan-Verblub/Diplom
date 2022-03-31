@@ -18,6 +18,10 @@ namespace Server.Controllers.Tables
         public LearningHistory[] Select()
         {
             var dt = st.LearningHistoryT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var learningHistories = new LearningHistory[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -41,6 +45,10 @@ namespace Server.Controllers.Tables
         public LearningHistory[] Select(LearningHistoryFilter learningHistoryF)
         {
             var dt = st.LearningHistoryT.Select(learningHistoryF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var learningHistories = new LearningHistory[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

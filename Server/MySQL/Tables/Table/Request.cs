@@ -3,7 +3,7 @@ using Server.MySQL.Atributes.Table;
 
 namespace Server.MySQL.Tables.Table
 {
-    [TableAtribute(new string[] { "request", "learninghistroy","user" })]
+    [TableAtribute(new string[] { "request", "learninghistroy" })]
     public class Request
     {
         [OrderAtribute(0)]

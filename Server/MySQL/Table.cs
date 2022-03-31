@@ -129,6 +129,7 @@ namespace Server.MySQL
             try
             {
                 _command.CommandText = builder.ToString();
+                Console.WriteLine(_command.CommandText);
                 if (_command.ExecuteNonQuery() == 0)
                     return "Запись не была добавлена";
                 return "";
@@ -205,6 +206,7 @@ namespace Server.MySQL
             try
             {
                 _command.CommandText = builder.ToString();
+                Console.WriteLine(_command.CommandText);
                 if (_command.ExecuteNonQuery() == 0)
                     return "Запись не была изменена";
                 return "";
@@ -278,7 +280,8 @@ namespace Server.MySQL
                 }
                 foreach (var element in decryptTable.FKeyFields)
                 {
-                    builder.Append(element.Table);
+                    if (element == decryptTable.FKeyFields.First())
+                        builder.Append(element.Table);
                     builder.Append(' ');
                     builder.Append(element.ConType.ToString());
                     builder.Append(" JOIN ");
@@ -297,6 +300,7 @@ namespace Server.MySQL
 
                 foreach (var element in decryptTable.Ranges)
                 {
+                    var t = false;
                     builder.Append('(');
                     foreach (var range in element.Range)
                     {
@@ -315,13 +319,19 @@ namespace Server.MySQL
                                     break;
                                 }
                             }
+                            t = true;
                         }
                     }
-                    builder.Remove(builder.Length - 4, 4);
-                    builder.Append(')');
-                    builder.Append(" AND ");
-                    if (decryptTable.Filters.Count == 0)
-                        builder.Remove(builder.Length - 5, 5);
+                    if (t)
+                    {
+                        builder.Remove(builder.Length - 4, 4);
+                        builder.Append(')');
+                        builder.Append(" AND ");
+                        if (decryptTable.Filters.Count == 0)
+                            builder.Remove(builder.Length - 5, 5);
+                    }
+                    else
+                        builder.Remove(builder.Length - 1, 1);
                 }
 
                 foreach (var element in decryptTable.Filters)

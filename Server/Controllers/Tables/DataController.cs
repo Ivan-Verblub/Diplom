@@ -18,6 +18,10 @@ namespace Server.Controllers.Tables
         public DatasTable[] Select()
         {
             var dt = st.DataT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var data = new DatasTable[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -39,8 +43,10 @@ namespace Server.Controllers.Tables
         public DatasTable[] Select(DatasFilter dataF)
         {
             var dt = st.DataT.Select(dataF);
-            if(dt == null)
+            if (dt.Rows.Count==0)
+            {
                 return null;
+            }
             var data = new DatasTable[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

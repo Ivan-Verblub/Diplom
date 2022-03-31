@@ -7,7 +7,6 @@ namespace Server.MySQL.Tables.Table
     {
         [OrderAtribute(0)]
         [KeyAtribute(true)]
-        [DataAtribute]
         [DBAtribute(hide: false, table: "Paths", field: "idPaths")]
         public int Id { get; set; }
 
@@ -24,7 +23,7 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(3)]
         [DataAtribute]
         [DBAtribute(hide: false, table: "Paths", field: "Class")]
-        public int Class { get; set; }
+        public int Cclass { get; set; }
 
         [OrderAtribute(4)]
         [DataAtribute]

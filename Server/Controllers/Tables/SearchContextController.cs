@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Server.Controllers.Tables
 {
-    [Route("Table/[controller]")]
+    [Route("Tables/[controller]")]
     [ApiController]
     public class SearchContextController : ControllerBase
     {
@@ -16,6 +16,10 @@ namespace Server.Controllers.Tables
         public SearchContext[] Select()
         {
             var dt = st.SearchContextT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new SearchContext[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -34,6 +38,10 @@ namespace Server.Controllers.Tables
         public SearchContext[] Select(SearchContextFilter objectsF)
         {
             var dt = st.SearchContextT.Select(objectsF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new SearchContext[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

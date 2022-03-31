@@ -18,6 +18,10 @@ namespace Server.Controllers.Tables
         public Request[] Select()
         {
             var dt = st.RequestT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var request = new Request[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -39,6 +43,10 @@ namespace Server.Controllers.Tables
         public Request[] Select(RequestFilter requestF)
         {
             var dt = st.RequestT.Select(requestF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var request = new Request[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

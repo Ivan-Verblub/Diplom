@@ -1,20 +1,36 @@
 ﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Filter;
 
 namespace Gos.Server.Models.Table
 {
-    [API("Table/Actual")]
+    [API("Tables/Actual")]
     public class Actual
     {
-        public int IdActual { get; set; }
+        [Localize("Код")]
+        [Key(true)]
+        [AI]
+        [Invisible]
+        public int idActual { get; set; }
 
-        public string Name { get; set; }
+        [Localize("Имя")]
+        [Key(false)]
+        public string name { get; set; }
 
-        public string Conf { get; set; }
+        [Localize("Конфигурация")]
+        [Invisible]
+        public string conf { get; set; }
 
-        public int IdLearningHistory { get; set; }
+        [Localize("Код обучения")]
+        [Invisible]
+        [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
+        public int idLearningHistory { get; set; }
 
-        public string Comment { get; set; }
+        [Localize("Коментарий")]
+        [AI]
+        public string comment { get; set; }
 
-        public string Version { get; set; }
+        [Localize("Версия")]
+        [AI]
+        public string version { get; set; }
     }
 }

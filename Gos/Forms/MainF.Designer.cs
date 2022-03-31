@@ -1,6 +1,6 @@
 ﻿namespace Gos.Forms
 {
-    partial class MainF
+    partial class MainF 
     {
         /// <summary>
         /// Required designer variable.

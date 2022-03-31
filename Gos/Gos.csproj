@@ -64,47 +64,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Changing\ChangingForm.cs">
+    <Compile Include="Forms\Generic\Buttons.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Changing\ChangingForm.Designer.cs">
+    <Compile Include="Forms\Generic\Buttons.Designer.cs">
+      <DependentUpon>Buttons.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Generic\Changing\ChangingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Generic\Changing\ChangingForm.Designer.cs">
       <DependentUpon>ChangingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Changing\DataField.cs">
+    <Compile Include="Forms\Generic\Changing\DataField.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Changing\DataField.Designer.cs">
+    <Compile Include="Forms\Generic\Changing\DataField.Designer.cs">
       <DependentUpon>DataField.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DataForm.cs">
+    <Compile Include="Forms\Generic\DataForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DataForm.Designer.cs">
+    <Compile Include="Forms\Generic\DataForm.Designer.cs">
       <DependentUpon>DataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EventController.cs" />
-    <Compile Include="Forms\FieldSelector.cs">
+    <Compile Include="Forms\Generic\EventController.cs" />
+    <Compile Include="Forms\Generic\FieldSelector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FieldSelector.Designer.cs">
+    <Compile Include="Forms\Generic\FieldSelector.Designer.cs">
       <DependentUpon>FieldSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Filter\FilterField.cs">
+    <Compile Include="Forms\Generic\Filter\FilterField.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Filter\FilterField.Designer.cs">
+    <Compile Include="Forms\Generic\Filter\FilterField.Designer.cs">
       <DependentUpon>FilterField.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Filter\Filters.cs">
+    <Compile Include="Forms\Generic\Filter\Filters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Filter\Filters.Designer.cs">
+    <Compile Include="Forms\Generic\Filter\Filters.Designer.cs">
       <DependentUpon>Filters.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Filter\FilterSelector.cs">
+    <Compile Include="Forms\Generic\Filter\FilterSelector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Filter\FilterSelector.Designer.cs">
+    <Compile Include="Forms\Generic\Filter\FilterSelector.Designer.cs">
       <DependentUpon>FilterSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainF.cs">
@@ -119,13 +125,34 @@
     <Compile Include="Forms\VMenu.Designer.cs">
       <DependentUpon>VMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Сustom\CreateTech.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Сustom\CreateTech.Designer.cs">
+      <DependentUpon>CreateTech.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Сustom\Learn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Сustom\Learn.Designer.cs">
+      <DependentUpon>Learn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Сustom\LoadDataF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Сustom\LoadDataF.Designer.cs">
+      <DependentUpon>LoadDataF.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Atribute\AI.cs" />
     <Compile Include="Server\Atribute\API.cs" />
+    <Compile Include="Server\Atribute\EnumList.cs" />
     <Compile Include="Server\Atribute\Filter.cs" />
     <Compile Include="Server\Atribute\Key.cs" />
     <Compile Include="Server\Atribute\Localize.cs" />
     <Compile Include="Server\Atribute\Typeable.cs" />
+    <Compile Include="Server\Atribute\Invisible.cs" />
     <Compile Include="Server\DataTableParser.cs" />
     <Compile Include="Server\Enums.cs" />
     <Compile Include="Server\Models\Filter\ActualFilter.cs" />
@@ -148,6 +175,11 @@
     <Compile Include="Server\Models\Filter\SearchNamesFilter.cs" />
     <Compile Include="Server\Models\Filter\SLocationFilter.cs" />
     <Compile Include="Server\Models\Filter\SStatusFilter.cs" />
+    <Compile Include="Server\Models\Requesting\Char.cs" />
+    <Compile Include="Server\Models\Requesting\Data.cs" />
+    <Compile Include="Server\Models\Requesting\DataLoad.cs" />
+    <Compile Include="Server\Models\Requesting\Metrics.cs" />
+    <Compile Include="Server\Models\Requesting\Options.cs" />
     <Compile Include="Server\Models\Table\Actual.cs" />
     <Compile Include="Server\Models\Table\CharListObjects.cs" />
     <Compile Include="Server\Models\Table\CharListRequest.cs" />
@@ -169,25 +201,28 @@
     <Compile Include="Server\Models\Table\SLocation.cs" />
     <Compile Include="Server\Models\Table\SStatus.cs" />
     <Compile Include="Server\Requester.cs" />
-    <EmbeddedResource Include="Forms\Changing\ChangingForm.resx">
+    <EmbeddedResource Include="Forms\Generic\Buttons.resx">
+      <DependentUpon>Buttons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Generic\Changing\ChangingForm.resx">
       <DependentUpon>ChangingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Changing\DataField.resx">
+    <EmbeddedResource Include="Forms\Generic\Changing\DataField.resx">
       <DependentUpon>DataField.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DataForm.resx">
+    <EmbeddedResource Include="Forms\Generic\DataForm.resx">
       <DependentUpon>DataForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FieldSelector.resx">
+    <EmbeddedResource Include="Forms\Generic\FieldSelector.resx">
       <DependentUpon>FieldSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Filter\FilterField.resx">
+    <EmbeddedResource Include="Forms\Generic\Filter\FilterField.resx">
       <DependentUpon>FilterField.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Filter\Filters.resx">
+    <EmbeddedResource Include="Forms\Generic\Filter\Filters.resx">
       <DependentUpon>Filters.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Filter\FilterSelector.resx">
+    <EmbeddedResource Include="Forms\Generic\Filter\FilterSelector.resx">
       <DependentUpon>FilterSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainF.resx">
@@ -195,6 +230,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VMenu.resx">
       <DependentUpon>VMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Сustom\CreateTech.resx">
+      <DependentUpon>CreateTech.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Сustom\Learn.resx">
+      <DependentUpon>Learn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Сustom\LoadDataF.resx">
+      <DependentUpon>LoadDataF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

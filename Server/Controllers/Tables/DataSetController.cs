@@ -19,6 +19,10 @@ namespace Server.Controllers.Tables
         public DataSet[] Select()
         {
             var dt = st.DataSetT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var dataSet = new DataSet[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -36,6 +40,10 @@ namespace Server.Controllers.Tables
         public DataSet[] SelectF(DataSetFilter dataSetF)
         {
             var dt = st.DataSetT.Select(dataSetF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var dataSet = new DataSet[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

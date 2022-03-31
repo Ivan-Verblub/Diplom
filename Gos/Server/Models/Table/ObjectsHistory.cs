@@ -1,4 +1,5 @@
 ﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Filter;
 using System;
 
 namespace Gos.Server.Models.Table
@@ -6,22 +7,43 @@ namespace Gos.Server.Models.Table
     [API("Tables/ObjectsHistory")]
     public class ObjectsHistory
     {
-        public int Id { get; set; }
+        [Localize("Код")]
+        [Key(true)]
+        [AI]
+        [Invisible]
+        public int id { get; set; }
 
-        public string InvNumber { get; set; }
+        [Localize("Инвентарный номер")]
+        [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
+        [Invisible]
+        public string invNumber { get; set; }
 
-        public string Name { get; set; }
+        [Localize("Название")]
+        public string name { get; set; }
 
-        public int IdStatus { get; set; }
+        [Localize("Код статуса")]
+        [Typeable(typeof(SStatus),typeof(SStatusFilter))]
+        [Invisible]
+        public int idStatus { get; set; }
 
-        public string Status { get; set; }
+        [Localize("Назание статуса")]
+        [AI]
+        public string status { get; set; }
 
-        public int IdLocation { get; set; }
+        [Localize("Код расположения")]
+        [Typeable(typeof(SLocation), typeof(SLocationFilter))]
+        [Invisible]
+        public int idLocation { get; set; }
 
-        public string Location { get; set; }
+        [Localize("Расположение")]
+        [AI]
+        public string location { get; set; }
 
-        public DateTime Date { get; set; }
+        [Localize("Дата")]
+        public DateTime date { get; set; }
 
+        [Localize("Комментарий")]
+        [Key(false)]
         public string comment { get; set; }
     }
 }

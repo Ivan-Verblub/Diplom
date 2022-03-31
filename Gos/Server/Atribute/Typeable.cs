@@ -15,7 +15,7 @@ namespace Gos.Server.Atribute
         public Type TType => _tType;
         private Type _tType;
 
-        public Typeable(Type fType, Type tType)
+        public Typeable(Type tType, Type fType)
         {
             _fType = fType;
             _tType = tType;

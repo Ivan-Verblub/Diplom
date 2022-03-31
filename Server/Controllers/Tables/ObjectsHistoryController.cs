@@ -18,6 +18,10 @@ namespace Server.Controllers.Tables
         public ObjectsHistory[] Select()
         {
             var dt = st.ObjectsHistoryT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objectsHistory = new ObjectsHistory[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -43,6 +47,10 @@ namespace Server.Controllers.Tables
         public ObjectsHistory[] Select(ObjectsHistoryFilter objectsF)
         {
             var dt = st.ObjectsHistoryT.Select(objectsF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objectsHistory = new ObjectsHistory[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

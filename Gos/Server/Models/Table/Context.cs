@@ -5,8 +5,14 @@ namespace Gos.Server.Models.Table
     [API("Tables/Context")]
     public class Context
     {
-        public int Id { get; set; }
+        [Localize("Код")]
+        [AI]
+        [Key(true)]
+        [Invisible]
+        public int id { get; set; }
 
-        public string Domen { get; set; }
+        [Localize("Домен")]
+        [Key(false)]
+        public string domen { get; set; }
     }
 }

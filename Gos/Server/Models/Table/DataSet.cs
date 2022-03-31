@@ -5,9 +5,15 @@ namespace Gos.Server.Models.Table
     [API("Tables/DataSet")]
     public class DataSet
     {
-        public int IdDataSet { get; set; }
+        [Localize("Код")]
+        [Key(true)]
+        [AI]
+        [Invisible]
+        public int idDataSet { get; set; }
 
-        public string SetName { get; set; }
+        [Localize("Название сета")]
+        [Key(false)]
+        public string setName { get; set; }
 
     }
 }

@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Server.Controllers.Tables
 {
-    [Route("Table/[controller]")]
+    [Route("Tables/[controller]")]
     [ApiController]
     public class PathsController : ControllerBase
     {
@@ -16,6 +16,10 @@ namespace Server.Controllers.Tables
         public Paths[] Select()
         {
             var dt = st.PathsT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new Paths[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -25,7 +29,7 @@ namespace Server.Controllers.Tables
                     Id = row.Field<int>("idPaths"),
                     Path = row.Field<string>("path"),
                     Type = row.Field<int>("type"),
-                    Class = row.Field<int>("class"),
+                    Cclass = row.Field<int>("class"),
                     IdContext = row.Field<int>("idContext"),
                     Domen = row.Field<string>("domen")
                 };
@@ -38,6 +42,10 @@ namespace Server.Controllers.Tables
         public Paths[] Select(PathsFilter objectsF)
         {
             var dt = st.PathsT.Select(objectsF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new Paths[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -47,7 +55,7 @@ namespace Server.Controllers.Tables
                     Id = row.Field<int>("idPaths"),
                     Path = row.Field<string>("path"),
                     Type = row.Field<int>("type"),
-                    Class = row.Field<int>("class"),
+                    Cclass = row.Field<int>("class"),
                     IdContext = row.Field<int>("idContext"),
                     Domen = row.Field<string>("domen")
                 };
@@ -62,7 +70,7 @@ namespace Server.Controllers.Tables
             string er = st.PathsT.Insert(objects);
             if (er == "")
                 return CreatedAtAction(nameof(this.Select), objects);
-            return BadRequest(er);
+            return StatusCode(400,er);
         }
 
         [HttpPost("Update")]

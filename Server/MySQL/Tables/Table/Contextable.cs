@@ -8,7 +8,6 @@ namespace Server.MySQL.Tables.Table
     {
         [OrderAtribute(0)]
         [KeyAtribute(false)]
-        [DataAtribute]
         [FKeyAtribute(table: "learninghistroy", conection: CType.INNER)]
         [DBAtribute(hide: false, table: "contextable", field: "idlearninghistroy")]
         public int Id { get; set; }
@@ -40,6 +39,7 @@ namespace Server.MySQL.Tables.Table
 
         [OrderAtribute(7)]
         [FKeyAtribute(table: "SearchContext", conection: CType.LEFT)]
+        [DataAtribute]
         [DBAtribute(hide: false, table: "Contextable", field: "idSearchContext")]
         public int IdSearch { get; set; }
 

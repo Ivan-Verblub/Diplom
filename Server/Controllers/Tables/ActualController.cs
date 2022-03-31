@@ -10,7 +10,7 @@ using System.Data;
 namespace Server.Controllers.Tables
 {
     [ApiController]
-    [Route("Table/[controller]")]
+    [Route("Tables/[controller]")]
     public class ActualController : Controller
     {
         private StaticTables st = StaticTables.Instance;
@@ -45,6 +45,10 @@ namespace Server.Controllers.Tables
         public Actual[] Select(ActualFilter actualF)
         {
             var dt = st.ActualT.Select(actualF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var actual = new Actual[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

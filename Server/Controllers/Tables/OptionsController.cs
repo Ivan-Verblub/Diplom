@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Server.Controllers.Tables
 {
-    [Route("Table/[controller]")]
+    [Route("Tables/[controller]")]
     [ApiController]
     public class OptionsController : ControllerBase
     {
@@ -16,6 +16,10 @@ namespace Server.Controllers.Tables
         public Options[] Select()
         {
             var dt = st.OptionsT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new Options[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -37,6 +41,10 @@ namespace Server.Controllers.Tables
         public Options[] Select(OptionsFilter objectsF)
         {
             var dt = st.OptionsT.Select(objectsF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new Options[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

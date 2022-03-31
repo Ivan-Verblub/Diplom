@@ -18,6 +18,10 @@ namespace Server.Controllers.Tables
         public Scat[] SelectSC()
         {
             var dt = st.ScatT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var scat = new Scat[dt.Rows.Count];
             int i = 0;
             foreach(var row in dt.Select())
@@ -35,6 +39,10 @@ namespace Server.Controllers.Tables
         public Scat[] SelectSC(ScatFilter scatf)
         {
             var dt = st.ScatT.Select(scatf);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var scat = new Scat[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

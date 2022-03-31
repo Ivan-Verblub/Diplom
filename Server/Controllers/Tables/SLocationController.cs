@@ -18,6 +18,10 @@ namespace Server.Controllers.Tables
         public SLocation[] Select()
         {
             var dt = st.SLocationT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var sLocation = new SLocation[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -36,6 +40,10 @@ namespace Server.Controllers.Tables
         public SLocation[] SelectF(SLocationFilter sLocationf)
         {
             var dt = st.SLocationT.Select(sLocationf);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var sLocation = new SLocation[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

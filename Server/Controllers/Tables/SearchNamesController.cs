@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Server.Controllers.Tables
 {
-    [Route("Table/[controller]")]
+    [Route("Tables/[controller]")]
     [ApiController]
     public class SearchNamesController : ControllerBase
     {
@@ -16,6 +16,10 @@ namespace Server.Controllers.Tables
         public SearchNames[] Select()
         {
             var dt = st.SearchNamesT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new SearchNames[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -23,9 +27,9 @@ namespace Server.Controllers.Tables
                 objects[i] = new()
                 {
                     Id = row.Field<int>("idSearchNames"),
-                    Name = row.Field<string>("name1"),
+                    Name = row.Field<string>("name"),
                     IdSearch = row.Field<int>("idSearchContext"),
-                    SearchName = row.Field<string>("name2")
+                    SearchName = row.Field<string>("name1")
                 };
                 i++;
             }
@@ -36,6 +40,10 @@ namespace Server.Controllers.Tables
         public SearchNames[] Select(SearchNamesFilter objectsF)
         {
             var dt = st.SearchNamesT.Select(objectsF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new SearchNames[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -43,9 +51,9 @@ namespace Server.Controllers.Tables
                 objects[i] = new()
                 {
                     Id = row.Field<int>("idSearchNames"),
-                    Name = row.Field<string>("name1"),
+                    Name = row.Field<string>("name"),
                     IdSearch = row.Field<int>("idSearchContext"),
-                    SearchName = row.Field<string>("name2")
+                    SearchName = row.Field<string>("name1")
                 };
                 i++;
             }

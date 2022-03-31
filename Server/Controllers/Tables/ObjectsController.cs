@@ -18,6 +18,10 @@ namespace Server.Controllers.Tables
         public Objects[] Select()
         {
             var dt = st.ObjectsT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new Objects[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -26,7 +30,6 @@ namespace Server.Controllers.Tables
                 {
                     InvNumber = row.Field<string>("invnumber"),
                     Name = row.Field<string>("name"),
-                    Chars = row.Field<string>("char"),
                     Cost = row.Field<float>("cost"),
                     IdStatus = row.Field<int>("idstatus"),
                     Status = row.Field<string>("status"),
@@ -46,6 +49,10 @@ namespace Server.Controllers.Tables
         public Objects[] Select(ObjectsFilter objectsF)
         {
             var dt = st.ObjectsT.Select(objectsF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var objects = new Objects[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -54,7 +61,6 @@ namespace Server.Controllers.Tables
                 {
                     InvNumber = row.Field<string>("invnumber"),
                     Name = row.Field<string>("name"),
-                    Chars = row.Field<string>("char"),
                     Cost = row.Field<float>("cost"),
                     IdStatus = row.Field<int>("idstatus"),
                     Status = row.Field<string>("status"),

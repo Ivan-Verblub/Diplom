@@ -18,6 +18,10 @@ namespace Server.Controllers.Tables
         public RequestInner[] Select()
         {
             var dt = st.RequestInnerT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var requestInner = new RequestInner[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -42,6 +46,10 @@ namespace Server.Controllers.Tables
         public RequestInner[] Select(RequestInnerFilter requestInnerF)
         {
             var dt = st.RequestInnerT.Select(requestInnerF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var requestInner = new RequestInner[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

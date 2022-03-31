@@ -1,20 +1,39 @@
 ﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Filter;
 
 namespace Gos.Server.Models.Table
 {
     [API("Tables/Contexts")]
     public class Contexts
     {
-        public int Id { get; set; }
+        [Localize("Код")]
+        [AI]
+        [Key(true)]
+        [Invisible]
+        public int id { get; set; }
 
-        public int IdContext { get; set; }
+        [Localize("Код контекста")]
+        [Typeable(typeof(Context),typeof(ContextFilter))]
+        [Invisible]
+        public int idContext { get; set; }
 
-        public string Domen { get; set; }
+        [Localize("Домен")]
+        [AI]
+        [Key(false)]
+        public string domen { get; set; }
 
-        public int IdContextable { get; set; }
+        [Localize("Код обучения")]
+        [Typeable(typeof(Contextable), typeof(ContextableFilter))]
+        [Invisible]
+        public int idContextable { get; set; }
 
-        public int IdLearning { get; set; }
+        [Localize("Код обучения")]
+        [Invisible]
+        [AI]
+        public int idLearning { get; set; }
 
-        public string Comment { get; set; }
+        [Localize("Коментарий")]
+        [AI]
+        public string comment { get; set; }
     }
 }

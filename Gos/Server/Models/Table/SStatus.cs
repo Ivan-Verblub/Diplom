@@ -5,8 +5,13 @@ namespace Gos.Server.Models.Table
     [API("Tables/SStatus")]
     public class SStatus
     {
-        public int IdStatus { get; set; }
-
-        public string Status { get; set; }
+        [Localize("Код")]
+        [AI]
+        [Key(true)]
+        [Invisible]
+        public int idStatus { get; set; }
+        [Localize("Название статуса")]
+        [Key(false)]
+        public string status { get; set; }
     }
 }

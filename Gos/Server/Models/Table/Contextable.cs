@@ -1,4 +1,5 @@
 ﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Filter;
 using System;
 
 namespace Gos.Server.Models.Table
@@ -6,22 +7,47 @@ namespace Gos.Server.Models.Table
     [API("Tables/Contextable")]
     public class Contextable
     {
-        public int Id { get; set; }
+        [Key(true)]
+        [Localize("Код")]
+        [Invisible]
+        [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
+        public int id { get; set; }
 
-        public DateTime Date { get; set; }
+        [Localize("Дата создания")]
+        [AI]
+        public DateTime date { get; set; }
 
-        public int Iter { get; set; }
+        [Localize("Количество итераций")]
+        [AI]
+        public int iter { get; set; }
 
-        public int IdDataSet { get; set; }
+        [Localize("Код набора данных")]
+        [Typeable(typeof(DataSet),typeof(DataSetFilter))]
+        [Invisible]
+        [AI]
+        public int idDataSet { get; set; }
 
-        public string SetName { get; set; }
+        [Localize("Название набора")]
+        [AI]
+        public string setName { get; set; }
 
-        public string Comment { get; set; }
+        [Localize("Комментарий")]
+        [AI]
+        public string comment { get; set; }
 
-        public string Version { get; set; }
+        [Localize("Версия")]
+        [Key(false)]
+        [AI]
+        public string version { get; set; }
 
-        public int IdSearch { get; set; }
+        [Localize("Код поиска контекста")]
+        [Typeable(typeof(SearchContext),typeof(SearchContextFilter))]
 
-        public string SearchName { get; set; }
+        [Invisible]
+        public int idSearch { get; set; }
+
+        [Localize("Название контекста")]
+        [AI]
+        public string searchName { get; set; }
     }
 }

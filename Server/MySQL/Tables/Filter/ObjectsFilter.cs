@@ -20,14 +20,6 @@ namespace Server.MySQL.Tables.Filter
             table: "objects", filtType: FType.LIKE)]
         public string? NameL { get; set; }
 
-        [FilterAtribute(field: "char",
-            table: "objects", filtType: FType.EQUAL)]
-        public string? Chars { get; set; }
-
-        [FilterAtribute(field: "char",
-            table: "objects", filtType: FType.LIKE)]
-        public string? CharsL { get; set; }
-
         [FilterAtribute(field: "cost",
             table: "objects", filtType: FType.EQUAL)]
         public int Cost { get; set; }

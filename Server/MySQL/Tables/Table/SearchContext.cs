@@ -7,7 +7,7 @@ namespace Server.MySQL.Tables.Table
     {
         [OrderAtribute(0)]
         [KeyAtribute(true)]
-        [DBAtribute(hide: false, table: "SearchContext", field: "name")]
+        [DBAtribute(hide: false, table: "SearchContext", field: "idSearchContext")]
         public int Id { get; set; }
 
         [OrderAtribute(1)]

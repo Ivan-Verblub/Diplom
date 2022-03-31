@@ -1,18 +1,31 @@
 ﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Filter;
 
 namespace Gos.Server.Models.Table
 {
     [API("Tables/CharListObjects")]
     public class CharListObjects
     {
-        public int Id { get; set; }
+        [Localize("Код")]
+        [AI]
+        [Invisible]
+        [Key(true)]
+        public int id { get; set; }
 
-        public string Name { get; set; }
+        [Localize("Название характеристики")]
+        [Key(false)]
+        public string name { get; set; }
 
-        public string Value { get; set; }
+        [Localize("Значение характеристи")]
+        public string value { get; set; }
 
-        public string IdObject { get; set; }
+        [Localize("Код обьекта")]
+        [Invisible]
+        [Typeable(typeof(Objects),typeof(ObjectsFilter))]
+        public string idObject { get; set; }
 
-        public string ObjectName { get; set; }
+        [Localize("Название обьекта")]
+        [AI]
+        public string objectName { get; set; }
     }
 }

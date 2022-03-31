@@ -1,18 +1,32 @@
 ﻿using Gos.Server.Atribute;
+using Gos.Server.Models.Filter;
 
 namespace Gos.Server.Models.Table
 {
     [API("Tables/Options")]
     public class Options
     {
-        public int Id { get; set; }
+        [Localize("Код")]
+        [Key(true)]
+        [AI]
+        [Invisible]
+        public int id { get; set; }
 
-        public int Type { get; set; }
+        [Localize("Код типа")]
+        [EnumList(typeof(OpType))]
+        public int type { get; set; }
 
-        public string Value { get; set; }
+        [Localize("Значение")]
+        [Key(false)]
+        public string value { get; set; }
 
-        public int IdContext { get; set; }
+        [Localize("Код контекста")]
+        [Typeable(typeof(Context),typeof(ContextFilter))]
+        [Invisible]
+        public int idContext { get; set; }
 
-        public string Domen { get; set; }
+        [Localize("Домен")]
+        [AI]
+        public string domen { get; set; }
     }
 }

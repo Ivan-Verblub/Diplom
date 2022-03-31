@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Server.Controllers.Tables
 {
-    [Route("Table/[controller]")]
+    [Route("Tables/[controller]")]
     [ApiController]
     public class ContextableController : ControllerBase
     {
@@ -16,6 +16,10 @@ namespace Server.Controllers.Tables
         public Contextable[] Select()
         {
             var dt = st.ContextableT.Select();
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var context = new Contextable[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())
@@ -41,6 +45,10 @@ namespace Server.Controllers.Tables
         public Contextable[] Select(ContextableFilter contextF)
         {
             var dt = st.ContextableT.Select(contextF);
+            if (dt.Rows.Count==0)
+            {
+                return null;
+            }
             var context = new Contextable[dt.Rows.Count];
             int i = 0;
             foreach (var row in dt.Select())

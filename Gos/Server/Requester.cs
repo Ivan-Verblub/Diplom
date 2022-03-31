@@ -19,6 +19,7 @@ namespace Gos.Server
         private string route;
         public Requester (string url)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             _url = url;
             using (var apiAtrib =
                 typeof(T).GetCustomAttributes(typeof(API), true).Cast<API>().First())
@@ -35,6 +36,8 @@ namespace Gos.Server
             using (var responde = new StreamReader(request.GetResponse().GetResponseStream()))
             {
                 string json = responde.ReadToEnd();
+                if (json == "")
+                    return null;
                 var result = JsonSerializer.Deserialize<T[]>(json);
                 responde.Close();
                 return result;
@@ -60,7 +63,10 @@ namespace Gos.Server
             }
             using (var responde = new StreamReader(request.GetResponse().GetResponseStream()))
             {
-                var result = JsonSerializer.Deserialize<T[]>(responde.ReadToEnd());
+                string json = responde.ReadToEnd();
+                if (json == "")
+                    return null;
+                var result = JsonSerializer.Deserialize<T[]>(json);
                 responde.Close();
                 return result;
             }
@@ -90,12 +96,26 @@ namespace Gos.Server
                 using (var responde = new StreamReader(request.GetResponse().GetResponseStream()))
                 {
                     var result = responde.ReadToEnd();
-                    responde.Close();
-                    return result;
+                    try
+                    {
+                        JsonSerializer.Deserialize<T>(result);
+                        responde.Close();
+                        return "";
+                    }
+                    catch
+                    {
+                        responde.Close();
+                        return result;
+                    }
                 }
             }
             catch (Exception ex)
             {
+                if (typeof(WebException)==ex.GetType())
+                {
+                    return new StreamReader(((WebException)ex)
+                        .Response.GetResponseStream()).ReadToEnd();
+                }
                 return ex.Message;
             }
         }
@@ -123,8 +143,17 @@ namespace Gos.Server
                 using (var responde = new StreamReader(request.GetResponse().GetResponseStream()))
                 {
                     var result = responde.ReadToEnd();
-                    responde.Close();
-                    return result;
+                    try
+                    {
+                        JsonSerializer.Deserialize<T>(result);
+                        responde.Close();
+                        return "";
+                    }
+                    catch
+                    {
+                        responde.Close();
+                        return result;
+                    }
                 }
             }
             catch (Exception ex)
@@ -156,8 +185,17 @@ namespace Gos.Server
                 using (var responde = new StreamReader(request.GetResponse().GetResponseStream()))
                 {
                     var result = responde.ReadToEnd();
-                    responde.Close();
-                    return result;
+                    try
+                    {
+                        JsonSerializer.Deserialize<T>(result);
+                        responde.Close();
+                        return "";
+                    }
+                    catch
+                    {
+                        responde.Close();
+                        return result;
+                    }
                 }
             }
             catch (Exception ex)
