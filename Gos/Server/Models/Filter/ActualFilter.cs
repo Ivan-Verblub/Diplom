@@ -34,5 +34,8 @@ namespace Gos.Server.Models.Filter
         [Localize("Примерная версия")]
         [Atribute.Filter(Filtration.LIKE)]
         public string VersionL { get; set; }
+
+        [Localize("Тип")]
+        public int types { get; set; }
     }
 }

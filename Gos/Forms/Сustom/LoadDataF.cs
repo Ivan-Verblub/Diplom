@@ -111,5 +111,10 @@ namespace Gos.Forms.Сustom
                 stream.Close();
             }
         }
+
+        private void LoadDataF_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

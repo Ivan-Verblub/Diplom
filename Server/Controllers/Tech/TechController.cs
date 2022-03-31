@@ -62,7 +62,8 @@ namespace Server.Controllers.Tech
                 {
                     if (name.Field<int>("idSearchNames") == option.Id)
                     {
-                        chars = Search(option);
+                        chars = Search(ops.Where(x=>x.Id == name.Field<int>("idSearchNames")).ToArray());
+                        break;
                     }
                 }
             }
@@ -262,7 +263,7 @@ namespace Server.Controllers.Tech
         //Поиск наименований, создать методы по ссылками и именнам, несколько нейронок
         //Которые будут опредлять степень равности характеристик и похожести имен
         //(Возможно второй месяц?)
-        private Models.Char[] Search(SOptions op)
+        private Models.Char[] Search(SOptions[] op)
         {
             List<Models.Char> result = new List<Models.Char>();
             foreach (var context in names.ContextId)
@@ -272,10 +273,9 @@ namespace Server.Controllers.Tech
                     Id = context
                 };
                 var dt = st.ContextT.Select(filter);
-
                 var sFilter = new SearchNamesFilter()
                 {
-                    IdSearch = op.Id
+                    IdSearch = op[0].Id
                 };
                 var sdt = st.SearchNamesT.Select(sFilter);
 
@@ -307,66 +307,113 @@ namespace Server.Controllers.Tech
                             list = temp;
                             break;
                         }
-
                     }
                     driver.Url = list;
-                    var pathF = new PathsFilter()
+                    while (true)
                     {
-                        IdContext = context,
-                        Type = (int)PathType.SEARCH
-                    };
-                    var path = st.PathsT.Select(pathF);
-
-                    var search = driver.FindElement(
-                        By.XPath(path.Rows[0].Field<string>("Path")));
-                    search.SendKeys(op.Option);
-
-                    pathF = new PathsFilter()
-                    {
-                        IdContext = context,
-                        Type = (int)PathType.SUBMIT
-                    };
-                    path = st.PathsT.Select(pathF);
-                    var submit = driver.FindElement(
-                        By.XPath(path.Rows[0].Field<string>("Path")));
-                    submit.Click();
-
-                    filterO = new OptionsFilter()
-                    {
-                        IdContext = context,
-                        Type = (int)OpType.DELAY
-                    };
-                    var dtO = st.OptionsT.Select(filterO);
-                    if (dtO.Rows.Count != 0)
-                    {
-                        Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
-                    }
-                    pathF = new PathsFilter()
-                    {
-                        IdContext = context,
-                        Type = (int)PathType.CELL
-                    };
-                    path = st.PathsT.Select(pathF);
-                    var elemensLink = driver.FindElements(By.XPath(path.Rows[0].Field<string?>("Path")));
-                    pathF = new PathsFilter()
-                    {
-                        IdContext = context,
-                        Type = (int)PathType.CELLNAME
-                    };
-                    path = st.PathsT.Select(pathF);
-                    var elemensNames = driver.FindElements(By.XPath(path.Rows[0].Field<string?>("Path")));
-                    for(int i = 0;i<elemensLink.Count;i++)
-                    {
-                        result.Add(new()
+                        filterO = new OptionsFilter()
                         {
-                            Name = elemensNames[i].Text,
-                            Value = elemensLink[i].GetDomProperty("href")
-                        });
+                            IdContext = context,
+                            Type = (int)OpType.DELAY
+                        };
+                        var dtO = st.OptionsT.Select(filterO);
+                        if (dtO.Rows.Count != 0)
+                        {
+                            Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
+                        }
+                        var pathF = new PathsFilter()
+                        {
+                            IdContext = context,
+                            Type = (int)PathType.CELL
+                        };
+                        var path = st.PathsT.Select(pathF);
+                        var elemensLink = driver.FindElements(
+                            By.XPath(path.Rows[0].Field<string?>("Path")));
+                        pathF = new PathsFilter()
+                        {
+                            IdContext = context,
+                            Type = (int)PathType.CELLNAME
+                        };
+                        path = st.PathsT.Select(pathF);
+                        var elemensNames = driver.FindElements(
+                            By.XPath(path.Rows[0].Field<string?>("Path")));
+                        for (int i = 0; i<elemensLink.Count; i++)
+                        {
+                            result.Add(new()
+                            {
+                                Name = elemensNames[i].Text,
+                                Value = elemensLink[i].GetDomProperty("href")
+                            });
+                        }
+                        pathF = new PathsFilter()
+                        {
+                            IdContext = context,
+                            Type = (int)PathType.NEXT
+                        };
+                        path = st.PathsT.Select(pathF);
+                        try
+                        {
+                            var next = driver.FindElement(
+                                By.XPath(path.Rows[0].Field<string?>("Path")));
+                            next.Click();
+                        }
+                        catch
+                        {
+                            break;
+                        }
                     }
+                    var pathFs = new PathsFilter()
+                    {
+                        IdContext = context,
+                        Type = (int)PathType.TABLE
+                    };
+                    var paths = st.PathsT.Select(pathFs);
+                    var table = paths.Rows[0].Field<string?>("Path");
+
+                    pathFs.Type = (int)PathType.ROW;
+                    paths = st.PathsT.Select(pathFs);
+                    var row = paths.Rows[0].Field<string?>("Path");
+
+                    pathFs.Type = (int)PathType.COLUMNVALUE;
+                    paths = st.PathsT.Select(pathFs);
+                    var columnVPath = paths.Rows[0].Field<string?>("Path");
+
+                    pathFs.Type = (int)PathType.COLUMNTITLE;
+                    paths = st.PathsT.Select(pathFs);
+                    var columnTPath = paths.Rows[0].Field<string?>("Path");
+                    foreach (var item in result)
+                    {
+                        driver.Url = item.Value;
+                        Compare(driver.FindElement(By.XPath("//body"))
+                            .GetAttribute("outerHTML"), op,
+                            table, row, columnTPath, columnTPath);   
+                    }
+
                 }
             }
             return result.ToArray();
         }
+
+        private bool Compare(string html,SOptions[] ops,
+            string table,string row,string title,string value)
+        {
+            List<Models.Char> chars = new List<Models.Char>();
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+            var tableNode = doc.DocumentNode.SelectNodes(table)[0];
+            var rows = tableNode.SelectNodes(row);
+            foreach (var item in rows)
+            {
+                var local = HtmlNode.CreateNode(item.OuterHtml);
+                chars.Add(new Models.Char()
+                {
+                    Name = local.SelectNodes(title)[0].InnerText,
+                    Value = local.SelectNodes(value)[0].InnerText
+                });
+            }
+            return true;
+        }
+
         private string? Link(string link, int context)
         {
             string? newLink = "";

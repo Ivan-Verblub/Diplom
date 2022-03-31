@@ -2,7 +2,7 @@
 {
     public class Chars
     {
-        public string Name { get; set; }
-        public string Value { get; set; }
+        public string name { get; set; }
+        public string value { get; set; }
     }
 }

@@ -34,7 +34,8 @@ namespace Server.Controllers.Tables
                     Conf = Convert.ToBase64String(row.Field<byte[]>("conf")),
                     IdLearningHistory = row.Field<int>("idlearninghistroy"),
                     Comment = row.Field<string>("comment"),
-                    Version = row.Field<string>("version")
+                    Version = row.Field<string>("version"),
+                    Types = row.Field<int>("type")
                 };
                 i++;
             }
@@ -60,7 +61,8 @@ namespace Server.Controllers.Tables
                     Conf = Convert.ToBase64String(row.Field<byte[]>("conf")),
                     IdLearningHistory = row.Field<int>("idlearninghistroy"),
                     Comment = row.Field<string>("comment"),
-                    Version = row.Field<string>("version")
+                    Version = row.Field<string>("version"),
+                    Types = row.Field<int>("type")
                 };
                 i++;
             }

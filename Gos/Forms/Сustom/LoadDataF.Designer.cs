@@ -138,6 +138,7 @@
             this.Controls.Add(this.label1);
             this.Name = "LoadDataF";
             this.Text = "LoadDataF";
+            this.Load += new System.EventHandler(this.LoadDataF_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

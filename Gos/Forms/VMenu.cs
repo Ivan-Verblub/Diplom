@@ -137,5 +137,17 @@ namespace Gos.Forms
             var learn = new Learn();
             learn.ShowDialog();
         }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            var ct = new CreateTech();
+            ct.ShowDialog();
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            var lDF = new LoadDataDefine();
+            lDF.ShowDialog();
+        }
     }
 }

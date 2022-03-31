@@ -32,5 +32,8 @@ namespace Gos.Server.Models.Table
         [Localize("Версия")]
         [AI]
         public string version { get; set; }
+
+        [Localize("Тип")]
+        public int types { get; set; }
     }
 }
