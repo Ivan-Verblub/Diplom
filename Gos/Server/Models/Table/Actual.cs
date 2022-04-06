@@ -4,6 +4,7 @@ using Gos.Server.Models.Filter;
 namespace Gos.Server.Models.Table
 {
     [API("Tables/Actual")]
+    [Updateable]
     public class Actual
     {
         [Localize("Код")]

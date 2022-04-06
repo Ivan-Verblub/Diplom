@@ -28,16 +28,14 @@ namespace Gos.Server.Models.Requesting
             result += $"topKAccuracy:{topKAccuracy}\n";
             result += $"topKPredictionCount:{topKPredictionCount}\n";
             result += "topKAccuracyForAllK:";
-            try
-            {
+            if (topKAccuracyForAllK != null)
                 foreach (var item in topKAccuracyForAllK)
                     result += $"{item} ";
-            }
-            catch { }
             result += "\nperClassLogLoss:";
-            try { 
-            foreach (var item in perClassLogLoss)
-                result += $"{item} ";
+            try
+            {
+                foreach (var item in perClassLogLoss)
+                    result += $"{item} ";
             }
             catch { }
             result += "\n"+confusionMatrix.ToString();

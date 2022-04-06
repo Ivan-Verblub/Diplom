@@ -3,6 +3,9 @@
 namespace Gos.Server.Models.Table
 {
     [API("Tables/SLocation")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class SLocation
     {
         [Localize("Код")]

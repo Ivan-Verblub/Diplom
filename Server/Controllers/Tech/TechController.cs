@@ -394,24 +394,41 @@ namespace Server.Controllers.Tech
             return result.ToArray();
         }
 
-        private bool Compare(string html,SOptions[] ops,
+        private List<Models.Char> Compare(string html,SOptions[] ops,
             string table,string row,string title,string value)
         {
+            int requierd = ops.Count();
             List<Models.Char> chars = new List<Models.Char>();
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
             var tableNode = doc.DocumentNode.SelectNodes(table)[0];
             var rows = tableNode.SelectNodes(row);
+            var control = ops.Count();
             foreach (var item in rows)
             {
+                int fact = 0;
                 var local = HtmlNode.CreateNode(item.OuterHtml);
-                chars.Add(new Models.Char()
+                foreach (var op in ops)
                 {
-                    Name = local.SelectNodes(title)[0].InnerText,
-                    Value = local.SelectNodes(value)[0].InnerText
-                });
+                    var prediction = ml.Predcit(new Data()
+                    {
+                        Feature = local.SelectNodes(title)[0].InnerText + ";" +
+                            local.SelectNodes(value)[0].InnerText + ";" +
+                            op.Option
+                    });
+                    if (prediction.PredictedLabel == "equeal")
+                    {
+                        fact++;
+                    }
+                }
+                if (fact == requierd)
+                    chars.Add(new Models.Char()
+                    {
+                        Name = local.SelectNodes(title)[0].InnerText,
+                        Value = local.SelectNodes(value)[0].InnerText
+                    });
             }
-            return true;
+            return chars;
         }
 
         private string? Link(string link, int context)

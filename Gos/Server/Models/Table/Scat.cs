@@ -3,6 +3,9 @@
 namespace Gos.Server.Models.Table
 {
     [API("Tables/Scat")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class Scat
     {
         [Localize("Код")]

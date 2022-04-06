@@ -4,6 +4,9 @@ using Gos.Server.Models.Filter;
 namespace Gos.Server.Models.Table
 {
     [API("Tables/SearchNames")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class SearchNames
     {
         [Localize("Код")]

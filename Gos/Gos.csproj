@@ -48,8 +48,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.7.0.0-preview.2.22152.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
-    <Reference Include="System.Text.Json, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -64,6 +64,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Components\Adapter.cs" />
+    <Compile Include="Forms\Components\Combo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Components\Combo.Designer.cs">
+      <DependentUpon>Combo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Components\Value.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Components\Value.Designer.cs">
+      <DependentUpon>Value.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Generic\Buttons.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +166,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\Atribute\AI.cs" />
     <Compile Include="Server\Atribute\API.cs" />
+    <Compile Include="Server\Atribute\Deleteable.cs" />
+    <Compile Include="Server\Atribute\Updateable.cs" />
+    <Compile Include="Server\Atribute\Insertable.cs" />
     <Compile Include="Server\Atribute\EnumList.cs" />
     <Compile Include="Server\Atribute\Filter.cs" />
     <Compile Include="Server\Atribute\Key.cs" />
@@ -207,6 +223,9 @@
     <Compile Include="Server\Models\Table\SLocation.cs" />
     <Compile Include="Server\Models\Table\SStatus.cs" />
     <Compile Include="Server\Requester.cs" />
+    <EmbeddedResource Include="Forms\Components\Value.resx">
+      <DependentUpon>Value.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Generic\Buttons.resx">
       <DependentUpon>Buttons.cs</DependentUpon>
     </EmbeddedResource>

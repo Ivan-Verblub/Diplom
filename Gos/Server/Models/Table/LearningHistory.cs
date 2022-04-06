@@ -5,6 +5,8 @@ using System;
 namespace Gos.Server.Models.Table
 {
     [API("Tables/LearningHistory")]
+    [Updateable]
+    [Deleteable]
     public class LearningHistory
     {
         [Localize("Код")]

@@ -3,6 +3,9 @@
 namespace Gos.Server.Models.Table
 {
     [API("Tables/DataSet")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class DataSet
     {
         [Localize("Код")]

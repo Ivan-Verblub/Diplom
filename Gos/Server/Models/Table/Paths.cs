@@ -4,6 +4,9 @@ using Gos.Server.Models.Filter;
 namespace Gos.Server.Models.Table
 {
     [API("Tables/Paths")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class Paths
     {
         [Localize("Код")]

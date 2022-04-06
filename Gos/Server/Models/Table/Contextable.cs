@@ -5,6 +5,9 @@ using System;
 namespace Gos.Server.Models.Table
 {
     [API("Tables/Contextable")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class Contextable
     {
         [Key(true)]

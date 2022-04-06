@@ -4,6 +4,9 @@ using Gos.Server.Models.Filter;
 namespace Gos.Server.Models.Table
 {
     [API("Tables/CharListRequest")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class CharListRequest
     {
         [Localize("Код")]

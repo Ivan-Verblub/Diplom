@@ -3,6 +3,9 @@
 namespace Gos.Server.Models.Table
 {
     [API("Tables/Context")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class Context
     {
         [Localize("Код")]

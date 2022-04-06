@@ -74,7 +74,78 @@ namespace Gos.Forms.Сustom
 
         private void button2_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow rw in dataGridView1.Rows)
+            {
+                var datas = new DatasTable()
+                {
+                    feature = (string)rw.Cells["value"].Value+(string)rw.Cells["equeal"].Value,
+                    label = "equeal",
+                    idDataSet = (int)comboBox1.SelectedValue
+                };
+                using (var requester = new Requester<DatasTable, DatasFilter>("https://localhost:5001"))
+                {
+                    string er = requester.Insert(datas);
+                    if (er!= "")
+                    {
+                        MessageBox.Show(
+                            er,
+                            "Ошибка",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
 
+            foreach (DataGridViewRow rw in dataGridView1.Rows)
+            {
+                var datas = new DatasTable()
+                {
+                    feature = (string)rw.Cells["value"].Value+(string)rw.Cells["unequeal"].Value,
+                    label = "unequeal",
+                    idDataSet = (int)comboBox1.SelectedValue
+                };
+                using (var requester = new Requester<DatasTable, DatasFilter>("https://localhost:5001"))
+                {
+                    string er = requester.Insert(datas);
+                    if (er!= "")
+                    {
+                        MessageBox.Show(
+                            er,
+                            "Ошибка",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
+            var rn = new Random();
+            int i = 0;
+            foreach (DataGridViewRow rw in dataGridView1.Rows)
+            {
+                if (i == dataGridView1.Rows.Count)
+                    break;
+                var datas = new DatasTable()
+                {
+                    feature = (string)rw.Cells["value"].Value+(string)dataGridView1.Rows[rn.Next(0,dataGridView1.Rows.Count-1)].Cells["unequeal"].Value,
+                    label = "unequeal",
+                    idDataSet = (int)comboBox1.SelectedValue
+                };
+                using (var requester = new Requester<DatasTable, DatasFilter>("https://localhost:5001"))
+                {
+                    string er = requester.Insert(datas);
+                    if (er!= "")
+                    {
+                        MessageBox.Show(
+                            er,
+                            "Ошибка",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                i++;
+            }
         }
     }
 }

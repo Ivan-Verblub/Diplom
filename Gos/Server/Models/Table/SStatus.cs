@@ -3,6 +3,9 @@
 namespace Gos.Server.Models.Table
 {
     [API("Tables/SStatus")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class SStatus
     {
         [Localize("Код")]

@@ -4,6 +4,8 @@ using Gos.Server.Models.Filter;
 namespace Gos.Server.Models.Table
 {
     [API("Tables/Objects")]
+    [Updateable]
+    [Deleteable]
     public class Objects
     {
         [Localize("Инвентарный номер")]

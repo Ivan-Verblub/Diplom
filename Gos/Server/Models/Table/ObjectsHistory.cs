@@ -5,6 +5,9 @@ using System;
 namespace Gos.Server.Models.Table
 {
     [API("Tables/ObjectsHistory")]
+    [Updateable]
+    [Insertable]
+    [Deleteable]
     public class ObjectsHistory
     {
         [Localize("Код")]

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,6 +21,12 @@ namespace Gos.Forms
         {
             InitializeComponent();
             this.df = df;
+            if (null != typeof(T).GetCustomAttribute<Insertable>())
+                button1.Visible = true;
+            if (null != typeof(T).GetCustomAttribute<Updateable>())
+                button2.Visible = true;
+            if (null != typeof(T).GetCustomAttribute<Deleteable>())
+                button3.Visible = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
