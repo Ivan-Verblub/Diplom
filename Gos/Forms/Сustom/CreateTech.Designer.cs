@@ -40,17 +40,17 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.element = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.elementId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.valueL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
@@ -170,6 +170,35 @@
             this.dataGridView1.Size = new System.Drawing.Size(313, 153);
             this.dataGridView1.TabIndex = 12;
             // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "Название требования";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // value
+            // 
+            this.value.DataPropertyName = "value";
+            this.value.HeaderText = "Требование";
+            this.value.Name = "value";
+            this.value.ReadOnly = true;
+            // 
+            // element
+            // 
+            this.element.DataPropertyName = "element";
+            this.element.HeaderText = "Элемент поиска";
+            this.element.Name = "element";
+            this.element.ReadOnly = true;
+            // 
+            // elementId
+            // 
+            this.elementId.DataPropertyName = "elementId";
+            this.elementId.HeaderText = "elementId";
+            this.elementId.Name = "elementId";
+            this.elementId.ReadOnly = true;
+            this.elementId.Visible = false;
+            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(12, 399);
@@ -194,6 +223,21 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.Size = new System.Drawing.Size(315, 287);
             this.dataGridView2.TabIndex = 14;
+            // 
+            // valueL
+            // 
+            this.valueL.DataPropertyName = "valueL";
+            this.valueL.HeaderText = "valueL";
+            this.valueL.Name = "valueL";
+            this.valueL.ReadOnly = true;
+            this.valueL.Visible = false;
+            // 
+            // nameL
+            // 
+            this.nameL.DataPropertyName = "nameL";
+            this.nameL.HeaderText = "Название";
+            this.nameL.Name = "nameL";
+            this.nameL.ReadOnly = true;
             // 
             // button3
             // 
@@ -225,50 +269,6 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Название требования";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // value
-            // 
-            this.value.DataPropertyName = "value";
-            this.value.HeaderText = "Требование";
-            this.value.Name = "value";
-            this.value.ReadOnly = true;
-            // 
-            // element
-            // 
-            this.element.DataPropertyName = "element";
-            this.element.HeaderText = "Элемент поиска";
-            this.element.Name = "element";
-            this.element.ReadOnly = true;
-            // 
-            // elementId
-            // 
-            this.elementId.DataPropertyName = "elementId";
-            this.elementId.HeaderText = "elementId";
-            this.elementId.Name = "elementId";
-            this.elementId.ReadOnly = true;
-            this.elementId.Visible = false;
-            // 
-            // valueL
-            // 
-            this.valueL.DataPropertyName = "valueL";
-            this.valueL.HeaderText = "valueL";
-            this.valueL.Name = "valueL";
-            this.valueL.ReadOnly = true;
-            this.valueL.Visible = false;
-            // 
-            // nameL
-            // 
-            this.nameL.DataPropertyName = "nameL";
-            this.nameL.HeaderText = "Название";
-            this.nameL.Name = "nameL";
-            this.nameL.ReadOnly = true;
-            // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(329, 373);
@@ -293,12 +293,13 @@
             this.button6.TabIndex = 20;
             this.button6.Text = "Сформировать по названию";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // CreateTech
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 428);
+            this.ClientSize = new System.Drawing.Size(650, 429);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label7);

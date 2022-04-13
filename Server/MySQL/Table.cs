@@ -355,6 +355,7 @@ namespace Server.MySQL
                 }
                 if (decryptTable.Filters.Count != 0)
                     builder.Remove(builder.Length - 5, 5);
+                Console.WriteLine(builder.ToString());
                 _command.CommandText = builder.ToString();
                 DataTable dt = new DataTable();
                 _adapter.Fill(dt);

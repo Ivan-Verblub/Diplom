@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using FuzzySharp;
+using HtmlAgilityPack;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpenQA.Selenium;
@@ -266,6 +267,9 @@ namespace Server.Controllers.Tech
         private Models.Char[] Search(SOptions[] op)
         {
             List<Models.Char> result = new List<Models.Char>();
+            List<Models.Char> newRes = new();
+            int max = 10;
+            int cur = 0;
             foreach (var context in names.ContextId)
             {
                 var filter = new ContextFilter()
@@ -344,7 +348,12 @@ namespace Server.Controllers.Tech
                                 Name = elemensNames[i].Text,
                                 Value = elemensLink[i].GetDomProperty("href")
                             });
+                            cur++;
+                            if (max == cur)
+                                break;
                         }
+                        if (max == cur)
+                            break;
                         pathF = new PathsFilter()
                         {
                             IdContext = context,
@@ -381,54 +390,83 @@ namespace Server.Controllers.Tech
                     pathFs.Type = (int)PathType.COLUMNTITLE;
                     paths = st.PathsT.Select(pathFs);
                     var columnTPath = paths.Rows[0].Field<string?>("Path");
+                    
                     foreach (var item in result)
                     {
-                        driver.Url = item.Value;
-                        Compare(driver.FindElement(By.XPath("//body"))
+                        driver.Url = Link(item.Value,context);
+                        var buff = Compare(driver.FindElement(By.XPath("//body"))
                             .GetAttribute("outerHTML"), op,
-                            table, row, columnTPath, columnTPath);   
+                            table, row, columnTPath, columnVPath,item);
+                        if (buff!=null)
+                            newRes.Add(buff);
                     }
 
                 }
             }
-            return result.ToArray();
+            return newRes.ToArray();
         }
 
-        private List<Models.Char> Compare(string html,SOptions[] ops,
-            string table,string row,string title,string value)
+        private Models.Char Compare(string html,SOptions[] ops,
+            string table,string row,string title,string value,
+            Models.Char result)
         {
             int requierd = ops.Count();
-            List<Models.Char> chars = new List<Models.Char>();
+            var groups = new List<Group>();
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
             var tableNode = doc.DocumentNode.SelectNodes(table)[0];
             var rows = tableNode.SelectNodes(row);
-            var control = ops.Count();
-            foreach (var item in rows)
+            int control = 0;
+            foreach (var op in ops)
             {
-                int fact = 0;
-                var local = HtmlNode.CreateNode(item.OuterHtml);
-                foreach (var op in ops)
+                foreach (var item in rows)
                 {
-                    var prediction = ml.Predcit(new Data()
+                    var local = HtmlNode.CreateNode(item.OuterHtml);
+                    var res = new List<Result>();
+                    foreach (var d in local.SelectNodes(title)[0].InnerText.Trim().Split(' '))
                     {
-                        Feature = local.SelectNodes(title)[0].InnerText + ";" +
-                            local.SelectNodes(value)[0].InnerText + ";" +
-                            op.Option
-                    });
-                    if (prediction.PredictedLabel == "equeal")
-                    {
-                        fact++;
+                        foreach (var n in op.Option.Split(';')[0].Split(' '))
+                        {
+                            res.Add(new()
+                            {
+                                Name = n,
+                                Data = d,
+                                Value = Fuzz.PartialRatio(d, n)
+                            });
+                        }
                     }
-                }
-                if (fact == requierd)
-                    chars.Add(new Models.Char()
+                    res.Add(new()
                     {
-                        Name = local.SelectNodes(title)[0].InnerText,
-                        Value = local.SelectNodes(value)[0].InnerText
+                        Name = op.Option.Split(';')[1],
+                        Data = local.SelectNodes(value)[0].InnerText.Trim(),
+                        Value = Fuzz.PartialRatio(op.Option,
+                        local.SelectNodes(value)[0].InnerText.Trim())<70
+                        ?0: Fuzz.PartialRatio(op.Option,
+                        local.SelectNodes(value)[0].InnerText.Trim())*2
                     });
+                    int[] values = new int[res.Count];
+                    for (int i = 0; i < res.Count; i++)
+                    {
+                        values[i] = res[i].Value<=30?0:res[i].Value;
+                    }
+                    groups.Add(new()
+                    {
+                        Results = res,
+                        Avg = (int)values.Average()
+                    });
+                }
+                var groups2 = groups.OrderBy(x => x.Avg);
+                var max = groups2.Last();
+                if(max.Avg > 50)
+                {
+                    control++;
+                }
             }
-            return chars;
+            if (requierd == control)
+            {
+                return result;
+            }
+            return null;
         }
 
         private string? Link(string link, int context)

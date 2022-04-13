@@ -31,14 +31,7 @@
         SUBMIT = 8,
         CELLNAME = 9,
         NEXT = 10
-    }
-
-    public enum ActType
-    { 
-        DEFINE = 1,
-        COMPARE = 2
-    }
-    
+    }   
 
     public enum OpType
     {

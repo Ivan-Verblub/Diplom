@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Words, Version=22.4.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Words.22.4.0\lib\net461\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Words.Pdf2Word, Version=22.4.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Words.22.4.0\lib\net461\Aspose.Words.Pdf2Word.dll</HintPath>
+    </Reference>
+    <Reference Include="Control.Draggable, Version=1.0.5049.269, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Control.Draggable.1.0.5049.269\lib\net35-Client\Control.Draggable.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -48,8 +57,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.7.0.0-preview.2.22152.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
-    <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Json, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -139,6 +148,18 @@
     <Compile Include="Forms\VMenu.Designer.cs">
       <DependentUpon>VMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Сustom\CharList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Сustom\CharList.Designer.cs">
+      <DependentUpon>CharList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Сustom\CharsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Сustom\CharsList.Designer.cs">
+      <DependentUpon>CharsList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Сustom\CreateTech.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,12 +171,6 @@
     </Compile>
     <Compile Include="Forms\Сustom\Learn.Designer.cs">
       <DependentUpon>Learn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Сustom\LoadDataDefine.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Сustom\LoadDataDefine.Designer.cs">
-      <DependentUpon>LoadDataDefine.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Сustom\LoadDataF.cs">
       <SubType>Form</SubType>
@@ -198,11 +213,14 @@
     <Compile Include="Server\Models\Filter\SearchNamesFilter.cs" />
     <Compile Include="Server\Models\Filter\SLocationFilter.cs" />
     <Compile Include="Server\Models\Filter\SStatusFilter.cs" />
+    <Compile Include="Server\Models\Requesting\About.cs" />
     <Compile Include="Server\Models\Requesting\Char.cs" />
     <Compile Include="Server\Models\Requesting\Data.cs" />
     <Compile Include="Server\Models\Requesting\DataLoad.cs" />
+    <Compile Include="Server\Models\Requesting\Final.cs" />
     <Compile Include="Server\Models\Requesting\Metrics.cs" />
     <Compile Include="Server\Models\Requesting\Options.cs" />
+    <Compile Include="Server\Models\Requesting\Result.cs" />
     <Compile Include="Server\Models\Table\Actual.cs" />
     <Compile Include="Server\Models\Table\CharListObjects.cs" />
     <Compile Include="Server\Models\Table\CharListRequest.cs" />
@@ -257,14 +275,17 @@
     <EmbeddedResource Include="Forms\VMenu.resx">
       <DependentUpon>VMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Сustom\CharList.resx">
+      <DependentUpon>CharList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Сustom\CharsList.resx">
+      <DependentUpon>CharsList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Сustom\CreateTech.resx">
       <DependentUpon>CreateTech.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Сustom\Learn.resx">
       <DependentUpon>Learn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Сustom\LoadDataDefine.resx">
-      <DependentUpon>LoadDataDefine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Сustom\LoadDataF.resx">
       <DependentUpon>LoadDataF.cs</DependentUpon>
@@ -295,6 +316,34 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

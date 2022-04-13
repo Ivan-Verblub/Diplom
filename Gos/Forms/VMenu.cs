@@ -143,11 +143,5 @@ namespace Gos.Forms
             var ct = new CreateTech();
             ct.ShowDialog();
         }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-            var lDF = new LoadDataDefine();
-            lDF.ShowDialog();
-        }
     }
 }

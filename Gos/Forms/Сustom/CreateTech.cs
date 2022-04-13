@@ -22,6 +22,7 @@ namespace Gos.Forms.Сustom
 {
     public partial class CreateTech : Form
     {
+        private CharsList list = null;
         public CreateTech()
         {
             InitializeComponent();
@@ -134,7 +135,7 @@ namespace Gos.Forms.Сustom
                 ops[i] = new SOptions()
                 {
                     Id = (int)dataGridView1.Rows[i].Cells["elementId"].Value,
-                    Option = (string)dataGridView1.Rows[i].Cells["name"].Value +" "+
+                    Option = (string)dataGridView1.Rows[i].Cells["name"].Value +";"+
                     (string)dataGridView1.Rows[i].Cells["value"].Value
                 };
             }
@@ -188,7 +189,7 @@ namespace Gos.Forms.Сustom
                     var uri = new Uri(dataGridView2.SelectedRows[0].Cells["valueL"].Value.ToString());
                     var filter = new ContextFilter()
                     {
-                        DomenL = uri.Host.Split('.')[1]
+                        DomenL = $"%{uri.Host.Split('.')[1]}%"
                     };
                     using (var requester = new Requester<Context,ContextFilter>("https://localhost:5001"))
                     {
@@ -200,8 +201,29 @@ namespace Gos.Forms.Сustom
                     request.Method = "POST";
                     var jsons = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
                     var chars = JsonSerializer.Deserialize<Chars[]>(jsons);
+                    Create(chars);
                 }
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Create(Chars[] chars)
+        {
+            if(list == null)
+            {
+                list = new CharsList();
+                list.Show();
+            }
+            list.Create(chars);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
