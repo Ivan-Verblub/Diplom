@@ -28,14 +28,14 @@ namespace Server.Controllers.Tables
             {
                 objectsHistory[i] = new()
                 {
-                    Id = row.Field<int>("idobjectshistory"),
+                    Id = row.Field<int?>("idobjectshistory"),
                     InvNumber = row.Field<string>("invnumber"),
                     Name = row.Field<string>("name"),
-                    IdStatus = row.Field<int>("idstatus"),
+                    IdStatus = row.Field<int?>("idstatus"),
                     Status = row.Field<string>("status"),
-                    IdLocation = row.Field<int>("idLocation"),
+                    IdLocation = row.Field<int?>("idLocation"),
                     Location = row.Field<string>("location"),
-                    Date = row.Field<DateTime>("date"),
+                    Date = row.Field<DateTime?>("date"),
                     comment = row.Field<string>("comment")
                 };
                 i++;
@@ -57,14 +57,14 @@ namespace Server.Controllers.Tables
             {
                 objectsHistory[i] = new()
                 {
-                    Id = row.Field<int>("idobjectshistory"),
+                    Id = row.Field<int?>("idobjectshistory"),
                     InvNumber = row.Field<string>("invnumber"),
                     Name = row.Field<string>("name"),
-                    IdStatus = row.Field<int>("idstatus"),
+                    IdStatus = row.Field<int?>("idstatus"),
                     Status = row.Field<string>("status"),
-                    IdLocation = row.Field<int>("idLocation"),
+                    IdLocation = row.Field<int?>("idLocation"),
                     Location = row.Field<string>("location"),
-                    Date = row.Field<DateTime>("date"),
+                    Date = row.Field<DateTime?>("date"),
                     comment = row.Field<string>("comment")
                 };
                 i++;

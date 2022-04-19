@@ -26,10 +26,10 @@ namespace Server.Controllers.Tables
             {
                 charList[i] = new()
                 {
-                    Id = row.Field<int>("idCharList"),
+                    Id = row.Field<int?>("idCharList"),
                     Name = row.Field<string>("Name"),
                     Value = row.Field<string>("Value"),
-                    IdRequest = row.Field<int>("idrequestinner")
+                    IdRequest = row.Field<int?>("idrequestinner")
                 };
                 i++;
             }
@@ -50,10 +50,10 @@ namespace Server.Controllers.Tables
             {
                 charList[i] = new()
                 {
-                    Id = row.Field<int>("idCharList"),
+                    Id = row.Field<int?>("idCharList"),
                     Name = row.Field<string>("Name"),
                     Value = row.Field<string>("Value"),
-                    IdRequest = row.Field<int>("idrequestinner")
+                    IdRequest = row.Field<int?>("idrequestinner")
                 };
                 i++;
             }

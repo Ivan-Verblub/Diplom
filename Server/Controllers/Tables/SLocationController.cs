@@ -28,7 +28,7 @@ namespace Server.Controllers.Tables
             {
                 sLocation[i] = new()
                 {
-                    IdLocation = row.Field<int>("idlocation"),
+                    IdLocation = row.Field<int?>("idlocation"),
                     Location = row.Field<string>("location")
                 };
                 i++;
@@ -50,7 +50,7 @@ namespace Server.Controllers.Tables
             {
                 sLocation[i] = new()
                 {
-                    IdLocation = row.Field<int>("idlocation"),
+                    IdLocation = row.Field<int?>("idlocation"),
                     Location = row.Field<string>("location")
                 };
                 i++;

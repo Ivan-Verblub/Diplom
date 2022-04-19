@@ -28,10 +28,10 @@ namespace Server.Controllers.Tables
             {
                 request[i] = new()
                 {
-                    Id = row.Field<int>("idrequest"),
+                    Id = row.Field<int?>("idrequest"),
                     Name = row.Field<string>("name"),
-                    File = Convert.ToBase64String(row.Field<byte[]>("File")),
-                    IdLearning = row.Field<int>("idlearninghistroy"),
+                    File = Convert.ToBase64String(row.Field<byte[]?>("File")),
+                    IdLearning = row.Field<int?>("idlearninghistroy"),
                     Comment = row.Field<string>("comment")
                 };
                 i++;
@@ -53,10 +53,10 @@ namespace Server.Controllers.Tables
             {
                 request[i] = new()
                 {
-                    Id = row.Field<int>("idrequest"),
+                    Id = row.Field<int?>("idrequest"),
                     Name = row.Field<string>("name"),
-                    File = Convert.ToBase64String(row.Field<byte[]>("File")),
-                    IdLearning = row.Field<int>("idlearninghistroy"),
+                    File = Convert.ToBase64String(row.Field<byte[]?>("File")),
+                    IdLearning = row.Field<int?>("idlearninghistroy"),
                     Comment = row.Field<string>("comment")
                 };
                 i++;

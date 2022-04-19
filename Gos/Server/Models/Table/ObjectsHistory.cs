@@ -14,7 +14,7 @@ namespace Gos.Server.Models.Table
         [Key(true)]
         [AI]
         [Invisible]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Инвентарный номер")]
         [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
@@ -27,7 +27,7 @@ namespace Gos.Server.Models.Table
         [Localize("Код статуса")]
         [Typeable(typeof(SStatus),typeof(SStatusFilter))]
         [Invisible]
-        public int idStatus { get; set; }
+        public int? idStatus { get; set; }
 
         [Localize("Назание статуса")]
         [AI]
@@ -36,14 +36,14 @@ namespace Gos.Server.Models.Table
         [Localize("Код расположения")]
         [Typeable(typeof(SLocation), typeof(SLocationFilter))]
         [Invisible]
-        public int idLocation { get; set; }
+        public int? idLocation { get; set; }
 
         [Localize("Расположение")]
         [AI]
         public string location { get; set; }
 
         [Localize("Дата")]
-        public DateTime date { get; set; }
+        public DateTime? date { get; set; }
 
         [Localize("Комментарий")]
         [Key(false)]

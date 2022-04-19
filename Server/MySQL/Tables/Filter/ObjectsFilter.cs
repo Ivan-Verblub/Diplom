@@ -22,21 +22,21 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "cost",
             table: "objects", filtType: FType.EQUAL)]
-        public int Cost { get; set; }
+        public int? Cost { get; set; }
 
         [RangeAtribute(0,0)]
         [FilterAtribute(field: "cost",
             table: "objects", filtType: FType.GREATEREQUAL)]
-        public int CostG { get; set; }
+        public int? CostG { get; set; }
 
         [RangeAtribute(0, 1)]
         [FilterAtribute(field: "cost",
             table: "objects", filtType: FType.LESSEREQUAL)]
-        public int CostL { get; set; }
+        public int? CostL { get; set; }
 
         [FilterAtribute(field: "idstatus",
             table: "objects", filtType: FType.EQUAL)]
-        public int IdStatus { get; set; }
+        public int? IdStatus { get; set; }
 
         [FilterAtribute(field: "status",
             table: "sstatus", filtType: FType.EQUAL)]
@@ -48,7 +48,7 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "idlocation",
             table: "objects", filtType: FType.EQUAL)]
-        public int IdLocation { get; set; }
+        public int? IdLocation { get; set; }
 
         [FilterAtribute(field: "idlocation",
             table: "slocation", filtType: FType.EQUAL)]
@@ -60,7 +60,7 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "idcat",
             table: "objects", filtType: FType.EQUAL)]
-        public int IdCat { get; set; }
+        public int? IdCat { get; set; }
 
         [FilterAtribute(field: "name",
             table: "scat", filtType: FType.EQUAL)]
@@ -72,7 +72,7 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "idrequest",
             table: "objects", filtType: FType.EQUAL)]
-        public int IdRequest { get; set; }
+        public int? IdRequest { get; set; }
 
         [FilterAtribute(field: "name",
             table: "request", filtType: FType.EQUAL)]

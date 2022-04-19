@@ -6,7 +6,7 @@ namespace Server.MySQL.Tables.Filter
     {
         [FilterAtribute(field: "idobjectshistory",
             table: "objectshistory", filtType: FType.EQUAL)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [FilterAtribute(field: "invnumber",
             table: "objectshistory", filtType: FType.EQUAL)]
@@ -26,7 +26,7 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "idstatus",
             table: "objectshistory", filtType: FType.EQUAL)]
-        public int IdStatus { get; set; }
+        public int? IdStatus { get; set; }
 
         [FilterAtribute(field: "status",
             table: "sstatus", filtType: FType.EQUAL)]
@@ -38,7 +38,7 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "idlocation",
             table: "objectshistory", filtType: FType.EQUAL)]
-        public int IdLocation { get; set; }
+        public int? IdLocation { get; set; }
 
         [FilterAtribute(field: "location",
             table: "slocation", filtType: FType.EQUAL)]
@@ -50,15 +50,15 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "date",
             table: "objectshistory", filtType: FType.EQUAL)]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [FilterAtribute(field: "date",
             table: "objectshistory", filtType: FType.GREATEREQUAL)]
-        public DateTime DateG { get; set; }
+        public DateTime? DateG { get; set; }
 
         [FilterAtribute(field: "date",
             table: "objectshistory", filtType: FType.LESSEREQUAL)]
-        public DateTime DateL { get; set; }
+        public DateTime? DateL { get; set; }
 
         [FilterAtribute(field: "comment",
             table: "objectshistory", filtType: FType.EQUAL)]

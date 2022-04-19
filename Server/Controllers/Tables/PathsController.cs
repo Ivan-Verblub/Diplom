@@ -26,11 +26,11 @@ namespace Server.Controllers.Tables
             {
                 objects[i] = new()
                 {
-                    Id = row.Field<int>("idPaths"),
+                    Id = row.Field<int?>("idPaths"),
                     Path = row.Field<string>("path"),
-                    Type = row.Field<int>("type"),
-                    Cclass = row.Field<int>("class"),
-                    IdContext = row.Field<int>("idContext"),
+                    Type = row.Field<int?>("type"),
+                    Cclass = row.Field<int?>("class"),
+                    IdContext = row.Field<int?>("idContext"),
                     Domen = row.Field<string>("domen")
                 };
                 i++;
@@ -52,11 +52,11 @@ namespace Server.Controllers.Tables
             {
                 objects[i] = new()
                 {
-                    Id = row.Field<int>("idPaths"),
+                    Id = row.Field<int?>("idPaths"),
                     Path = row.Field<string>("path"),
-                    Type = row.Field<int>("type"),
-                    Cclass = row.Field<int>("class"),
-                    IdContext = row.Field<int>("idContext"),
+                    Type = row.Field<int?>("type"),
+                    Cclass = row.Field<int?>("class"),
+                    IdContext = row.Field<int?>("idContext"),
                     Domen = row.Field<string>("domen")
                 };
                 i++;

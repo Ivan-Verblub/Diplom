@@ -28,14 +28,14 @@ namespace Server.Controllers.Tables
             {
                 requestInner[i] = new()
                 {
-                    Id = row.Field<int>("idrequestinner"),
+                    Id = row.Field<int?>("idrequestinner"),
                     Name = row.Field<string>("name"),
-                    Cost = row.Field<float>("cost"),
-                    IdCat = row.Field<int>("idcat"),
+                    Cost = row.Field<float?>("cost"),
+                    IdCat = row.Field<int?>("idcat"),
                     Cat = row.Field<string>("name1"),
-                    IdRequest = row.Field<int>("idrequest"),
+                    IdRequest = row.Field<int?>("idrequest"),
                     RName = row.Field<string>("name2"),
-                    Count = row.Field<int>("count")
+                    Count = row.Field<int?>("count")
                 };
                 i++;
             }
@@ -56,14 +56,14 @@ namespace Server.Controllers.Tables
             {
                 requestInner[i] = new()
                 {
-                    Id = row.Field<int>("idrequestinner"),
+                    Id = row.Field<int?>("idrequestinner"),
                     Name = row.Field<string>("name"),
-                    Cost = row.Field<float>("cost"),
-                    IdCat = row.Field<int>("idcat"),
+                    Cost = row.Field<float?>("cost"),
+                    IdCat = row.Field<int?>("idcat"),
                     Cat = row.Field<string>("name"),
-                    IdRequest = row.Field<int>("idrequest"),
+                    IdRequest = row.Field<int?>("idrequest"),
                     RName = row.Field<string>("name"),
-                    Count = row.Field<int>("count")
+                    Count = row.Field<int?>("count")
                 };
                 i++;
             }

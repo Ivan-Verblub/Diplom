@@ -13,7 +13,7 @@ namespace Gos.Server.Models.Table
         [Key(true)]
         [AI]
         [Invisible]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Путь к элементу")]
         [Key(false)]
@@ -21,16 +21,16 @@ namespace Gos.Server.Models.Table
 
         [Localize("Тип")]
         [EnumList(typeof(PathType))]
-        public int type { get; set; }
+        public int? type { get; set; }
 
         [Localize("Класс")]
         [EnumList(typeof(PathClass))]
-        public int cclass { get; set; }
+        public int? cclass { get; set; }
 
         [Localize("Код контекста")]
         [Invisible]
         [Typeable(typeof(Context),typeof(ContextFilter))]
-        public int idContext { get; set; }
+        public int? idContext { get; set; }
 
         [Localize("Домен")]
         [AI]

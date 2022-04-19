@@ -7,7 +7,7 @@ namespace Gos.Server.Models.Filter
         [Localize("Код")]
         [Invisible]
         [Key(true)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Localize("Название")]
         public string Name { get; set; }

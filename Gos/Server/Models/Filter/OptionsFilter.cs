@@ -8,11 +8,11 @@ namespace Gos.Server.Models.Filter
         [Localize("Код")]
         [Invisible]
         [Key(true)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Localize("Тип")]
         [EnumList(typeof(OpType))]
-        public int Type { get; set; }
+        public int? Type { get; set; }
 
         [Localize("Значение")]
         public string Value { get; set; }
@@ -22,7 +22,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Контекст")]
         [Typeable(typeof(Context),typeof(ContextFilter))]
-        public int IdContext { get; set; }
+        public int? IdContext { get; set; }
 
         [Localize("Домен")]
         public string Domen { get; set; }

@@ -8,7 +8,7 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(0)]
         [KeyAtribute(ai: true)]
         [DBAtribute(hide: false, table: "data", field: "idData")]
-        public int IdData { get; set; }
+        public int? IdData { get; set; }
 
         [OrderAtribute(1)]
         [DataAtribute]
@@ -24,7 +24,7 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [FKeyAtribute(table: "dataset", conection: CType.INNER)]
         [DBAtribute(hide: false, field: "idDataSet", table: "data")]
-        public int IdDataSet { get; set; }
+        public int? IdDataSet { get; set; }
 
         [OrderAtribute(4)]
         [DBAtribute(hide: false, field: "setName", table: "dataset")]

@@ -8,12 +8,12 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(0)]
         [KeyAtribute(true)]
         [DBAtribute(hide: false, table: "Options", field: "idOptions")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [OrderAtribute(1)]
         [DataAtribute]
         [DBAtribute(hide: false, table: "Options", field: "Type")]
-        public int Type { get; set; }
+        public int? Type { get; set; }
 
         [OrderAtribute(2)]
         [DataAtribute]
@@ -24,7 +24,7 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [FKeyAtribute(Conection = CType.INNER, Table = "Context")]
         [DBAtribute(hide: false, table: "Options", field: "idContext")]
-        public int IdContext { get; set; }
+        public int? IdContext { get; set; }
 
         [OrderAtribute(4)]
         [DBAtribute(hide: false, table: "Context", field: "domen")]

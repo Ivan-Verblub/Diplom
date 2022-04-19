@@ -8,7 +8,7 @@ namespace Gos.Server.Models.Filter
         [Localize("Код")]
         [Invisible]
         [Key(true)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Localize("Название")]
         public string Name { get; set; }
@@ -17,15 +17,15 @@ namespace Gos.Server.Models.Filter
         public string NameL { get; set; }
 
         [Localize("Цена")]
-        public float Cost { get; set; }
+        public float? Cost { get; set; }
         [Localize("Цена от")]
-        public float CostG { get; set; }
+        public float? CostG { get; set; }
         [Localize("Цена до")]
-        public float CostL { get; set; }
+        public float? CostL { get; set; }
 
         [Localize("Категория")]
         [Typeable(typeof(Scat),typeof(ScatFilter))]
-        public int IdCat { get; set; }
+        public int? IdCat { get; set; }
 
         [Localize("Название категории")]
         public string Cat { get; set; }
@@ -35,7 +35,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("ТЗ")]
         [Typeable(typeof(Request), typeof(RequestFilter))]
-        public int IdRequest { get; set; }
+        public int? IdRequest { get; set; }
 
         [Localize("Название ТЗ")]
         public string RName { get; set; }
@@ -44,10 +44,10 @@ namespace Gos.Server.Models.Filter
         public string RNameL { get; set; }
 
         [Localize("Количество")]
-        public int Count { get; set; }
+        public int? Count { get; set; }
         [Localize("Количество от")]
-        public int CountG { get; set; }
+        public int? CountG { get; set; }
         [Localize("Количество до")]
-        public int CountL { get; set; }
+        public int? CountL { get; set; }
     }
 }

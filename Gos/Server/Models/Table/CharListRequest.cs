@@ -13,7 +13,7 @@ namespace Gos.Server.Models.Table
         [AI]
         [Key(true)]
         [Invisible]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Название характеристи")]
         [Key(false)]
@@ -25,7 +25,7 @@ namespace Gos.Server.Models.Table
         [Localize("Код ТЗ")]
         [Invisible]
         [Typeable(typeof(Request),typeof(RequestFilter))]
-        public int idRequest { get; set; }
+        public int? idRequest { get; set; }
 
         [Localize("Название ТЗ")]
         [AI]

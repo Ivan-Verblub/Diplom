@@ -5,10 +5,10 @@ namespace Server.MySQL.Tables.Filter
     public class SearchNamesFilter
     {
         [FilterAtribute("idSearchNames", "SearchNames",FType.EQUAL)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [FilterAtribute("idSearchContext", "SearchNames", FType.EQUAL)]
-        public int IdSearch { get; set; }
+        public int? IdSearch { get; set; }
 
         [FilterAtribute("name", "SearchContext", FType.EQUAL)]
         public string? SearchName { get; set; }

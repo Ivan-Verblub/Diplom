@@ -13,7 +13,7 @@ namespace Gos.Server.Models.Table
         [AI]
         [Invisible]
         [Key(true)]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Название характеристики")]
         [Key(false)]

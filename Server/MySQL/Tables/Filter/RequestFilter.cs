@@ -6,7 +6,7 @@ namespace Server.MySQL.Tables.Filter
     {
         [FilterAtribute(field: "idrequest",
             table: "request", filtType: FType.EQUAL)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [FilterAtribute(field: "name",
             table: "request", filtType: FType.EQUAL)]
@@ -18,7 +18,7 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "idlearninghistroy",
             table: "request", filtType: FType.EQUAL)]
-        public int IdLearning { get; set; }
+        public int? IdLearning { get; set; }
 
         [FilterAtribute(field: "comment",
             table: "learninghistroy", filtType: FType.EQUAL)]

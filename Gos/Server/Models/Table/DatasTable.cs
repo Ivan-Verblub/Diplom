@@ -13,7 +13,7 @@ namespace Gos.Server.Models.Table
         [AI]
         [Key(true)]
         [Invisible]
-        public int idData { get; set; }
+        public int? idData { get; set; }
 
         [Localize("Feature")]
         [Key(false)]
@@ -25,7 +25,7 @@ namespace Gos.Server.Models.Table
         [Localize("Код сета")]
         [Invisible]
         [Typeable(typeof(DataSet),typeof(DataSetFilter))]
-        public int idDataSet { get; set; }
+        public int? idDataSet { get; set; }
 
         [Localize("Название сета")]
         [AI]

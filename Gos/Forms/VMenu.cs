@@ -143,5 +143,28 @@ namespace Gos.Forms
             var ct = new CreateTech();
             ct.ShowDialog();
         }
+
+        private void flowLayoutPanel1_Resize(object sender, EventArgs e)
+        {
+            button1.Width = flowLayoutPanel1.Width-30;
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            var zak = new Zak();
+            zak.ShowDialog();
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            var ro = new ResObj();
+            ro.ShowDialog();
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            var ro = new History();
+            ro.ShowDialog();
+        }
     }
 }

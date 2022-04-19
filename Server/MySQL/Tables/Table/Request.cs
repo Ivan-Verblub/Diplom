@@ -7,9 +7,9 @@ namespace Server.MySQL.Tables.Table
     public class Request
     {
         [OrderAtribute(0)]
-        [KeyAtribute(ai:true)]
+        [KeyAtribute(ai:false)]
         [DBAtribute(hide: false, table: "request", field:"idrequest")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [DataAtribute]
         [OrderAtribute(1)]
@@ -26,7 +26,7 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [FKeyAtribute(table: "learninghistroy", conection: CType.INNER)]
         [DBAtribute(hide: false, table: "request", field: "idlearninghistroy")]
-        public int IdLearning { get; set; }
+        public int? IdLearning { get; set; }
 
         [OrderAtribute(4)]
         [DBAtribute(hide: false, table: "learninghistroy", field: "comment")]

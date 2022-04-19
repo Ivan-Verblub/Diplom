@@ -26,10 +26,10 @@ namespace Server.Controllers.Tables
             {
                 context[i] = new()
                 {
-                    Id = row.Field<int>("idContexts"),
-                    IdContext = row.Field<int>("idContext"),
+                    Id = row.Field<int?>("idContexts"),
+                    IdContext = row.Field<int?>("idContext"),
                     Domen = row.Field<string>("domen"),
-                    IdContextable = row.Field<int>("idlearninghistroy"),
+                    IdContextable = row.Field<int?>("idlearninghistroy"),
                     Comment = row.Field<string>("comment")
                 };
                 i++;
@@ -51,10 +51,10 @@ namespace Server.Controllers.Tables
             {
                 context[i] = new()
                 {
-                    Id = row.Field<int>("idContexts"),
-                    IdContext = row.Field<int>("idContext"),
+                    Id = row.Field<int?>("idContexts"),
+                    IdContext = row.Field<int?>("idContext"),
                     Domen = row.Field<string>("domen"),
-                    IdContextable = row.Field<int>("idlearninghistroy"),
+                    IdContextable = row.Field<int?>("idlearninghistroy"),
                     Comment = row.Field<string>("comment")
                 };
                 i++;

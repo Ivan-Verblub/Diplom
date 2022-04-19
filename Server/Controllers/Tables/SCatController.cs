@@ -28,7 +28,7 @@ namespace Server.Controllers.Tables
             {
                 scat[i] = new()
                 {
-                    IdCat = row.Field<int>("idcat"),
+                    IdCat = row.Field<int?>("idcat"),
                     Name = row.Field<string>("name")
                 };
                 i++;
@@ -49,7 +49,7 @@ namespace Server.Controllers.Tables
             {
                 scat[i] = new()
                 {
-                    IdCat = row.Field<int>("idcat"),
+                    IdCat = row.Field<int?>("idcat"),
                     Name = row.Field<string>("name")
                 };
                 i++;

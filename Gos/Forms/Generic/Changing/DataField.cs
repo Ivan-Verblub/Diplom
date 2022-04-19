@@ -64,11 +64,11 @@ namespace Gos.Forms.Changing
                 {
                     _data = new TextBox();
                 }
-                else if (type.PropertyType == typeof(DateTime))
+                else if (type.PropertyType == typeof(DateTime?))
                 {
                     _data = new DateTimePicker();
                 }
-                else if (type.PropertyType == typeof(int))
+                else if (type.PropertyType == typeof(int?))
                 {
                     _data = new TextBox();
                     ((TextBox)Data).KeyPress += (o, e) =>
@@ -77,7 +77,7 @@ namespace Gos.Forms.Changing
                             e.Handled = true;
                     };
                 }
-                else if (type.PropertyType == typeof(float))
+                else if (type.PropertyType == typeof(float?))
                 {
                     _data = new TextBox();
                     ((TextBox)Data).KeyPress += (o, e) =>

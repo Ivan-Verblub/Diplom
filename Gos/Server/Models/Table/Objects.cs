@@ -17,12 +17,12 @@ namespace Gos.Server.Models.Table
         public string name { get; set; }
 
         [Localize("Стоимость")]
-        public float cost { get; set; }
+        public float? cost { get; set; }
 
         [Localize("Код статуса")]
         [Typeable(typeof(SStatus),typeof(SStatusFilter))]
         [Invisible]
-        public int idStatus { get; set; }
+        public int? idStatus { get; set; }
 
         [Localize("Статус")]
         [AI]
@@ -31,7 +31,7 @@ namespace Gos.Server.Models.Table
         [Localize("Код расположения")]
         [Typeable(typeof(SLocation),typeof(SLocationFilter))]
         [Invisible]
-        public int idLocation { get; set; }
+        public int? idLocation { get; set; }
 
         [Localize("Расположение")]
         [AI]
@@ -40,7 +40,7 @@ namespace Gos.Server.Models.Table
         [Typeable(typeof(Scat),typeof(ScatFilter))]
         [Localize("Код категории")]
         [Invisible]
-        public int idCat { get; set; }
+        public int? idCat { get; set; }
 
         [Localize("Категория")]
         [AI]
@@ -49,7 +49,7 @@ namespace Gos.Server.Models.Table
         [Typeable(typeof(Request),typeof(RequestFilter))]
         [Localize("Код ТЗ")]
         [Invisible]
-        public int idRequest { get; set; }
+        public int? idRequest { get; set; }
 
         [Localize("Название ТЗ")]
         [AI]

@@ -29,7 +29,7 @@ namespace Server.Controllers.Tables
             {
                 dataSet[i] = new()
                 {
-                    IdDataSet = row.Field<int>("iddataset"),
+                    IdDataSet = row.Field<int?>("iddataset"),
                     SetName = row.Field<string>("setName")
                 };
                 i++;
@@ -50,7 +50,7 @@ namespace Server.Controllers.Tables
             {
                 dataSet[i] = new()
                 {
-                    IdDataSet = row.Field<int>("iddataset"),
+                    IdDataSet = row.Field<int?>("iddataset"),
                     SetName = row.Field<string>("setName")
                 };
                 i++;

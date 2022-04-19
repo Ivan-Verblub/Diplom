@@ -6,7 +6,7 @@ namespace Server.MySQL.Tables.Filter
     {
         [FilterAtribute(field: "idData",
             table: "data", filtType: FType.EQUAL)]
-        public int IdData { get; set; }
+        public int? IdData { get; set; }
 
         [FilterAtribute(field: "Feature",
             table: "data", filtType: FType.EQUAL)]
@@ -26,7 +26,7 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "idDataSet",
             table: "data", filtType: FType.EQUAL)]
-        public int IdDataSet { get; set; }
+        public int? IdDataSet { get; set; }
 
         [FilterAtribute(field: "setName",
             table: "dataset", filtType: FType.EQUAL)]

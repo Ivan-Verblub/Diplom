@@ -26,7 +26,7 @@ namespace Server.Controllers.Tables
             {
                 objects[i] = new()
                 {
-                    Id = row.Field<int>("idSearchContext"),
+                    Id = row.Field<int?>("idSearchContext"),
                     Name = row.Field<string>("Name")
                 };
                 i++;
@@ -48,7 +48,7 @@ namespace Server.Controllers.Tables
             {
                 objects[i] = new()
                 {
-                    Id = row.Field<int>("idSearchContext"),
+                    Id = row.Field<int?>("idSearchContext"),
                     Name = row.Field<string>("Name")
                 };
                 i++;

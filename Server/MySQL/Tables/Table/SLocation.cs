@@ -8,7 +8,7 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(0)]
         [KeyAtribute(true)]
         [DBAtribute(false, "slocation","idlocation")]
-        public int IdLocation { get; set; }
+        public int? IdLocation { get; set; }
 
         [OrderAtribute(1)]
         [DataAtribute]

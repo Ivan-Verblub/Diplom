@@ -131,7 +131,11 @@ namespace Server.MySQL
                 _command.CommandText = builder.ToString();
                 Console.WriteLine(_command.CommandText);
                 if (_command.ExecuteNonQuery() == 0)
+                {
+                    _command.Parameters.Clear();
                     return "Запись не была добавлена";
+                }
+                _command.Parameters.Clear();
                 return "";
             }
             catch (MySqlException ex)
@@ -247,7 +251,11 @@ namespace Server.MySQL
             {
                 _command.CommandText = builder.ToString();
                 if (_command.ExecuteNonQuery() == 0)
+                {
+                    _command.Parameters.Clear();
                     return "Запись не была удалена";
+                }
+                _command.Parameters.Clear();
                 return "";
             }
             catch (MySqlException ex)
@@ -304,7 +312,7 @@ namespace Server.MySQL
                     builder.Append('(');
                     foreach (var range in element.Range)
                     {
-                        if (!IsDefault(obj.GetType().GetProperty(range.Field).GetValue(obj)))
+                        if (obj.GetType().GetProperty(range.Field).GetValue(obj) != null)
                         {
                             foreach (var field in typeof(D).GetProperties())
                             {
@@ -336,7 +344,7 @@ namespace Server.MySQL
 
                 foreach (var element in decryptTable.Filters)
                 {
-                    if (!IsDefault(obj.GetType().GetProperty(element.Field).GetValue(obj)))
+                    if (obj.GetType().GetProperty(element.Field).GetValue(obj) != null)
                     {
                         foreach (var field in typeof(D).GetProperties())
                         {
@@ -386,10 +394,10 @@ namespace Server.MySQL
             {
 
                 builder.Append('\'');
-                if (field.PropertyType == typeof(DateTime))
+                if (field.PropertyType == typeof(DateTime?))
                     builder.Append(
                         ((DateTime)obj.GetType().GetProperty(element.Field)
-                        .GetValue(obj)).ToString("yyyy-MM-dd"));
+                        .GetValue(obj)).ToString("yyyy-MM-dd HH:mm:ss"));
                 else
                     builder.Append(
                         obj.GetType().GetProperty(element.Field)

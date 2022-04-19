@@ -7,7 +7,7 @@ namespace Gos.Server.Models.Filter
         [Localize("Код расположения")]
         [Key(true)]
         [Invisible]
-        public int IdLocation { get; set; }
+        public int? IdLocation { get; set; }
 
         [Localize("Расположение")]
         public string Location { get; set; }

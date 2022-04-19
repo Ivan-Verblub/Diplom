@@ -8,7 +8,7 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(0)]
         [KeyAtribute(ai:true)]
         [DBAtribute(hide: false, table: "dataset", field: "iddataset")]
-        public int IdDataSet { get; set; }
+        public int? IdDataSet { get; set; }
 
         [DataAtribute]
         [OrderAtribute(1)]

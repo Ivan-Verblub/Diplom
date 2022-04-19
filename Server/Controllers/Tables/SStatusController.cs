@@ -28,7 +28,7 @@ namespace Server.Controllers.Tables
             {
                 sStatus[i] = new()
                 {
-                    IdStatus = row.Field<int>("idstatus"),
+                    IdStatus = row.Field<int?>("idstatus"),
                     Status = row.Field<string>("status")
                 };
                 i++;
@@ -50,7 +50,7 @@ namespace Server.Controllers.Tables
             {
                 sStatus[i] = new()
                 {
-                    IdStatus = row.Field<int>("idstatus"),
+                    IdStatus = row.Field<int?>("idstatus"),
                     Status = row.Field<string>("status")
                 };
                 i++;

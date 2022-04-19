@@ -6,7 +6,7 @@ namespace Server.MySQL.Tables.Filter
     {
         [FilterAtribute(field: "idactual",
             table: "actual", filtType: FType.EQUAL)]
-        public int IdActual { get; set; }
+        public int? IdActual { get; set; }
 
         [FilterAtribute(field: "name",
             table: "actual", filtType: FType.EQUAL)]
@@ -18,7 +18,7 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "idlearninghistroy",
             table: "actual", filtType: FType.EQUAL)]
-        public int IdLearn { get; set; }
+        public int? IdLearn { get; set; }
 
         [FilterAtribute(field: "comment",
             table: "learninghistroy", filtType: FType.EQUAL)]
@@ -38,6 +38,6 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "type",
             table: "actual", filtType: FType.EQUAL)]
-        public int Types { get; set; }
+        public int? Types { get; set; }
     }
 }

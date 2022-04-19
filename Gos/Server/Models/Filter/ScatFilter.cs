@@ -8,7 +8,7 @@ namespace Gos.Server.Models.Filter
         [Localize("Код категории")]
         [Key(true)]
         [Invisible]
-        public int IdCat { get; set; }
+        public int? IdCat { get; set; }
         [Localize("Название категории")]
         public string Name { get; set; }
         [Localize("Примерное название категории")]

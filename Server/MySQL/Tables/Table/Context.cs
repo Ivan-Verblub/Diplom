@@ -8,7 +8,7 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(0)]
         [KeyAtribute(true)]
         [DBAtribute(hide: false, table: "Context", field: "idContext")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [OrderAtribute(1)]
         [DataAtribute]

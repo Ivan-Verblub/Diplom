@@ -12,7 +12,7 @@ namespace Gos.Server.Models.Table
         [Key(true)]
         [AI]
         [Invisible]
-        public int idLocation { get; set; }
+        public int? idLocation { get; set; }
 
         [Localize("Расположение")]
         [Key(true)]

@@ -9,7 +9,7 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(0)]
         [KeyAtribute(ai: true)]
         [DBAtribute(hide: false, table: "actual", field: "idactual")]
-        public int IdActual { get; set; }
+        public int? IdActual { get; set; }
 
         [OrderAtribute(1)]
         [DataAtribute]
@@ -26,7 +26,7 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [FKeyAtribute(table: "learninghistroy",conection: CType.INNER)]
         [DBAtribute(hide: false, table: "actual", field: "idlearninghistroy")]
-        public int IdLearningHistory { get; set; }
+        public int? IdLearningHistory { get; set; }
 
         [OrderAtribute(4)]
         [DBAtribute(hide: false, table: "learninghistroy", field: "comment")]
@@ -39,6 +39,6 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(6)]
         [DataAtribute]
         [DBAtribute(hide: false, table: "actual", field: "type")]
-        public int Types { get; set; }
+        public int? Types { get; set; }
     }
 }

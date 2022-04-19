@@ -9,6 +9,8 @@ namespace Gos.Server.Models.Requesting
     public class Final
     {
         public string Name { get; set; }
+        public int Count { get; set; }
+        public int Cost { get; set; }
         public List<About> Abouts {get;set;}
     }
 }

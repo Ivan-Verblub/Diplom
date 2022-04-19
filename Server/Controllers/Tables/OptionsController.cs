@@ -26,10 +26,10 @@ namespace Server.Controllers.Tables
             {
                 objects[i] = new()
                 {
-                    Id = row.Field<int>("idOptions"),
-                    Type = row.Field<int>("type"),
+                    Id = row.Field<int?>("idOptions"),
+                    Type = row.Field<int?>("type"),
                     Value = row.Field<string>("value"),
-                    IdContext = row.Field<int>("idContext"),
+                    IdContext = row.Field<int?>("idContext"),
                     Domen = row.Field<string>("domen")
                 };
                 i++;
@@ -51,10 +51,10 @@ namespace Server.Controllers.Tables
             {
                 objects[i] = new()
                 {
-                    Id = row.Field<int>("idOptions"),
-                    Type = row.Field<int>("type"),
+                    Id = row.Field<int?>("idOptions"),
+                    Type = row.Field<int?>("type"),
                     Value = row.Field<string>("value"),
-                    IdContext = row.Field<int>("idContext"),
+                    IdContext = row.Field<int?>("idContext"),
                     Domen = row.Field<string>("domen")
                 };
                 i++;

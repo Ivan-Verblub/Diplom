@@ -26,7 +26,7 @@ namespace Server.Controllers.Tables
             {
                 context[i] = new()
                 {
-                    Id = row.Field<int>("idContext"),
+                    Id = row.Field<int?>("idContext"),
                     Domen = row.Field<string>("Domen")
                 };
                 i++;
@@ -48,7 +48,7 @@ namespace Server.Controllers.Tables
             {
                 context[i] = new()
                 {
-                    Id = row.Field<int>("idContext"),
+                    Id = row.Field<int?>("idContext"),
                     Domen = row.Field<string>("Domen")
                 };
                 i++;

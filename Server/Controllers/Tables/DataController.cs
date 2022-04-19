@@ -28,10 +28,10 @@ namespace Server.Controllers.Tables
             {
                 data[i] = new()
                 {
-                    IdData = row.Field<int>("idData"),
+                    IdData = row.Field<int?>("idData"),
                     Feature = row.Field<string>("Feature"),
                     Label = row.Field<string>("Label"),
-                    IdDataSet = row.Field<int>("idDataSet"),
+                    IdDataSet = row.Field<int?>("idDataSet"),
                     SetName = row.Field<string>("setName")
                 };
                 i++;
@@ -53,10 +53,10 @@ namespace Server.Controllers.Tables
             {
                 data[i] = new()
                 {
-                    IdData = row.Field<int>("idData"),
+                    IdData = row.Field<int?>("idData"),
                     Feature = row.Field<string>("Feature"),
                     Label = row.Field<string>("Label"),
-                    IdDataSet = row.Field<int>("idDataSet"),
+                    IdDataSet = row.Field<int?>("idDataSet"),
                     SetName = row.Field<string>("setName")
                 };
                 i++;

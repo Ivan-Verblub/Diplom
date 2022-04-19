@@ -28,10 +28,10 @@ namespace Server.Controllers.Tables
             {
                 learningHistories[i] = new()
                 {
-                    Id = row.Field<int>("idlearninghistroy"),
-                    Date = row.Field<DateTime>("date"),
-                    Iter = row.Field<int>("iteration"),
-                    IdDataSet = row.Field<int>("idDataSet"),
+                    Id = row.Field<int?>("idlearninghistroy"),
+                    Date = row.Field<DateTime?>("date"),
+                    Iter = row.Field<int?>("iteration"),
+                    IdDataSet = row.Field<int?>("idDataSet"),
                     SetName = row.Field<string>("setName"),
                     Comment = row.Field<string>("comment"),
                     Version = row.Field<string>("version")
@@ -55,10 +55,10 @@ namespace Server.Controllers.Tables
             {
                 learningHistories[i] = new()
                 {
-                    Id = row.Field<int>("idlearninghistroy"),
-                    Date = row.Field<DateTime>("date"),
-                    Iter = row.Field<int>("iteration"),
-                    IdDataSet = row.Field<int>("idDataSet"),
+                    Id = row.Field<int?>("idlearninghistroy"),
+                    Date = row.Field<DateTime?>("date"),
+                    Iter = row.Field<int?>("iteration"),
+                    IdDataSet = row.Field<int?>("idDataSet"),
                     SetName = row.Field<string>("setName"),
                     Comment = row.Field<string>("comment"),
                     Version = row.Field<string>("version")

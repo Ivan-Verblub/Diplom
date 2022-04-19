@@ -5,7 +5,7 @@ namespace Server.MySQL.Tables.Filter
     public class CharListObjectsFilter
     {
         [FilterAtribute("idCharList", "CharListObjects", FType.EQUAL)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [FilterAtribute("Name", "CharListObjects", FType.EQUAL)]
         public string? Name { get; set; }

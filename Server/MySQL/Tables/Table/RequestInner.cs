@@ -6,9 +6,9 @@ namespace Server.MySQL.Tables.Table
     public class RequestInner
     {
         [OrderAtribute(order: 0)]
-        [KeyAtribute(ai: true)]
+        [KeyAtribute(ai: false)]
         [DBAtribute(hide: false, table: "requestinner", field: "idrequestinner")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [OrderAtribute(order: 1)]
         [DataAtribute]
@@ -18,13 +18,13 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(order: 2)]
         [DataAtribute]
         [DBAtribute(hide: false, table: "requestinner", field: "cost")]
-        public float Cost { get; set; }
+        public float? Cost { get; set; }
 
         [OrderAtribute(order: 3)]
         [DataAtribute]
-        [FKeyAtribute(table: "scat", conection: CType.INNER)]
+        [FKeyAtribute(table: "scat", conection: CType.LEFT)]
         [DBAtribute(hide: false, table: "requestinner", field: "idcat")]
-        public int IdCat { get; set; }
+        public int? IdCat { get; set; }
 
         [OrderAtribute(order: 4)]
         [DBAtribute(hide: false, table: "scat", field: "name")]
@@ -34,7 +34,7 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [FKeyAtribute(table: "request", conection: CType.INNER)]
         [DBAtribute(hide: false, table: "requestinner", field: "idrequest")]
-        public int IdRequest { get; set; }
+        public int? IdRequest { get; set; }
 
         [OrderAtribute(order: 6)]
         [DBAtribute(hide: false, table: "request", field: "name")]
@@ -43,6 +43,6 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [OrderAtribute(order: 7)]
         [DBAtribute(hide: false, table: "requestinner", field: "count")]
-        public int Count { get; set; }
+        public int? Count { get; set; }
     }
 }

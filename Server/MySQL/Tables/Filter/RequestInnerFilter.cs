@@ -6,7 +6,7 @@ namespace Server.MySQL.Tables.Filter
     {
         [FilterAtribute(field: "idrequestinner",
             table: "requestinner", filtType: FType.EQUAL)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [FilterAtribute(field: "name",
             table: "requestinner", filtType: FType.EQUAL)]
@@ -18,21 +18,21 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "cost",
             table: "requestinner", filtType: FType.EQUAL)]
-        public float Cost { get; set; }
+        public float? Cost { get; set; }
 
         [RangeAtribute(0,0)]
         [FilterAtribute(field: "cost",
             table: "requestinner", filtType: FType.GREATEREQUAL)]
-        public float CostG { get; set; }
+        public float? CostG { get; set; }
 
         [RangeAtribute(0, 1)]
         [FilterAtribute(field: "cost",
             table: "requestinner", filtType: FType.LESSEREQUAL)]
-        public float CostL { get; set; }
+        public float? CostL { get; set; }
 
         [FilterAtribute(field: "idcat",
             table: "requestinner", filtType: FType.EQUAL)]
-        public int IdCat { get; set; }
+        public int? IdCat { get; set; }
 
         [FilterAtribute(field: "name",
             table: "scat", filtType: FType.EQUAL)]
@@ -44,7 +44,7 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "idrequest",
             table: "requestinner", filtType: FType.EQUAL)]
-        public int IdRequest { get; set; }
+        public int? IdRequest { get; set; }
 
         [FilterAtribute(field: "name",
             table: "request", filtType: FType.EQUAL)]
@@ -56,16 +56,16 @@ namespace Server.MySQL.Tables.Filter
 
         [FilterAtribute(field: "count",
             table: "requestinner", filtType: FType.EQUAL)]
-        public int Count { get; set; }
+        public int? Count { get; set; }
 
         [RangeAtribute(1, 0)]
         [FilterAtribute(field: "count",
             table: "requestinner", filtType: FType.GREATEREQUAL)]
-        public int CountG { get; set; }
+        public int? CountG { get; set; }
 
         [RangeAtribute(1, 1)]
         [FilterAtribute(field: "count",
             table: "requestinner", filtType: FType.LESSEREQUAL)]
-        public int CountL { get; set; }
+        public int? CountL { get; set; }
     }
 }

@@ -13,18 +13,18 @@ namespace Gos.Server.Models.Table
         [Key(true)]
         [AI]
         [Invisible]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Дата создания")]
-        public DateTime date { get; set; }
+        public DateTime? date { get; set; }
 
         [Localize("Количество итераций")]
-        public int iter { get; set; }
+        public int? iter { get; set; }
 
         [Localize("Код набора данных")]
         [Typeable(typeof(DataSet),typeof(DataSetFilter))]
         [Invisible]
-        public int idDataSet { get; set; }
+        public int? idDataSet { get; set; }
 
         [Localize("Название набора")]
         [AI]

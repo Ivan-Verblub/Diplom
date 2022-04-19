@@ -13,12 +13,12 @@ namespace Gos.Server.Models.Table
         [AI]
         [Key(true)]
         [Invisible]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Код контекста")]
         [Typeable(typeof(SearchContext),typeof(SearchContextFilter))]
         [Invisible]
-        public int idSearch { get; set; }
+        public int? idSearch { get; set; }
 
         [Localize("Название контекста")]
         [AI]

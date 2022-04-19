@@ -213,12 +213,16 @@ namespace Gos.Forms.Сustom
 
         private void Create(Chars[] chars)
         {
-            if(list == null)
+            try
             {
-                list = new CharsList();
                 list.Show();
             }
-            list.Create(chars);
+            catch
+            { 
+                list = new CharsList((int)comboBox1.SelectedValue);
+                list.Show();
+            }
+            list.Create(chars, label3.Text);
         }
 
         private void button7_Click(object sender, EventArgs e)

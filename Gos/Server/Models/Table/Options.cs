@@ -13,11 +13,11 @@ namespace Gos.Server.Models.Table
         [Key(true)]
         [AI]
         [Invisible]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Код типа")]
         [EnumList(typeof(OpType))]
-        public int type { get; set; }
+        public int? type { get; set; }
 
         [Localize("Значение")]
         [Key(false)]
@@ -26,7 +26,7 @@ namespace Gos.Server.Models.Table
         [Localize("Код контекста")]
         [Typeable(typeof(Context),typeof(ContextFilter))]
         [Invisible]
-        public int idContext { get; set; }
+        public int? idContext { get; set; }
 
         [Localize("Домен")]
         [AI]

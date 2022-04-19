@@ -8,7 +8,7 @@ namespace Gos.Server.Models.Filter
         [Localize("Код")]
         [Key(true)]
         [Invisible]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Localize("Название")]
         public string Name { get; set; }
@@ -18,7 +18,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Обучение")]
         [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
-        public int IdLearning { get; set; }
+        public int? IdLearning { get; set; }
 
         [Localize("Коментарий")]
         public string Comment { get; set; }

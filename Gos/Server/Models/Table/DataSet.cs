@@ -12,7 +12,7 @@ namespace Gos.Server.Models.Table
         [Key(true)]
         [AI]
         [Invisible]
-        public int idDataSet { get; set; }
+        public int? idDataSet { get; set; }
 
         [Localize("Название сета")]
         [Key(false)]

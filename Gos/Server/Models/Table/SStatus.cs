@@ -12,7 +12,7 @@ namespace Gos.Server.Models.Table
         [AI]
         [Key(true)]
         [Invisible]
-        public int idStatus { get; set; }
+        public int? idStatus { get; set; }
         [Localize("Название статуса")]
         [Key(false)]
         public string status { get; set; }

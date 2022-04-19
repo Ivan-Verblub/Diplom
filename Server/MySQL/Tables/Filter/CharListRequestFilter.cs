@@ -5,7 +5,7 @@ namespace Server.MySQL.Tables.Filter
     public class CharListRequestFilter
     {
         [FilterAtribute("idCharList", "CharListRequest",FType.EQUAL)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [FilterAtribute("Name", "CharListRequest", FType.EQUAL)]
         public string? Name { get; set; }
@@ -18,7 +18,7 @@ namespace Server.MySQL.Tables.Filter
         public string? ValueL { get; set; }
 
         [FilterAtribute("idrequestinner", "CharListRequest", FType.EQUAL)]
-        public int IdRequest { get; set; }
+        public int? IdRequest { get; set; }
 
         [FilterAtribute("name", "requestinner", FType.EQUAL)]
         public string? RequestName { get; set; }

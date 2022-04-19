@@ -9,7 +9,7 @@ namespace Gos.Server.Models.Filter
         [Localize("Код")]
         [Key(true)]
         [Invisible]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Localize("Инвентарный номер")]
         [Typeable(typeof(Objects),typeof(ObjectsFilter))]
@@ -26,7 +26,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Статус")]
         [Typeable(typeof(SStatus), typeof(SStatusFilter))]
-        public int IdStatus { get; set; }
+        public int? IdStatus { get; set; }
 
         [Localize("Название статуса")]
         public string Status { get; set; }
@@ -36,7 +36,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Расположение")]
         [Typeable(typeof(SLocation), typeof(SLocationFilter))]
-        public int IdLocation { get; set; }
+        public int? IdLocation { get; set; }
 
         [Localize("Место расположение")]
         public string Location { get; set; }
@@ -45,11 +45,11 @@ namespace Gos.Server.Models.Filter
         public string LocationL { get; set; }
 
         [Localize("Дата")]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         [Localize("Дата от")]
-        public DateTime DateG { get; set; }
+        public DateTime? DateG { get; set; }
         [Localize("Дата до")]
-        public DateTime DateL { get; set; }
+        public DateTime? DateL { get; set; }
 
         [Localize("Коментарий")]
         public string Comment { get; set; }

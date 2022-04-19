@@ -8,11 +8,11 @@ namespace Gos.Server.Models.Filter
         [Localize("Код")]
         [Key(true)]
         [Invisible]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Localize("Контекст")]
         [Typeable(typeof(SearchContext),typeof(SearchContextFilter))]
-        public int IdSearch { get; set; }
+        public int? IdSearch { get; set; }
 
         [Localize("Название контекста")]
         public string SearchName { get; set; }

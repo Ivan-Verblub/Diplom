@@ -9,25 +9,25 @@ namespace Gos.Server.Models.Filter
         [Localize("Код")]
         [Key(true)]
         [Invisible]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Localize("Дата")]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         [Localize("Дата от")]
-        public DateTime DateG { get; set; }
+        public DateTime? DateG { get; set; }
         [Localize("Дата до")]
-        public DateTime DateL { get; set; }
+        public DateTime? DateL { get; set; }
 
         [Localize("Количество итераций")]
-        public int Iter { get; set; }
+        public int? Iter { get; set; }
         [Localize("Количество итераций от")]
-        public int IterG { get; set; }
+        public int? IterG { get; set; }
         [Localize("Количество итераций до")]
-        public int IterL { get; set; }
+        public int? IterL { get; set; }
 
         [Localize("Набор данных")]
         [Typeable(typeof(DataSet),typeof(DataSetFilter))]
-        public int IdDataSet { get; set; }
+        public int? IdDataSet { get; set; }
 
         [Localize("Название набора данных")]
         public string SetName { get; set; }

@@ -26,14 +26,14 @@ namespace Server.Controllers.Tables
             {
                 context[i] = new()
                 {
-                    Id = row.Field<int>("idlearninghistroy"),
-                    Date = row.Field<DateTime>("date"),
-                    Iter = row.Field<int>("iteration"),
-                    IdDataSet = row.Field<int>("iddataset"),
+                    Id = row.Field<int?>("idlearninghistroy"),
+                    Date = row.Field<DateTime?>("date"),
+                    Iter = row.Field<int?>("iteration"),
+                    IdDataSet = row.Field<int?>("iddataset"),
                     SetName = row.Field<string>("setName"),
                     Comment = row.Field<string>("comment"),
                     Version = row.Field<string>("version"),
-                    IdSearch = row.Field<int>("idSearchContext"),
+                    IdSearch = row.Field<int?>("idSearchContext"),
                     SearchName = row.Field<string>("name")
                 };
                 i++;
@@ -55,14 +55,14 @@ namespace Server.Controllers.Tables
             {
                 context[i] = new()
                 {
-                    Id = row.Field<int>("idlearninghistroy"),
-                    Date = row.Field<DateTime>("date"),
-                    Iter = row.Field<int>("iteration"),
-                    IdDataSet = row.Field<int>("iddataset"),
+                    Id = row.Field<int?>("idlearninghistroy"),
+                    Date = row.Field<DateTime?>("date"),
+                    Iter = row.Field<int?>("iteration"),
+                    IdDataSet = row.Field<int?>("iddataset"),
                     SetName = row.Field<string>("setName"),
                     Comment = row.Field<string>("comment"),
                     Version = row.Field<string>("version"),
-                    IdSearch = row.Field<int>("idSearchContext"),
+                    IdSearch = row.Field<int?>("idSearchContext"),
                     SearchName = row.Field<string>("name")
                 };
                 i++;

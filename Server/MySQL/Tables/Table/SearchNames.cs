@@ -8,13 +8,13 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(0)]
         [KeyAtribute(true)]
         [DBAtribute(hide: false, table: "SearchNames", field: "idSearchNames")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [OrderAtribute(1)]
         [DataAtribute]
         [FKeyAtribute(Conection = CType.INNER, Table = "SearchContext")]
         [DBAtribute(hide: false, table: "SearchNames", field: "idSearchContext")]
-        public int IdSearch { get; set; }
+        public int? IdSearch { get; set; }
 
         [OrderAtribute(2)]
         [DBAtribute(hide: false, table: "SearchContext", field: "name")]

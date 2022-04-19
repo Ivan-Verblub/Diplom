@@ -8,23 +8,23 @@ namespace Server.MySQL.Tables
         [OrderAtribute(0)]
         [KeyAtribute(ai: true)]
         [DBAtribute(hide: false,table: "learninghistroy", field: "idlearninghistroy")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [OrderAtribute(order: 1)]
         [DataAtribute]
         [DBAtribute(hide: false, table: "learninghistroy", field: "date")]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [OrderAtribute(order: 2)]
         [DataAtribute]
         [DBAtribute(hide: false, table: "learninghistroy", field: "iteration")]
-        public int Iter { get; set; }
+        public int? Iter { get; set; }
 
         [OrderAtribute(3)]
         [FKeyAtribute(table: "dataset", conection: CType.INNER)]
         [DataAtribute]
         [DBAtribute(hide: false, table: "learninghistroy", field: "iddataset")]
-        public int IdDataSet { get; set; }
+        public int? IdDataSet { get; set; }
 
         [OrderAtribute(order: 4)]
         [DBAtribute(hide: false, table: "dataset", field: "setName")]

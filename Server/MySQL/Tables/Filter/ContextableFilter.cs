@@ -5,28 +5,28 @@ namespace Server.MySQL.Tables.Filter
     public class ContextableFilter
     {
         [FilterAtribute("idlearninghistroy", "Contextable",FType.EQUAL)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [FilterAtribute("date", "learninghistroy", FType.EQUAL)]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         [RangeAtribute(0,0)]
         [FilterAtribute("date", "learninghistroy", FType.GREATEREQUAL)]
-        public DateTime DateG { get; set; }
+        public DateTime? DateG { get; set; }
         [RangeAtribute(0, 1)]
         [FilterAtribute("date", "learninghistroy", FType.LESSEREQUAL)]
-        public DateTime DateL { get; set; }
+        public DateTime? DateL { get; set; }
 
         [FilterAtribute("iteration", "learninghistroy", FType.EQUAL)]
-        public int Iter { get; set; }
+        public int? Iter { get; set; }
         [RangeAtribute(1, 0)]
         [FilterAtribute("iteration", "learninghistroy", FType.GREATEREQUAL)]
-        public int IterG { get; set; }
+        public int? IterG { get; set; }
         [RangeAtribute(1, 1)]
         [FilterAtribute("iteration", "learninghistroy", FType.LESSEREQUAL)]
-        public int IterL { get; set; }
+        public int? IterL { get; set; }
 
         [FilterAtribute("iddataset", "learninghistroy", FType.EQUAL)]
-        public int IdDataSet { get; set; }
+        public int? IdDataSet { get; set; }
 
         [FilterAtribute("setName", "dataset", FType.EQUAL)]
         public string? SetName { get; set; }
@@ -44,7 +44,7 @@ namespace Server.MySQL.Tables.Filter
         public string? VersionL { get; set; }
 
         [FilterAtribute("idSearchContext", "Contextable", FType.EQUAL)]
-        public int IdSearch { get; set; }
+        public int? IdSearch { get; set; }
 
         [FilterAtribute("name", "SearchContext", FType.EQUAL)]
         public string? SearchName { get; set; }

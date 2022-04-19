@@ -19,15 +19,15 @@ namespace Gos.Server.Models.Filter
         public string NameL { get; set; }
 
         [Localize("Стоимость")]
-        public int Cost { get; set; }
+        public int? Cost { get; set; }
         [Localize("Стоимость от")]
-        public int CostG { get; set; }
+        public int? CostG { get; set; }
         [Localize("Стоимость до")]
-        public int CostL { get; set; }
+        public int? CostL { get; set; }
 
         [Localize("Статус")]
         [Typeable(typeof(SStatus),typeof(SStatusFilter))]
-        public int IdStatus { get; set; }
+        public int? IdStatus { get; set; }
         
         [Localize("Название статуса")]
         public string Status { get; set; }
@@ -37,7 +37,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Расположение")]
         [Typeable(typeof(SLocation), typeof(SLocationFilter))]
-        public int IdLocation { get; set; }
+        public int? IdLocation { get; set; }
 
         [Localize("Название расположения")]
         public string Location { get; set; }
@@ -47,7 +47,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Категория")]
         [Typeable(typeof(Scat),typeof(ScatFilter))]
-        public int IdCat { get; set; }
+        public int? IdCat { get; set; }
 
         [Localize("Название категории")]
         public string NameC { get; set; }
@@ -57,7 +57,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("ТЗ")]
         [Typeable(typeof(Request), typeof(RequestFilter))]
-        public int IdRequest { get; set; }
+        public int? IdRequest { get; set; }
 
         [Localize("Название ТЗ")]
         public string NameR { get; set; }

@@ -30,14 +30,14 @@ namespace Server.Controllers.Tables
                 {
                     InvNumber = row.Field<string>("invnumber"),
                     Name = row.Field<string>("name"),
-                    Cost = row.Field<float>("cost"),
-                    IdStatus = row.Field<int>("idstatus"),
+                    Cost = row.Field<float?>("cost"),
+                    IdStatus = row.Field<int?>("idstatus"),
                     Status = row.Field<string>("status"),
-                    IdLocation = row.Field<int>("idLocation"),
+                    IdLocation = row.Field<int?>("idLocation"),
                     Location = row.Field<string>("location"),
-                    IdCat = row.Field<int>("idcat"),
+                    IdCat = row.Field<int?>("idcat"),
                     Cat = row.Field<string>("name1"),
-                    IdRequest = row.Field<int>("idrequest"),
+                    IdRequest = row.Field<int?>("idrequest"),
                     RName = row.Field<string>("name2")
                 };
                 i++;
@@ -61,14 +61,14 @@ namespace Server.Controllers.Tables
                 {
                     InvNumber = row.Field<string>("invnumber"),
                     Name = row.Field<string>("name"),
-                    Cost = row.Field<float>("cost"),
-                    IdStatus = row.Field<int>("idstatus"),
+                    Cost = row.Field<float?>("cost"),
+                    IdStatus = row.Field<int?>("idstatus"),
                     Status = row.Field<string>("status"),
-                    IdLocation = row.Field<int>("idLocation"),
+                    IdLocation = row.Field<int?>("idLocation"),
                     Location = row.Field<string>("location"),
-                    IdCat = row.Field<int>("idcat"),
+                    IdCat = row.Field<int?>("idcat"),
                     Cat = row.Field<string>("name1"),
-                    IdRequest = row.Field<int>("idrequest"),
+                    IdRequest = row.Field<int?>("idrequest"),
                     RName = row.Field<string>("name2")
                 };
                 i++;

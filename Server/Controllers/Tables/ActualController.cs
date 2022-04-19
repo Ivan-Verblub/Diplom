@@ -29,13 +29,13 @@ namespace Server.Controllers.Tables
             {
                 actual[i] = new()
                 {
-                    IdActual = row.Field<int>("idactual"),
+                    IdActual = row.Field<int?>("idactual"),
                     Name = row.Field<string>("name"),
                     Conf = Convert.ToBase64String(row.Field<byte[]>("conf")),
-                    IdLearningHistory = row.Field<int>("idlearninghistroy"),
+                    IdLearningHistory = row.Field<int?>("idlearninghistroy"),
                     Comment = row.Field<string>("comment"),
                     Version = row.Field<string>("version"),
-                    Types = row.Field<int>("type")
+                    Types = row.Field<int?>("type")
                 };
                 i++;
             }
@@ -56,13 +56,13 @@ namespace Server.Controllers.Tables
             {
                 actual[i] = new()
                 {
-                    IdActual = row.Field<int>("idactual"),
+                    IdActual = row.Field<int?>("idactual"),
                     Name = row.Field<string>("name"),
                     Conf = Convert.ToBase64String(row.Field<byte[]>("conf")),
-                    IdLearningHistory = row.Field<int>("idlearninghistroy"),
+                    IdLearningHistory = row.Field<int?>("idlearninghistroy"),
                     Comment = row.Field<string>("comment"),
                     Version = row.Field<string>("version"),
-                    Types = row.Field<int>("type")
+                    Types = row.Field<int?>("type")
                 };
                 i++;
             }

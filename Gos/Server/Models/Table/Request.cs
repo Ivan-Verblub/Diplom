@@ -12,7 +12,7 @@ namespace Gos.Server.Models.Table
         [AI]
         [Key(true)]
         [Invisible]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Название")]
         [Key(false)]
@@ -25,7 +25,7 @@ namespace Gos.Server.Models.Table
         [Localize("Код обучения")]
         [Invisible]
         [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
-        public int idLearning { get; set; }
+        public int? idLearning { get; set; }
 
         [Localize("Комментарий")]
         [AI]

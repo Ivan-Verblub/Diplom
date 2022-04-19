@@ -13,12 +13,12 @@ namespace Gos.Server.Models.Table
         [AI]
         [Key(true)]
         [Invisible]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Код контекста")]
         [Typeable(typeof(Context),typeof(ContextFilter))]
         [Invisible]
-        public int idContext { get; set; }
+        public int? idContext { get; set; }
 
         [Localize("Домен")]
         [AI]
@@ -28,12 +28,12 @@ namespace Gos.Server.Models.Table
         [Localize("Код обучения")]
         [Typeable(typeof(Contextable), typeof(ContextableFilter))]
         [Invisible]
-        public int idContextable { get; set; }
+        public int? idContextable { get; set; }
 
         [Localize("Код обучения")]
         [Invisible]
         [AI]
-        public int idLearning { get; set; }
+        public int? idLearning { get; set; }
 
         [Localize("Коментарий")]
         [AI]

@@ -26,7 +26,7 @@ namespace Server.Controllers.Tables
             {
                 charList[i] = new()
                 {
-                    Id = row.Field<int>("idCharList"),
+                    Id = row.Field<int?>("idCharList"),
                     Name = row.Field<string>("Name"),
                     Value = row.Field<string>("Value"),
                     IdObject = row.Field<string>("invnumber")
@@ -50,7 +50,7 @@ namespace Server.Controllers.Tables
             {
                 charList[i] = new()
                 {
-                    Id = row.Field<int>("idCharList"),
+                    Id = row.Field<int?>("idCharList"),
                     Name = row.Field<string>("Name"),
                     Value = row.Field<string>("Value"),
                     IdObject = row.Field<string>("invnumber")

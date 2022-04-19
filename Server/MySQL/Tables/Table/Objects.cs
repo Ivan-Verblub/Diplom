@@ -7,7 +7,6 @@ namespace Server.MySQL.Tables.Table
     {
         [OrderAtribute(order:0)]
         [KeyAtribute(ai:false)]
-        [DataAtribute]
         [DBAtribute(hide:false,table:"objects",field:"invnumber")]
         public string? InvNumber { get; set; }
 
@@ -19,13 +18,13 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(order: 2)]
         [DataAtribute]
         [DBAtribute(hide: false, table: "objects", field: "cost")]
-        public float Cost { get; set; }
+        public float? Cost { get; set; }
 
         [OrderAtribute(3)]
         [DataAtribute]
         [FKeyAtribute(table: "sstatus", conection:CType.INNER)]
         [DBAtribute(hide: false, table: "objects", field: "idstatus")]
-        public int IdStatus { get; set; }
+        public int? IdStatus { get; set; }
 
         [OrderAtribute(order: 4)]
         [DBAtribute(hide: false, table: "sstatus", field: "status")]
@@ -35,7 +34,7 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [FKeyAtribute(table: "slocation", conection: CType.INNER)]
         [DBAtribute(hide: false, table: "objects", field: "idlocation")]
-        public int IdLocation { get; set; }
+        public int? IdLocation { get; set; }
 
         [OrderAtribute(order: 6)]
         [DBAtribute(hide: false, table: "slocation", field: "location")]
@@ -45,7 +44,7 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [FKeyAtribute(table: "scat", conection: CType.INNER)]
         [DBAtribute(hide: false, table: "objects", field: "idcat")]
-        public int IdCat { get; set; }
+        public int? IdCat { get; set; }
 
         [OrderAtribute(order: 8)]
         [DBAtribute(hide: false, table: "scat", field: "name")]
@@ -55,7 +54,7 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [FKeyAtribute(table: "request", conection: CType.INNER)]
         [DBAtribute(hide: false, table: "request", field: "idrequest")]
-        public int IdRequest { get; set; }
+        public int? IdRequest { get; set; }
 
         [OrderAtribute(order: 10)]
         [DBAtribute(hide: false, table: "request", field: "name")]

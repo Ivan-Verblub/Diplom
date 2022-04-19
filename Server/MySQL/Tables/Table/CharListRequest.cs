@@ -8,7 +8,7 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(0)]
         [KeyAtribute(true)]
         [DBAtribute(hide: false, table: "CharListRequest", field: "idCharList")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [OrderAtribute(1)]
         [DataAtribute]
@@ -24,7 +24,7 @@ namespace Server.MySQL.Tables.Table
         [DataAtribute]
         [FKeyAtribute(Conection = CType.INNER, Table = "requestinner")]
         [DBAtribute(hide: false, table: "CharListRequest", field: "idrequestinner")]
-        public int IdRequest { get; set; }
+        public int? IdRequest { get; set; }
 
         [OrderAtribute(4)]
         [DBAtribute(hide: false, table: "requestinner", field: "name")]

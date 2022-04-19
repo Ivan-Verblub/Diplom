@@ -10,21 +10,21 @@ namespace Gos.Server.Models.Filter
         [Localize("Код")]
         [Invisible]
         [Key(true)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Localize("Дата")]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         [Localize("Дата от")]
-        public DateTime DateBegin { get; set; }
+        public DateTime? DateBegin { get; set; }
         [Localize("Дата до")]
-        public DateTime DateEnd { get; set; }
+        public DateTime? DateEnd { get; set; }
 
         [Localize("Количество итераций")]
-        public int iter { get; set; }
+        public int? iter { get; set; }
 
         [Localize("Набор данных")]
         [Typeable(typeof(DataSet),typeof(DataSetFilter))]
-        public int IdDataSet { get; set; }
+        public int? IdDataSet { get; set; }
 
         [Localize("Коментарий")]
         public string Comment { get; set; }

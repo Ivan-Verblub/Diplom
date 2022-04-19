@@ -14,21 +14,21 @@ namespace Gos.Server.Models.Table
         [Localize("Код")]
         [Invisible]
         [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Localize("Дата создания")]
         [AI]
-        public DateTime date { get; set; }
+        public DateTime? date { get; set; }
 
         [Localize("Количество итераций")]
         [AI]
-        public int iter { get; set; }
+        public int? iter { get; set; }
 
         [Localize("Код набора данных")]
         [Typeable(typeof(DataSet),typeof(DataSetFilter))]
         [Invisible]
         [AI]
-        public int idDataSet { get; set; }
+        public int? idDataSet { get; set; }
 
         [Localize("Название набора")]
         [AI]
@@ -47,7 +47,7 @@ namespace Gos.Server.Models.Table
         [Typeable(typeof(SearchContext),typeof(SearchContextFilter))]
 
         [Invisible]
-        public int idSearch { get; set; }
+        public int? idSearch { get; set; }
 
         [Localize("Название контекста")]
         [AI]

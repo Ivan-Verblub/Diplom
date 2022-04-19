@@ -8,7 +8,7 @@ namespace Gos.Server.Models.Filter
         [Localize("Код")]
         [Invisible]
         [Key(true)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Localize("Путь")]
         public string Path { get; set; }
@@ -18,15 +18,15 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Тип")]
         [EnumList(typeof(PathType))]
-        public int Type { get; set; }
+        public int? Type { get; set; }
 
         [Localize("Класс")]
         [EnumList(typeof(PathClass))]
-        public int Class { get; set; }
+        public int? Class { get; set; }
 
         [Localize("Контекст")]
         [Typeable(typeof(Context),typeof(ContextFilter))]
-        public int IdContext { get; set; }
+        public int? IdContext { get; set; }
 
         [Localize("Домен")]
         public string Domen { get; set; }
