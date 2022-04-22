@@ -139,10 +139,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(18, 1100);
+            this.button3.Location = new System.Drawing.Point(979, 127);
             this.button3.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(949, 35);
+            this.button3.Size = new System.Drawing.Size(303, 35);
             this.button3.TabIndex = 34;
             this.button3.Text = "Сформировать документ";
             this.button3.UseVisualStyleBackColor = true;
@@ -150,10 +150,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(18, 1065);
+            this.button4.Location = new System.Drawing.Point(979, 92);
             this.button4.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(949, 35);
+            this.button4.Size = new System.Drawing.Size(303, 35);
             this.button4.TabIndex = 35;
             this.button4.Text = "Добавить в очередь";
             this.button4.UseVisualStyleBackColor = true;
@@ -162,7 +162,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 999);
+            this.label3.Location = new System.Drawing.Point(979, 27);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(169, 20);
@@ -172,7 +172,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(189, 1000);
+            this.label4.Location = new System.Drawing.Point(1150, 27);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(18, 20);
@@ -181,10 +181,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(18, 1136);
+            this.button5.Location = new System.Drawing.Point(979, 163);
             this.button5.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(949, 35);
+            this.button5.Size = new System.Drawing.Size(303, 35);
             this.button5.TabIndex = 38;
             this.button5.Text = "Подтвердить документ";
             this.button5.UseVisualStyleBackColor = true;
@@ -192,16 +192,16 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(18, 1040);
+            this.textBox3.Location = new System.Drawing.Point(979, 67);
             this.textBox3.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(947, 26);
+            this.textBox3.Size = new System.Drawing.Size(301, 26);
             this.textBox3.TabIndex = 40;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 1019);
+            this.label5.Location = new System.Drawing.Point(975, 46);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(100, 20);
@@ -212,7 +212,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(975, 1176);
+            this.ClientSize = new System.Drawing.Size(1298, 997);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button5);
