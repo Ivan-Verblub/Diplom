@@ -148,7 +148,7 @@ namespace Gos.Forms.Сustom
                 stream.Write(bytes, 0, bytes.Length);
                 stream.Close();
             }
-
+            request.Timeout = int.MaxValue;
             var jsons = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
             var chars = JsonSerializer.Deserialize<Chars[]>(jsons);
 

@@ -49,7 +49,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Контекст")]
         [Typeable(typeof(SearchContext),typeof(SearchContextFilter))]
-        public int IdSearch { get; set; }
+        public int? IdSearch { get; set; }
 
         [Localize("Название")]
         public string SearchName { get; set; }

@@ -20,13 +20,33 @@ namespace Server.Controllers.Tech
     [ApiController]
     public class TechController : ControllerBase
     {
+        private static Models.Char _chars = null;
+        private static bool isBusy = false;
         private const int count = 5;
         private StaticTables st = StaticTables.Instance;
         private ML.ML ml = ML.ML.Instance;
         private Names? names;
+
+        //public ActionResult<Models.Char[]> TrySelect(int id, SOptions[] ops)
+        //{
+        //    if (isBusy)
+        //    {
+        //        return StatusCode(StatusCodes.Status102Processing);
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //    return _chars;
+        //}
+
         [HttpPost("Select/{id}")]
-        public Models.Char[] Select(int id, SOptions[] ops)
+        public ActionResult<Models.Char[]> Select(int id, SOptions[] ops)
         {
+            if(isBusy)
+            { 
+                return StatusCode(StatusCodes.Status102Processing);
+            }
             var na = new Names();
             var contextableF = new ContextableFilter()
             {
