@@ -28,7 +28,12 @@ namespace Gos.Forms
                 if (prop.GetCustomAttributes(typeof(AI), true).Count() == 0)
                 {
                     var df = new DataField<T, F>(prop);
+                    df.Width = flowLayoutPanel1.Width-260;
                     flowLayoutPanel1.Controls.Add(df);
+                    flowLayoutPanel1.SizeChanged += (o, e) =>
+                    {
+                        df.Width = flowLayoutPanel1.Width-260;
+                    };
                 }
             }
             isChange = false;
@@ -117,7 +122,7 @@ namespace Gos.Forms
                     }
                 }
             }
-            using (var requester = new Requester<T, F>("https://localhost:5001"))
+            using (var requester = new Requester<T, F>(Param.Serv.host))
             {
                 string er = "";
                 if (isChange)
@@ -151,7 +156,7 @@ namespace Gos.Forms
         private void ChangingForm_Load(object sender, EventArgs e)
         {
             if (isChange)
-                using (var requester = new Requester<T, F>("https://localhost:5001"))
+                using (var requester = new Requester<T, F>(Param.Serv.host))
                 {
                     var table = requester.Select(filter);
                     foreach (var item in table.GetType().GetElementType().GetProperties())
@@ -193,6 +198,11 @@ namespace Gos.Forms
                         }
                     }
                 }
+        }
+
+        private void flowLayoutPanel1_SizeChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

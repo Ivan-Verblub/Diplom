@@ -51,17 +51,21 @@ namespace Gos.Forms.Сustom
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var tab = new TabPage();
+            var tab = new TabPage()
+            {
+                Text = textBox2.Text
+            };
             var flow = new FlowLayoutPanel()
             {
                 AutoScroll = true,
                 Dock = DockStyle.Fill,
-                AllowDrop = true,
-                Text = textBox2.Text
+                AllowDrop = true                
             };
             flow.Controls.Add(new Label()
             {
-                Text = textBox1.Text
+                Text = textBox1.Text,
+                AutoSize = false,
+                Width = flow.Width-10
             });
             flow.DragDrop += (o,ea) =>
             {
@@ -73,6 +77,8 @@ namespace Gos.Forms.Сustom
             };
             tab.Controls.Add(flow);
             tabControl1.TabPages.Add(tab);
+            textBox1.Text = "";
+            textBox2.Text = "";
         }
 
         private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
@@ -363,7 +369,15 @@ namespace Gos.Forms.Сustom
 
         private void button4_Click(object sender, EventArgs e)
         {
-            label4.Text = _finals.Count().ToString();
+            if(textBox3.Text == "")
+            {
+                MessageBox.Show("Заполните количество",
+                    "Внимание",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                textBox3.Focus();
+                return;
+            }
             var final = new Final();
             final.Name = _name;
             final.Count = int.Parse(textBox3.Text);
@@ -447,13 +461,14 @@ namespace Gos.Forms.Сustom
             }
             _finals.Add(final);
             Clear();
+            label4.Text = _finals.Count().ToString();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             var bytes = File.ReadAllBytes(@"C:\Users\limcm\Documents\my.docx");
             using (var requester = new Requester<Request,
-                RequestFilter>("https://localhost:5001"))
+                RequestFilter>(Param.Serv.host))
             {
                 var res = requester.Select();
                 int idReq = res == null ? 0 : res.Count();
@@ -466,7 +481,7 @@ namespace Gos.Forms.Сustom
                 };
                 requester.Insert(request);
                 using (var requester2 = new Requester<RequestInner,
-                    RequestInnerFilter>("https://localhost:5001"))
+                    RequestInnerFilter>(Param.Serv.host))
                 {
                     foreach (var final in _finals)
                     {
@@ -481,7 +496,7 @@ namespace Gos.Forms.Сustom
                             idRequest = idReq
                         });
                         using (var requester3 = new Requester<CharListRequest,
-                            CharListRequestFilter>("https://localhost:5001"))
+                            CharListRequestFilter>(Param.Serv.host))
                         {
                             foreach (var about in final.Abouts)
                             {

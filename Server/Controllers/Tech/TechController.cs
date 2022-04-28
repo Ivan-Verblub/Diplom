@@ -20,33 +20,47 @@ namespace Server.Controllers.Tech
     [ApiController]
     public class TechController : ControllerBase
     {
-        private static Models.Char _chars = null;
+        private static Models.Char[] _chars = null;
         private static bool isBusy = false;
         private const int count = 5;
         private StaticTables st = StaticTables.Instance;
         private ML.ML ml = ML.ML.Instance;
         private Names? names;
 
-        //public ActionResult<Models.Char[]> TrySelect(int id, SOptions[] ops)
-        //{
-        //    if (isBusy)
-        //    {
-        //        return StatusCode(StatusCodes.Status102Processing);
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //    return _chars;
-        //}
-
         [HttpPost("Select/{id}")]
-        public ActionResult<Models.Char[]> Select(int id, SOptions[] ops)
+        public ActionResult<Models.Char[]> TrySelect(int id, SOptions[] ops)
         {
-            if(isBusy)
-            { 
-                return StatusCode(StatusCodes.Status102Processing);
+            try
+            {
+                if (isBusy)
+                {
+                    return StatusCode(StatusCodes.Status502BadGateway);
+                }
+                else
+                {
+                    if (_chars != null)
+                    {
+                        var buff = _chars;
+                        _chars = null;
+                        return CreatedAtAction(null, buff);
+                    }
+                    else
+                    {
+                        Task.Run(() => { Select(id, ops);}) ;
+                        return StatusCode(StatusCodes.Status502BadGateway);
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        private void Select(int id, SOptions[] ops)
+        {
+            isBusy = true;
+            _chars = null;
             var na = new Names();
             var contextableF = new ContextableFilter()
             {
@@ -88,12 +102,43 @@ namespace Server.Controllers.Tech
                     }
                 }
             }
-            return chars;
+            isBusy = false;
+            _chars = chars;
+        }
+        [HttpPost("Select/Link/{id}/{context}")]
+        public ActionResult<Models.Char[]> TrySelectLink(int id, int context, string url)
+        {
+            try
+            {
+                if (isBusy)
+                {
+                    return StatusCode(StatusCodes.Status502BadGateway);
+                }
+                else
+                {
+                    if (_chars != null)
+                    {
+                        var buff = _chars;
+                        _chars = null;
+                        return CreatedAtAction(null, buff);
+                    }
+                    else
+                    {
+                        Task.Run(() => { SelectLink(id, context, url); });
+                        return StatusCode(StatusCodes.Status502BadGateway);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        [HttpPost("Select/Link/{id}/{context}")]
-        public Models.Char[] SelectLink(int id,int context,string url)
+        private void SelectLink(int id,int context,string url)
         {
+            isBusy = true;
+            _chars = null;
             var na = new Names();
             var contextableF = new ContextableFilter()
             {
@@ -127,11 +172,40 @@ namespace Server.Controllers.Tech
             this.names = na;
             Models.Char[] chars;
             chars = GetCharsLink(context,url);
-            return chars;
+            isBusy = false;
+            _chars = chars;
+        }
+        [HttpPost("Select/Name/{id}")]
+        public ActionResult<Models.Char[]> TrySelectByName(int id, string name)
+        {
+            try
+            {
+                if (isBusy)
+                {
+                    return StatusCode(StatusCodes.Status502BadGateway);
+                }
+                else
+                {
+                    if (_chars != null)
+                    {
+                        var buff = _chars;
+                        _chars = null;
+                        return CreatedAtAction(null, buff);
+                    }
+                    else
+                    {
+                        Task.Run(() => { SelectByName(id, name); });
+                        return StatusCode(StatusCodes.Status502BadGateway);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        [HttpPost("Select/Name/{id}")]
-        public Models.Char[] SelectByName(int id,string name)
+        private Models.Char[] SelectByName(int id,string name)
         {
             var na = new Names();
             var contextableF = new ContextableFilter()
@@ -279,11 +353,6 @@ namespace Server.Controllers.Tech
             return result.ToArray();
         }
 
-
-        //Дополни не контекстным поиском
-        //Поиск наименований, создать методы по ссылками и именнам, несколько нейронок
-        //Которые будут опредлять степень равности характеристик и похожести имен
-        //(Возможно второй месяц?)
         private Models.Char[] Search(SOptions[] op)
         {
             List<Models.Char> result = new List<Models.Char>();
@@ -413,12 +482,19 @@ namespace Server.Controllers.Tech
                     
                     foreach (var item in result)
                     {
-                        driver.Url = Link(item.Value,context);
-                        var buff = Compare(driver.FindElement(By.XPath("//body"))
-                            .GetAttribute("outerHTML"), op,
-                            table, row, columnTPath, columnVPath,item);
-                        if (buff!=null)
-                            newRes.Add(buff);
+                        if (op[0].Option == "-100")
+                        {
+                            newRes.Add(item);
+                        }
+                        else
+                        {
+                            driver.Url = Link(item.Value, context);
+                            var buff = Compare(driver.FindElement(By.XPath("//body"))
+                                .GetAttribute("outerHTML"), op,
+                                table, row, columnTPath, columnVPath, item);
+                            if (buff!=null)
+                                newRes.Add(buff);
+                        }
                     }
 
                 }

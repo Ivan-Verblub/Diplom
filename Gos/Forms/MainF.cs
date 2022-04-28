@@ -18,6 +18,8 @@ namespace Gos.Forms
         public MainF()
         {
             InitializeComponent();
+            var load = new Load();
+            load.ShowDialog();
             VMenu vMenu = new VMenu();
             vMenu.Dock = DockStyle.Fill;
             vMenu.TopLevel = false;

@@ -55,6 +55,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button25 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -351,11 +352,12 @@
             this.flowLayoutPanel1.Controls.Add(this.button24);
             this.flowLayoutPanel1.Controls.Add(this.button25);
             this.flowLayoutPanel1.Controls.Add(this.button26);
+            this.flowLayoutPanel1.Controls.Add(this.button27);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(236, 773);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(236, 797);
             this.flowLayoutPanel1.TabIndex = 24;
             this.flowLayoutPanel1.WrapContents = false;
             this.flowLayoutPanel1.Resize += new System.EventHandler(this.flowLayoutPanel1_Resize);
@@ -382,11 +384,22 @@
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
+            // button27
+            // 
+            this.button27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button27.Location = new System.Drawing.Point(3, 757);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(200, 23);
+            this.button27.TabIndex = 26;
+            this.button27.Text = "Работа с БД";
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
             // VMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(236, 773);
+            this.ClientSize = new System.Drawing.Size(236, 797);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "VMenu";
@@ -426,5 +439,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Button button27;
     }
 }

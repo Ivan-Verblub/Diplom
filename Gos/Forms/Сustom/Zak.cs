@@ -19,7 +19,7 @@ namespace Gos.Forms.Сustom
         {
             InitializeComponent();
             using (var requester = new Requester<Request,
-                RequestFilter>("https://localhost:5001"))
+                RequestFilter>(Param.Serv.host))
             {
                 comboBox1.ValueMember = "id";
                 comboBox1.DisplayMember = "name";
@@ -28,7 +28,7 @@ namespace Gos.Forms.Сustom
             }
 
             using (var requester = new Requester<SStatus,
-                SStatusFilter>("https://localhost:5001"))
+                SStatusFilter>(Param.Serv.host))
             {
                 comboBox2.DataSource = DataTableParser.
                     Parse(requester.Select());
@@ -37,7 +37,7 @@ namespace Gos.Forms.Сustom
             }
 
             using (var requester = new Requester<SLocation,
-                SLocationFilter>("https://localhost:5001"))
+                SLocationFilter>(Param.Serv.host))
             {
                 comboBox3.DataSource = DataTableParser.
                     Parse(requester.Select());
@@ -46,7 +46,7 @@ namespace Gos.Forms.Сustom
             }
 
             using (var requester = new Requester<Scat,
-                ScatFilter>("https://localhost:5001"))
+                ScatFilter>(Param.Serv.host))
             {
                 comboBox4.DataSource = DataTableParser.
                     Parse(requester.Select());
@@ -59,7 +59,7 @@ namespace Gos.Forms.Сustom
         {
             string inv = "";
             using (var requester = new Requester<Objects,
-                ObjectsFilter>("https://localhost:5001"))
+                ObjectsFilter>(Param.Serv.host))
             {
                 var obj = requester.Select();
                 inv = obj == null ? "0000000001" : obj.Max(x => x.invNumber);
@@ -76,7 +76,7 @@ namespace Gos.Forms.Сustom
                 inv += col.ToString();
 
                 using (var requester = new Requester<Objects,
-                    ObjectsFilter>("https://localhost:5001"))
+                    ObjectsFilter>(Param.Serv.host))
                 {
                     requester.Insert(new Objects()
                     {
@@ -90,21 +90,21 @@ namespace Gos.Forms.Сustom
                     });
                 }
                 using (var requester = new Requester<ObjectsHistory,
-                        ObjectsHistoryFilter>("https://localhost:5001"))
+                        ObjectsHistoryFilter>(Param.Serv.host))
                 {
                     requester.Insert(new ObjectsHistory()
                     {
                         invNumber = inv,
                         idStatus = (int)comboBox2.SelectedValue,
                         idLocation = (int)comboBox3.SelectedValue,
-                        date = DateTime.Now
+                        date = dateTimePicker1.Value
                     });
                 }
                 using (var requester = new Requester<CharListObjects,
-                   CharListObjectsFilter>("https://localhost:5001"))
+                   CharListObjectsFilter>(Param.Serv.host))
                 {
                     using (var requester2 = new Requester<CharListRequest,
-                        CharListRequestFilter>("https://localhost:5001"))
+                        CharListRequestFilter>(Param.Serv.host))
                     {
                         var list = requester2.Select(new CharListRequestFilter()
                         {
@@ -129,7 +129,7 @@ namespace Gos.Forms.Сustom
             try
             {
                 using (var requester = new Requester<RequestInner,
-                    RequestInnerFilter>("https://localhost:5001"))
+                    RequestInnerFilter>(Param.Serv.host))
                 {
                     comboBox5.ValueMember = "id";
                     comboBox5.DisplayMember = "name";
@@ -149,13 +149,20 @@ namespace Gos.Forms.Сustom
         private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
             using (var requester = new Requester<RequestInner,
-                RequestInnerFilter>("https://localhost:5001"))
+                RequestInnerFilter>(Param.Serv.host))
             {
                 textBox3.Text = requester.Select(new RequestInnerFilter()
                 {
                     Id = (int)comboBox5.SelectedValue
                 })[0].count.ToString();
-                
+                flowLayoutPanel1.Controls.Clear();
+                for(int i = 0;i<int.Parse(textBox3.Text);i++)
+                {
+                    flowLayoutPanel1.Controls.Add(new TextBox()
+                    {
+                        Width = flowLayoutPanel1.Width-10
+                    });
+                }
             }
         }
 

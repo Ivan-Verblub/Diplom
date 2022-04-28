@@ -65,6 +65,7 @@ namespace Server.MySQL
             Console.WriteLine(_command.CommandText);
             DataTable dt = new DataTable();
             _adapter.Fill(dt);
+            _command.Parameters.Clear();
             return dt;
         }
         public string Insert(T obj)
@@ -212,7 +213,11 @@ namespace Server.MySQL
                 _command.CommandText = builder.ToString();
                 Console.WriteLine(_command.CommandText);
                 if (_command.ExecuteNonQuery() == 0)
+                {
+                    _command.Parameters.Clear();
                     return "Запись не была изменена";
+                }
+                _command.Parameters.Clear();
                 return "";
             }
             catch (MySqlException ex)
@@ -367,6 +372,7 @@ namespace Server.MySQL
                 _command.CommandText = builder.ToString();
                 DataTable dt = new DataTable();
                 _adapter.Fill(dt);
+                _command.Parameters.Clear();
                 return dt;
             }
             catch

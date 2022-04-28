@@ -35,10 +35,5 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(5)]
         [DBAtribute(hide: false, table: "learninghistroy", field: "version")]
         public string? Version { get; set; }
-
-        [OrderAtribute(6)]
-        [DataAtribute]
-        [DBAtribute(hide: false, table: "actual", field: "type")]
-        public int? Types { get; set; }
     }
 }

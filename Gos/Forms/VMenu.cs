@@ -166,5 +166,11 @@ namespace Gos.Forms
             var ro = new History();
             ro.ShowDialog();
         }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            var ro = new Dump();
+            ro.ShowDialog();
+        }
     }
 }

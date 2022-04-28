@@ -35,9 +35,5 @@ namespace Server.MySQL.Tables.Filter
         [FilterAtribute(field: "version",
             table: "learninghistroy", filtType: FType.LIKE)]
         public string? VersionL { get; set; }
-
-        [FilterAtribute(field: "type",
-            table: "actual", filtType: FType.EQUAL)]
-        public int? Types { get; set; }
     }
 }

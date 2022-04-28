@@ -76,7 +76,7 @@ namespace Gos.Forms
                         }
                     }
                 }
-                using (var requester = new Requester<T, F>("https://localhost:5001"))
+                using (var requester = new Requester<T, F>(Param.Serv.host))
                 {
                     string er = "";
                     er = (string)requester.GetType()

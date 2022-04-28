@@ -24,7 +24,7 @@ namespace Gos.Forms.Сustom
         {
             InitializeComponent();
             using (var requster = new Requester<Server.Models.Table.DataSet,
-                DataSetFilter>("https://localhost:5001"))
+                DataSetFilter>(Param.Serv.host))
             {
                 comboBox1.DataSource = requster.Select();
                 comboBox1.ValueMember = "idDataSet";
@@ -32,7 +32,7 @@ namespace Gos.Forms.Сustom
             }
 
             using (var requster = new Requester<Context,
-                ContextFilter>("https://localhost:5001"))
+                ContextFilter>(Param.Serv.host))
             {
                 comboBox2.DataSource = requster.Select();
                 comboBox2.ValueMember = "id";

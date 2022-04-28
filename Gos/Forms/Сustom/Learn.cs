@@ -23,7 +23,7 @@ namespace Gos.Forms.Сustom
         public Learn()
         {
             InitializeComponent();
-            using (var requester = new Requester<DataSet, DataSetFilter>("https://localhost:5001"))
+            using (var requester = new Requester<DataSet, DataSetFilter>(Param.Serv.host))
             {
                 comboBox1.DataSource = DataTableParser.Parse(requester.Select());
                 comboBox1.ValueMember = "idDataSet";
@@ -40,7 +40,7 @@ namespace Gos.Forms.Сustom
         {
             if(comboBox1.SelectedIndex != -1)
             {
-                string url = $"https://localhost:5001/Tech/ML/" +
+                string url = $"{Param.Serv.host}/Tech/ML/" +
                     $"LoadData/{comboBox1.SelectedValue}/" +
                     $"{(trackBar1.Value/10f).ToString().Replace(',','.')}";
                 var requeset = WebRequest.Create(url);
@@ -89,7 +89,7 @@ namespace Gos.Forms.Сustom
         private void button2_Click(object sender, EventArgs e)
         {
             Task.Run(() => {
-                string url = $"https://localhost:5001/Tech/ML/Train";
+                string url = $"{Param.Serv.host}/Tech/ML/Train";
                 var requeset = WebRequest.Create(url);
                 requeset.Method = "GET";
                 Invoke((Action)(() => { progressBar1.Value = progressBar1.Maximum; }));
@@ -121,7 +121,7 @@ namespace Gos.Forms.Сustom
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string url = $"https://localhost:5001/Tech/ML/Predict";
+            string url = $"{Param.Serv.host}/Tech/ML/Predict";
             var request = WebRequest.Create(url);
             request.Method = "POST";
             var options = new JsonSerializerOptions
@@ -170,7 +170,7 @@ namespace Gos.Forms.Сustom
                 return;
             }
 
-            string url = $"https://localhost:5001/Tech/ML/Save/last.zip";
+            string url = $"{Param.Serv.host}/Tech/ML/Save/last.zip";
             var request = WebRequest.Create(url);
             request.Method = "POST";
             string bytes = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
@@ -179,16 +179,18 @@ namespace Gos.Forms.Сustom
                 date = DateTime.Now,
                 idDataSet = (int)comboBox1.SelectedValue,
                 version = textBox2.Text,
-                comment = textBox3.Text
+                comment = textBox3.Text,
+                iter = 1000
             };
             var learningF = new LearningHistoryFilter()
             {
                 Date = learning.date,
                 IdDataSet = learning.idDataSet,
                 Version = learning.version,
-                Comment = learning.comment
+                Comment = learning.comment,
+                
             };
-            using (var requster = new Requester<LearningHistory, LearningHistoryFilter>("https://localhost:5001"))
+            using (var requster = new Requester<LearningHistory, LearningHistoryFilter>(Param.Serv.host))
             {
                 string er = requster.Insert(learning);
                 try
@@ -196,19 +198,19 @@ namespace Gos.Forms.Сustom
                     var t = requster.Select(learningF);
                     var f = new Actual()
                     {
-                        idActual = t[0].id,
                         conf = bytes,
-                        name = textBox4.Text
+                        name = textBox4.Text,
+                        idLearningHistory = t[0].id
                     };
-                    using (var req = new Requester<Actual, ActualFilter>("https://localhost:5001"))
+                    using (var req = new Requester<Actual, ActualFilter>(Param.Serv.host))
                     {
                         var ers = req.Insert(f);
-                        if (er == "")
+                        if (ers == "")
                             Close();
                         else
                         {
                             MessageBox.Show(
-                                er,
+                                ers,
                                 "Внимаение",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);

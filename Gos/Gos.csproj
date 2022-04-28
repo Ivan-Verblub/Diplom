@@ -72,8 +72,8 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.7.0.0-preview.2.22152.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
-    <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Json, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -90,18 +90,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Components\Adapter.cs" />
-    <Compile Include="Forms\Components\Combo.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Forms\Dump.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Components\Combo.Designer.cs">
-      <DependentUpon>Combo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Components\Value.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Components\Value.Designer.cs">
-      <DependentUpon>Value.cs</DependentUpon>
+    <Compile Include="Forms\Dump.Designer.cs">
+      <DependentUpon>Dump.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Generic\Buttons.cs">
       <SubType>Form</SubType>
@@ -152,6 +145,12 @@
     <Compile Include="Forms\Generic\Filter\FilterSelector.Designer.cs">
       <DependentUpon>FilterSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Load.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Load.Designer.cs">
+      <DependentUpon>Load.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +181,12 @@
     <Compile Include="Forms\Сustom\CreateTech.Designer.cs">
       <DependentUpon>CreateTech.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Сustom\Element.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Сustom\Element.Designer.cs">
+      <DependentUpon>Element.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Сustom\History.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +210,12 @@
     </Compile>
     <Compile Include="Forms\Сustom\ResObj.Designer.cs">
       <DependentUpon>ResObj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Сustom\SetAdress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Сustom\SetAdress.Designer.cs">
+      <DependentUpon>SetAdress.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Сustom\Zak.cs">
       <SubType>Form</SubType>
@@ -255,6 +266,7 @@
     <Compile Include="Server\Models\Requesting\Metrics.cs" />
     <Compile Include="Server\Models\Requesting\Options.cs" />
     <Compile Include="Server\Models\Requesting\Result.cs" />
+    <Compile Include="Server\Models\Requesting\Server.cs" />
     <Compile Include="Server\Models\Table\Actual.cs" />
     <Compile Include="Server\Models\Table\CharListObjects.cs" />
     <Compile Include="Server\Models\Table\CharListRequest.cs" />
@@ -275,9 +287,10 @@
     <Compile Include="Server\Models\Table\SearchNames.cs" />
     <Compile Include="Server\Models\Table\SLocation.cs" />
     <Compile Include="Server\Models\Table\SStatus.cs" />
+    <Compile Include="Server\Param.cs" />
     <Compile Include="Server\Requester.cs" />
-    <EmbeddedResource Include="Forms\Components\Value.resx">
-      <DependentUpon>Value.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Dump.resx">
+      <DependentUpon>Dump.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Generic\Buttons.resx">
       <DependentUpon>Buttons.cs</DependentUpon>
@@ -303,6 +316,9 @@
     <EmbeddedResource Include="Forms\Generic\Filter\FilterSelector.resx">
       <DependentUpon>FilterSelector.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Load.resx">
+      <DependentUpon>Load.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainF.resx">
       <DependentUpon>MainF.cs</DependentUpon>
     </EmbeddedResource>
@@ -318,6 +334,9 @@
     <EmbeddedResource Include="Forms\Сustom\CreateTech.resx">
       <DependentUpon>CreateTech.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Сustom\Element.resx">
+      <DependentUpon>Element.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Сustom\History.resx">
       <DependentUpon>History.cs</DependentUpon>
     </EmbeddedResource>
@@ -329,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Сustom\ResObj.resx">
       <DependentUpon>ResObj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Сustom\SetAdress.resx">
+      <DependentUpon>SetAdress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Сustom\Zak.resx">
       <DependentUpon>Zak.cs</DependentUpon>

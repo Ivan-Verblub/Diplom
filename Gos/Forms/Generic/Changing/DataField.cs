@@ -93,10 +93,11 @@ namespace Gos.Forms.Changing
                 var t = able.TType;
                 var requester = typeof(Requester<,>).MakeGenericType(t, f).
                     GetConstructor(new Type[] { typeof(string) }).
-                    Invoke(new object[] { "https://localhost:5001" });
+                    Invoke(new object[] { Param.Serv.host });
                 var result = requester.GetType().
                     GetMethod("Select", Type.EmptyTypes).Invoke(requester, null);
                 _data = new ComboBox();
+                
                 ((ComboBox)Data).DataSource =
                     (DataTable)typeof(DataTableParser).GetMethod("Parse").
                     MakeGenericMethod(result.GetType().GetElementType())
@@ -118,6 +119,12 @@ namespace Gos.Forms.Changing
                     }
                 }
             }
+            _data.AutoSize = false;
+            Height = _data.Height+lab.Height+20;
+            flowLayoutPanel1.SizeChanged += (o, e) =>
+            {
+                _data.Width = (Width/2)-100;
+            };
             flowLayoutPanel1.Controls.Add(Data);
         }
     }

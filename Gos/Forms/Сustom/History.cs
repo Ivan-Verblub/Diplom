@@ -21,7 +21,7 @@ namespace Gos.Forms.Сustom
         {
             InitializeComponent();
             using (var requester = new Requester<Objects,
-                        ObjectsFilter>("https://localhost:5001"))
+                        ObjectsFilter>(Param.Serv.host))
             {
                 comboBox1.DataSource = 
                     DataTableParser.Parse(requester.Select());
@@ -79,7 +79,7 @@ namespace Gos.Forms.Сustom
                         OfficeOpenXml.Style.ExcelBorderStyle.Medium;
                     ws.Cells["B6"].Value = "Сформировано для:";
                     using (var requester = new Requester<Objects,
-                            ObjectsFilter>("https://localhost:5001"))
+                            ObjectsFilter>(Param.Serv.host))
                     {
                         var obj = requester.Select(new ObjectsFilter()
                         {
@@ -162,7 +162,7 @@ namespace Gos.Forms.Сustom
                         OfficeOpenXml.Style.ExcelBorderStyle.Thin;
                     List<ObjectsHistory> objects = new List<ObjectsHistory>();
                     using (var requester = new Requester<ObjectsHistory,
-                        ObjectsHistoryFilter>("https://localhost:5001"))
+                        ObjectsHistoryFilter>(Param.Serv.host))
                     {
                         var hists = requester.Select(new ObjectsHistoryFilter()
                         {

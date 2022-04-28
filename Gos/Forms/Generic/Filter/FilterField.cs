@@ -109,7 +109,7 @@ namespace Gos.Forms.Filter
                 var t = able.TType;
                 var requester = typeof(Requester<,>).MakeGenericType(t, f).
                     GetConstructor(new Type[] { typeof(string)}).
-                    Invoke(new object[] { "https://localhost:5001" });
+                    Invoke(new object[] { Param.Serv.host });
                 var result = requester.GetType().
                     GetMethod("Select", Type.EmptyTypes).Invoke(requester, null);
                 Data = new ComboBox();

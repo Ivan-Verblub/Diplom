@@ -77,14 +77,14 @@ namespace Gos.Forms
 
         private void UpdateTable(object sender, EventArgs e)
         {
-            using (var requester = new Requester<T, F>("https://localhost:5001"))
+            using (var requester = new Requester<T, F>(Param.Serv.host))
             {
                 dataGridView1.DataSource = DataTableParser.Parse(requester.Select());
             }
         }
         private void UpdateFilterTable(object sender, EventArgs e)
         {
-            using (var requester = new Requester<T, F>("https://localhost:5001"))
+            using (var requester = new Requester<T, F>(Param.Serv.host))
             {
                 dataGridView1.DataSource = DataTableParser.Parse(requester.Select((F)sender));
             }

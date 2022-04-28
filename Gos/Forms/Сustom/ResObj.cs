@@ -92,10 +92,10 @@ namespace Gos.Forms.Сustom
                 }
                 List<Objects> objects = new List<Objects>();
                 using (var requester = new Requester<Objects,
-                        ObjectsFilter>("https://localhost:5001"))
+                        ObjectsFilter>(Param.Serv.host))
                 {
                     using (var requester2 = new Requester<ObjectsHistory,
-                        ObjectsHistoryFilter>("https://localhost:5001"))
+                        ObjectsHistoryFilter>(Param.Serv.host))
                     {
                         var objs = requester.Select();
                         foreach (var obj in objs)
