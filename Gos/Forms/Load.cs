@@ -87,10 +87,11 @@ namespace Gos.Forms
                     }
                     catch
                     {
-                        var res = MessageBox.Show("Ошибка",
+                        var res = MessageBox.Show(
                             "Ошибка при подключении к серверу, если вы " +
                             "не уверены в параметрах, то можете их изменить. " +
                             "Существующие настройки будут удалены.",
+                            "Ошибка",
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Question);
                         if (res == DialogResult.Yes)

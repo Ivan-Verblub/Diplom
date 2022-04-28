@@ -195,7 +195,7 @@ namespace Gos.Forms.Сustom
                             MessageBoxIcon.Error);
                         return;
                     }
-                    Thread.Sleep(1000);
+                    Thread.Sleep(5000);
                 }
             }
             var dt = new DataTable();

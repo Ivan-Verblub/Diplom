@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Word = Microsoft.Office.Interop.Word;
 using Gos.Server.Models.Filter;
+using System.Threading;
 
 namespace Gos.Forms.Сustom
 {
@@ -108,237 +109,239 @@ namespace Gos.Forms.Сustom
 
         private void CreateDoc(List<Final> finals)
         {
-            var app = new Word.Application();
-            app.Visible = false;
-            object missing = Missing.Value;
-            var doc = app.Documents.Add(ref missing, ref missing,
-                ref missing, ref missing);
-
-            doc.PageSetup.Orientation =
-                Word.WdOrientation.wdOrientLandscape;
-            doc.PageSetup.LeftMargin =
-            doc.PageSetup.RightMargin =
-            doc.PageSetup.TopMargin =
-            doc.PageSetup.BottomMargin = 2*28.357f;
-            var par1 = doc.Paragraphs.Add();
-            var range = par1.Range;
-            range.Text = "РАЗДЕЛ 3.  ОПИСАНИЕ ОБЪЕКТА ЗАКУПКИ\n\n" +
-                "3.1. Требования к техническим, функциональным " +
-                "характеристикам и эксплуатационным характеристикам " +
-                "(потребительским свойствам) товара (работ, услуг), " +
-                "к размерам товара, используемым при выполнении " +
-                "работ (оказании услуг)\n\n";
-            range.Font.Name = "Times New Roman";
-            range.Font.Size = 12;
-            range.Font.Bold = 1;
-            range.Paragraphs.Alignment =
-                Word.WdParagraphAlignment.wdAlignParagraphCenter;
-            var par2 = doc.Paragraphs.Add();
-            var nextRange = par2.Range;
-            nextRange.Text += "Таблица №1\n\n";
-            nextRange.Font.Name = "Times New Roman";
-            nextRange.Font.Size = 11;
-            nextRange.Font.Italic = 1;
-            nextRange.Font.Bold = 0;
-            nextRange.Paragraphs.Alignment =
-                Word.WdParagraphAlignment.wdAlignParagraphRight;
-            nextRange.InsertParagraphAfter();
-            var par3 = doc.Paragraphs.Add();
-            var table = doc.Tables.Add(par3.Range, 4, 7);
-            table.Rows[1].Cells[1].Range.Text = "№\nп/п";
-            table.Rows[1].Cells[2].Range.Text = "Наименование товара" +
-                "(товарный знак(его словесное " +
-                "обозначение, страну происхождения)";
-            table.Rows[1].Cells[3].Range.Text = "-";
-            table.Rows[1].Cells[4].Range.Text = "Показатель " +
-                "(характеристика)товара";
-            table.Rows[1].Cells[5].Range.Text = "Значение показателя " +
-                "(характеристики) товара, или " +
-                "эквивалентности предлагаемого к " +
-                "поставке товара, позволяющего " +
-                "определить соответствие " +
-                "потребностям заказчика";
-            table.Rows[1].Cells[6].Range.Text = "Инструкция для " +
-                "участника закупки";
-            table.Rows[1].Cells[7].Range.Text = "Обоснование необходимости " +
-                "использования характеристик, показателей, " +
-                "требований, условных обозначений и " +
-                "терминологии при описании объекта закупки" +
-                " (в соответствии с п. 2 ч. 1 ст. 33 Закона)";
-
-
-            for (int i = 1; i<8; i++)
+            try
             {
-                table.Rows[2].Cells[i].Range.Text = i.ToString();
-            }
-            for (int j = 1; j<3; j++)
+                var app = new Word.Application();
+                app.Visible = false;
+                object missing = Missing.Value;
+                var doc = app.Documents.Add(ref missing, ref missing,
+                    ref missing, ref missing);
+                Thread.Sleep(5000);
+                doc.PageSetup.Orientation =
+                    Word.WdOrientation.wdOrientLandscape;
+                doc.PageSetup.LeftMargin =
+                doc.PageSetup.RightMargin =
+                doc.PageSetup.TopMargin =
+                doc.PageSetup.BottomMargin = 2*28.357f;
+                var par1 = doc.Paragraphs.Add();
+                var range = par1.Range;
+                range.Text = "РАЗДЕЛ 3.  ОПИСАНИЕ ОБЪЕКТА ЗАКУПКИ\n\n" +
+                    "3.1. Требования к техническим, функциональным " +
+                    "характеристикам и эксплуатационным характеристикам " +
+                    "(потребительским свойствам) товара (работ, услуг), " +
+                    "к размерам товара, используемым при выполнении " +
+                    "работ (оказании услуг)\n\n";
+                range.Font.Name = "Times New Roman";
+                range.Font.Size = 12;
+                range.Font.Bold = 1;
+                range.Paragraphs.Alignment =
+                    Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                var par2 = doc.Paragraphs.Add();
+                var nextRange = par2.Range;
+                nextRange.Text += "Таблица №1\n\n";
+                nextRange.Font.Name = "Times New Roman";
+                nextRange.Font.Size = 11;
+                nextRange.Font.Italic = 1;
+                nextRange.Font.Bold = 0;
+                nextRange.Paragraphs.Alignment =
+                    Word.WdParagraphAlignment.wdAlignParagraphRight;
+                nextRange.InsertParagraphAfter();
+                var par3 = doc.Paragraphs.Add();
+                var table = doc.Tables.Add(par3.Range, 4, 7);
+                table.Rows[1].Cells[1].Range.Text = "№\nп/п";
+                table.Rows[1].Cells[2].Range.Text = "Наименование товара" +
+                    "(товарный знак(его словесное " +
+                    "обозначение, страну происхождения)";
+                table.Rows[1].Cells[3].Range.Text = "-";
+                table.Rows[1].Cells[4].Range.Text = "Показатель " +
+                    "(характеристика)товара";
+                table.Rows[1].Cells[5].Range.Text = "Значение показателя " +
+                    "(характеристики) товара, или " +
+                    "эквивалентности предлагаемого к " +
+                    "поставке товара, позволяющего " +
+                    "определить соответствие " +
+                    "потребностям заказчика";
+                table.Rows[1].Cells[6].Range.Text = "Инструкция для " +
+                    "участника закупки";
+                table.Rows[1].Cells[7].Range.Text = "Обоснование необходимости " +
+                    "использования характеристик, показателей, " +
+                    "требований, условных обозначений и " +
+                    "терминологии при описании объекта закупки" +
+                    " (в соответствии с п. 2 ч. 1 ст. 33 Закона)";
+
+
                 for (int i = 1; i<8; i++)
                 {
-                    table.Rows[j].Cells[i].Range.Font.Name = "Times New Roman";
-                    table.Rows[j].Cells[i].Range.Font.Size = 8;
-                    table.Rows[j].Cells[i].Range.Paragraphs.Alignment =
-                        Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                    table.Rows[j].Cells[i].VerticalAlignment =
-                        Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                    table.Rows[2].Cells[i].Range.Text = i.ToString();
                 }
-            table.Rows[1].HeadingFormat = -1;
-            table.Rows[2].HeadingFormat = -1;
-            table.ApplyStyleHeadingRows = true;
-
-            int indexRow = 3;
-            bool firstA;
-            int index = 1;
-            foreach(var final in finals)
-            {
-                var firstF = true;
-                foreach (var about in final.Abouts)
-                {
-                    firstA = true;
-                    foreach (var result in about.Results)
+                for (int j = 1; j<3; j++)
+                    for (int i = 1; i<8; i++)
                     {
-                        if (firstF)
+                        table.Rows[j].Cells[i].Range.Font.Name = "Times New Roman";
+                        table.Rows[j].Cells[i].Range.Font.Size = 8;
+                        table.Rows[j].Cells[i].Range.Paragraphs.Alignment =
+                            Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                        table.Rows[j].Cells[i].VerticalAlignment =
+                            Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                    }
+                table.Rows[1].HeadingFormat = -1;
+                table.Rows[2].HeadingFormat = -1;
+                table.ApplyStyleHeadingRows = true;
+
+                int indexRow = 3;
+                bool firstA;
+                int index = 1;
+                foreach (var final in finals)
+                {
+                    var firstF = true;
+                    foreach (var about in final.Abouts)
+                    {
+                        firstA = true;
+                        foreach (var result in about.Results)
                         {
-                            table.Rows[indexRow].Cells[1].Range.Text = index.ToString();
-                            table.Rows[indexRow].Cells[1].Range.Font.Name = "Times New Roman";
-                            table.Rows[indexRow].Cells[1].Range.Font.Size = 10;
-                            table.Rows[indexRow].Cells[1].Range.Paragraphs.Alignment =
+                            if (firstF)
+                            {
+                                table.Rows[indexRow].Cells[1].Range.Text = index.ToString();
+                                table.Rows[indexRow].Cells[1].Range.Font.Name = "Times New Roman";
+                                table.Rows[indexRow].Cells[1].Range.Font.Size = 10;
+                                table.Rows[indexRow].Cells[1].Range.Paragraphs.Alignment =
+                                    Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                                table.Rows[indexRow].Cells[1].VerticalAlignment =
+                                    Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+
+                                table.Rows[indexRow].Cells[2].Range.Text = final.Name;
+                                table.Rows[indexRow].Cells[2].Range.Font.Name = "Times New Roman";
+                                table.Rows[indexRow].Cells[2].Range.Font.Size = 12;
+                                table.Rows[indexRow].Cells[2].Range.Paragraphs.Alignment =
+                                    Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                                table.Rows[indexRow].Cells[2].VerticalAlignment =
+                                    Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                                index++;
+                                firstF = false;
+                            }
+                            table.Rows[indexRow].Cells[4].Range.Text = result.Title;
+                            table.Rows[indexRow].Cells[4].Range.Font.Name = "Times New Roman";
+                            table.Rows[indexRow].Cells[4].Range.Font.Size = 12;
+                            table.Rows[indexRow].Cells[4].Range.Paragraphs.Alignment =
                                 Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                            table.Rows[indexRow].Cells[1].VerticalAlignment =
+                            table.Rows[indexRow].Cells[4].VerticalAlignment =
                                 Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
 
-                            table.Rows[indexRow].Cells[2].Range.Text = final.Name;
-                            table.Rows[indexRow].Cells[2].Range.Font.Name = "Times New Roman";
-                            table.Rows[indexRow].Cells[2].Range.Font.Size = 12;
-                            table.Rows[indexRow].Cells[2].Range.Paragraphs.Alignment =
+                            table.Rows[indexRow].Cells[5].Range.Text = result.Value;
+                            table.Rows[indexRow].Cells[5].Range.Font.Name = "Times New Roman";
+                            table.Rows[indexRow].Cells[5].Range.Font.Size = 11;
+                            table.Rows[indexRow].Cells[5].Range.Paragraphs.Alignment =
                                 Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                            table.Rows[indexRow].Cells[2].VerticalAlignment =
+                            table.Rows[indexRow].Cells[5].VerticalAlignment =
                                 Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-                            index++;
-                            firstF = false;
+
+                            table.Rows[indexRow].Cells[6].Range.Text = result.Instruction;
+                            table.Rows[indexRow].Cells[6].Range.Font.Name = "Times New Roman";
+                            table.Rows[indexRow].Cells[6].Range.Font.Size = 10;
+                            table.Rows[indexRow].Cells[6].Range.Paragraphs.Alignment =
+                                Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                            table.Rows[indexRow].Cells[6].VerticalAlignment =
+                                Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            table.Rows[indexRow].Cells[6].Range.Font.Italic = 1;
+                            if (firstA)
+                            {
+                                table.Rows[indexRow].Cells[7].Range.Text = about.Info;
+                                table.Rows[indexRow].Cells[7].Range.Font.Name = "Times New Roman";
+                                table.Rows[indexRow].Cells[7].Range.Font.Size = 12;
+                                table.Rows[indexRow].Cells[7].Range.Paragraphs.Alignment =
+                                    Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                                table.Rows[indexRow].Cells[7].VerticalAlignment =
+                                    Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                                firstA = false;
+                            }
+                            table.Rows.Add(table.Rows[indexRow+1]);
+                            indexRow++;
                         }
-                        table.Rows[indexRow].Cells[4].Range.Text = result.Title;
-                        table.Rows[indexRow].Cells[4].Range.Font.Name = "Times New Roman";
-                        table.Rows[indexRow].Cells[4].Range.Font.Size = 12;
-                        table.Rows[indexRow].Cells[4].Range.Paragraphs.Alignment =
-                            Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                        table.Rows[indexRow].Cells[4].VerticalAlignment =
-                            Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-
-                        table.Rows[indexRow].Cells[5].Range.Text = result.Value;
-                        table.Rows[indexRow].Cells[5].Range.Font.Name = "Times New Roman";
-                        table.Rows[indexRow].Cells[5].Range.Font.Size = 11;
-                        table.Rows[indexRow].Cells[5].Range.Paragraphs.Alignment =
-                            Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                        table.Rows[indexRow].Cells[5].VerticalAlignment =
-                            Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-
-                        table.Rows[indexRow].Cells[6].Range.Text = result.Instruction;
-                        table.Rows[indexRow].Cells[6].Range.Font.Name = "Times New Roman";
-                        table.Rows[indexRow].Cells[6].Range.Font.Size = 10;
-                        table.Rows[indexRow].Cells[6].Range.Paragraphs.Alignment =
-                            Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                        table.Rows[indexRow].Cells[6].VerticalAlignment =
-                            Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-                        table.Rows[indexRow].Cells[6].Range.Font.Italic = 1;
-                        if (firstA)
-                        {
-                            table.Rows[indexRow].Cells[7].Range.Text = about.Info;
-                            table.Rows[indexRow].Cells[7].Range.Font.Name = "Times New Roman";
-                            table.Rows[indexRow].Cells[7].Range.Font.Size = 12;
-                            table.Rows[indexRow].Cells[7].Range.Paragraphs.Alignment =
-                                Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                            table.Rows[indexRow].Cells[7].VerticalAlignment =
-                                Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-                            firstA = false;
-                        }
-                        table.Rows.Add(table.Rows[indexRow+1]);
-                        indexRow++;
                     }
                 }
-            }
-            #region line
-            table.Columns[1].Width = 1f*28.357f;
-            table.Columns[1].Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[1].Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[2].Width = 3.42f*28.357f;
-            table.Columns[2].Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[2].Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[3].Width = 0.75f*28.357f;
-            table.Columns[3].Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[3].Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[4].Width = 5.75f*28.357f;
-            table.Columns[4].Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[4].Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[5].Width = 5*28.357f;
-            table.Columns[5].Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[5].Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[6].Width = 6.25f*28.357f;
-            table.Columns[6].Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[6].Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[7].Width = 4.5f*28.357f;
-            table.Columns[7].Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Columns[7].Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Range.Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Range.Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Rows[1].Range.Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Rows[1].Range.Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Rows[2].Range.Borders.OutsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Rows[2].Range.Borders.InsideLineStyle =
-                Word.WdLineStyle.wdLineStyleSingle;
-            table.Rows[table.Rows.Count].Delete();
-            table.Rows[table.Rows.Count].Delete();
-            int indexRows = 3;
-            foreach(var final in finals)
-            {
-                int buff = 0;
-                foreach (var about in final.Abouts)
+                #region line
+                table.Columns[1].Width = 1f*28.357f;
+                table.Columns[1].Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[1].Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[2].Width = 3.42f*28.357f;
+                table.Columns[2].Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[2].Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[3].Width = 0.75f*28.357f;
+                table.Columns[3].Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[3].Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[4].Width = 5.75f*28.357f;
+                table.Columns[4].Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[4].Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[5].Width = 5*28.357f;
+                table.Columns[5].Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[5].Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[6].Width = 6.25f*28.357f;
+                table.Columns[6].Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[6].Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[7].Width = 4.5f*28.357f;
+                table.Columns[7].Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Columns[7].Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Range.Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Range.Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Rows[1].Range.Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Rows[1].Range.Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Rows[2].Range.Borders.OutsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Rows[2].Range.Borders.InsideLineStyle =
+                    Word.WdLineStyle.wdLineStyleSingle;
+                table.Rows[table.Rows.Count].Delete();
+                table.Rows[table.Rows.Count].Delete();
+                int indexRows = 3;
+                foreach (var final in finals)
                 {
-                    buff += about.Results.Count;
+                    int buff = 0;
+                    foreach (var about in final.Abouts)
+                    {
+                        buff += about.Results.Count;
+                    }
+                    table.Cell(indexRows, 1).Merge(
+                        table.Cell(indexRows+buff-1, 1));
+                    table.Cell(indexRows, 2).Merge(
+                        table.Cell(indexRows+buff-1, 2));
+                    table.Cell(indexRows, 3).Merge(
+                        table.Cell(indexRows+buff-1, 3));
+                    indexRows += buff;
                 }
-                table.Cell(indexRows, 1).Merge(
-                    table.Cell(indexRows+buff-1, 1));
-                table.Cell(indexRows, 2).Merge(
-                    table.Cell(indexRows+buff-1, 2));
-                table.Cell(indexRows, 3).Merge(
-                    table.Cell(indexRows+buff-1, 3));
-                indexRows += buff;
-            }
-            indexRows = 3;
-            foreach (var final in finals)
-            {
-                foreach (var about in final.Abouts)
+                indexRows = 3;
+                foreach (var final in finals)
                 {
-                    table.Cell(indexRows, 7).Merge(
-                        table.Cell(indexRows+about.Results.Count-1, 7));
-                    indexRows += about.Results.Count;
+                    foreach (var about in final.Abouts)
+                    {
+                        table.Cell(indexRows, 7).Merge(
+                            table.Cell(indexRows+about.Results.Count-1, 7));
+                        indexRows += about.Results.Count;
+                    }
                 }
-            }
-            doc.Words.Last.InsertBreak(Word.WdBreakType.wdSectionBreakNextPage);
-            var par4 = doc.Paragraphs.Add();
-            par4.Range.PageSetup.Orientation =
-                Word.WdOrientation.wdOrientPortrait;
-            par1.Range.Font.Name = "Times New Roman";
-            par1.Range.Font.Size = 11;
-            par1.Range.Text = @"3.2. Требования к качеству и безопасности товара, оказания услуг, выполнения работ
+                doc.Words.Last.InsertBreak(Word.WdBreakType.wdSectionBreakNextPage);
+                var par4 = doc.Paragraphs.Add();
+                par4.Range.PageSetup.Orientation =
+                    Word.WdOrientation.wdOrientPortrait;
+                par1.Range.Font.Name = "Times New Roman";
+                par1.Range.Font.Size = 11;
+                par1.Range.Text = @"3.2. Требования к качеству и безопасности товара, оказания услуг, выполнения работ
 3.2.1. Поставщик гарантирует заказчику, что товар, поставляемый в рамках Контракта, является новым (не был в употреблении, использовании, не прошел ремонт, в т.ч. восстановление, замену составных частей, восстановление потребительских свойств), свободным от любых притязаний третьих лиц, не находится под запретом (арестом), в залоге, или под иным обременением. В противном случае он обязан возместить Заказчику все убытки, причиненные изъятием товара. 
 Товар должен быть серийного производства, не ранее 2019 года выпуска. 
 3.2.2. Товар может происходить из Российской Федерации или любого другого государства, за исключением товара, в отношении которого Правительством Российской Федерации установлены запреты или ограничения.
@@ -357,14 +360,24 @@ namespace Gos.Forms.Сustom
 3.2.12. Поставка товара с механическими повреждениями не допускается. 
       3.2.13.  Поставщик должен осуществить замену некачественного товара на качественный, а также  несоответствующего спецификации,  в течение 3 (трех) рабочих дней с момента поступления претензии от Заказчика, переданной посредством факсимильного или электронного сообщения с последующим предоставлением почтовой или нарочной связью
 ";
-            #endregion
-            try
-            {
-                doc.SaveAs(@"C:\Users\limcm\Documents\my.docx", Word.WdSaveFormat.wdFormatDocumentDefault);
-                doc.Close();
-                Process.Start(@"C:\Users\limcm\Documents\my.docx");
+                #endregion
+                try
+                {
+                    doc.SaveAs(@"C:\Users\Untoshka\Documents\my.docx", Word.WdSaveFormat.wdFormatDocumentDefault);
+                    doc.Close();
+                    Process.Start(@"C:\Users\Untoshka\Documents\my.docx");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        ex.Message);
+                }
             }
-            catch { }
+            catch(Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -466,7 +479,7 @@ namespace Gos.Forms.Сustom
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var bytes = File.ReadAllBytes(@"C:\Users\limcm\Documents\my.docx");
+            var bytes = File.ReadAllBytes(@"C:\Users\Untoshka\Documents\my.docx");
             using (var requester = new Requester<Request,
                 RequestFilter>(Param.Serv.host))
             {
