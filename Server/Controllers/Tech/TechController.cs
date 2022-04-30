@@ -26,7 +26,8 @@ namespace Server.Controllers.Tech
         private StaticTables st = StaticTables.Instance;
         private ML.ML ml = ML.ML.Instance;
         private Names? names;
-
+        private List<Thread> _threads = new();
+        private string _un;
         [HttpPost("Select/{id}")]
         public ActionResult<Models.Char[]> TrySelect(int id, SOptions[] ops)
         {
@@ -105,8 +106,8 @@ namespace Server.Controllers.Tech
             isBusy = false;
             _chars = chars;
         }
-        [HttpPost("Select/Link/{id}/{context}")]
-        public ActionResult<Models.Char[]> TrySelectLink(int id, int context, string url)
+        [HttpPost("Select/Link/{id}/{context}/{un}")]
+        public ActionResult<Models.Char[]> TrySelectLink(int id, int context, string url,string un)
         {
             try
             {
@@ -124,7 +125,7 @@ namespace Server.Controllers.Tech
                     }
                     else
                     {
-                        Task.Run(() => { SelectLink(id, context, url); });
+                        Task.Run(() => { SelectLink(id, context, url,un); });
                         return StatusCode(StatusCodes.Status502BadGateway);
                     }
                 }
@@ -135,9 +136,10 @@ namespace Server.Controllers.Tech
             }
         }
 
-        private void SelectLink(int id,int context,string url)
+        private void SelectLink(int id,int context,string url,string un)
         {
             isBusy = true;
+            _un = un;
             _chars = null;
             var na = new Names();
             var contextableF = new ContextableFilter()
@@ -206,7 +208,7 @@ namespace Server.Controllers.Tech
                 {
                     Feature = result[i].Name +";"+result[i].Value
                 });
-                if (prediction.PredictedLabel == "Unuse")
+                if (prediction.PredictedLabel == _un)
                 {
                     result.Remove(result[i]);
                     i--;

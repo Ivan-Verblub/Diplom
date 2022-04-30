@@ -53,6 +53,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button7 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -288,10 +290,13 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(1186, 17);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(420, 701);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(420, 649);
             this.flowLayoutPanel1.TabIndex = 21;
+            this.flowLayoutPanel1.WrapContents = false;
             // 
             // button7
             // 
@@ -304,11 +309,30 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click_1);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(1186, 669);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 24);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Признак";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(1186, 696);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(420, 32);
+            this.comboBox3.TabIndex = 24;
+            // 
             // CreateTech
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1619, 792);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.button5);
@@ -366,5 +390,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameL;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comboBox3;
     }
 }

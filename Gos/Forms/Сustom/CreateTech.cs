@@ -103,6 +103,29 @@ namespace Gos.Forms.Сustom
                         comboBox2.ValueMember = "id";
                     }
                 }
+
+                using (var requster = new
+                    Requester<Contextable, ContextableFilter>(Param.Serv.host))
+                {
+                    using (var requster2 = new
+                        Requester<DatasTable, DatasFilter>(Param.Serv.host))
+                    {
+                        var data = requster2.Select(new DatasFilter()
+                        {
+                            IdDataSet = requster.Select(new ContextableFilter()
+                            {
+                                Id = (int)comboBox1.SelectedValue
+                            })[0].idDataSet
+                        });
+                        var nData = from d in data
+                        group d by d.label into d
+                        select new DatasTable() { label = d.Key, idData = 0};
+                        comboBox3.ValueMember = "idData";
+                        comboBox3.DisplayMember = "label";
+                        comboBox3.DataSource = DataTableParser.Parse(nData.ToArray());
+                    }
+                }    
+
                 flowLayoutPanel1.Controls.Clear();
                 var dt = (DataTable)comboBox2.DataSource;
                 foreach(DataRow rw in dt.Rows)
@@ -312,7 +335,7 @@ namespace Gos.Forms.Сustom
                     using (var requester = new Requester<Context, ContextFilter>(Param.Serv.host))
                     {
                         var data = requester.Select(filter);
-                        url += $"{data[0].id}?url={el.Link}";
+                        url += $"{data[0].id}/{comboBox3.Text}?url={el.Link}";
                     }
                     var request = WebRequest.Create(url);
                     request.Method = "POST";
