@@ -25,6 +25,10 @@ namespace Gos.Forms.Filter
 
                 var ff = new FilterField<T, F>(prop);
                 flowLayoutPanel1.Controls.Add(ff);
+                flowLayoutPanel1.SizeChanged += (o, e) =>
+                {
+                    ff.Width = flowLayoutPanel1.Width-50;
+                };
             }
             ec.EditFilterTable += Deselect;
         }

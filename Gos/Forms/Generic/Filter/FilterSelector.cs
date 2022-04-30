@@ -35,10 +35,14 @@ namespace Gos.Forms.Filter
                     {
                         Text = name,
                         Name = prop.Name,
-                        AutoSize = true
+                        AutoSize = false
                     };
 
                     flowLayoutPanel1.Controls.Add(cb);
+                    flowLayoutPanel1.SizeChanged += (o, e) =>
+                    {
+                        cb.Width = flowLayoutPanel1.Width-260;
+                    };
                 }
             }
         }

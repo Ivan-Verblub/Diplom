@@ -33,11 +33,14 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(329, 361);
             this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.WrapContents = false;
             // 
             // FieldSelector
             // 

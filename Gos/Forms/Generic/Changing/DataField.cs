@@ -123,7 +123,7 @@ namespace Gos.Forms.Changing
             Height = _data.Height+lab.Height+20;
             flowLayoutPanel1.SizeChanged += (o, e) =>
             {
-                _data.Width = (Width/2)-100;
+                _data.Width = Width-20;
             };
             flowLayoutPanel1.Controls.Add(Data);
         }

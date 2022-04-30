@@ -30,7 +30,7 @@ namespace Gos.Forms.Filter
                 name = local.Name;
             var lab = new Label()
             {
-                Text = name 
+                Text = name
             };
             flowLayoutPanel1.Controls.Add(lab);
 
@@ -48,6 +48,7 @@ namespace Gos.Forms.Filter
                     var rw = dt.NewRow();
                     rw["id"] = (int)ar;
                     rw["name"] = ar.ToString();
+                    dt.Rows.Add(rw);
                 }
                 ((ComboBox)Data).DataSource = dt;
                 ((ComboBox)Data).ValueMember = "id";
@@ -138,10 +139,21 @@ namespace Gos.Forms.Filter
                     ec.InvokeEditFilterTable();
                 };
             }
+            Data.AutoSize = false;
+            Height = Data.Height+lab.Height;
+            flowLayoutPanel1.SizeChanged += (o, e) =>
+            {
+                Data.Width = Width-10;
+            };
             flowLayoutPanel1.Controls.Add(Data);
         }
 
         private void FilterField_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

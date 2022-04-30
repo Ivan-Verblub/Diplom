@@ -18,7 +18,6 @@ namespace Gos.Server.Models.Table
 
         [Localize("Инвентарный номер")]
         [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
-        [Invisible]
         public string invNumber { get; set; }
 
         [Localize("Название")]

@@ -40,6 +40,10 @@ namespace Gos.Forms
                         ec.InvokeFieldTable(cm);
                     };
                     flowLayoutPanel1.Controls.Add(cm);
+                    flowLayoutPanel1.SizeChanged += (o, e) =>
+                    {
+                        cm.Width = flowLayoutPanel1.Width-260;
+                    };
                 }
             }
         }

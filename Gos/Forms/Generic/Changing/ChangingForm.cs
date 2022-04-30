@@ -28,11 +28,11 @@ namespace Gos.Forms
                 if (prop.GetCustomAttributes(typeof(AI), true).Count() == 0)
                 {
                     var df = new DataField<T, F>(prop);
-                    df.Width = flowLayoutPanel1.Width-260;
                     flowLayoutPanel1.Controls.Add(df);
+                    df.Width = flowLayoutPanel1.Width-20;
                     flowLayoutPanel1.SizeChanged += (o, e) =>
                     {
-                        df.Width = flowLayoutPanel1.Width-260;
+                        df.Width = flowLayoutPanel1.Width-20;
                     };
                 }
             }
@@ -48,6 +48,11 @@ namespace Gos.Forms
                 {
                     var df = new DataField<T, F>(prop);
                     flowLayoutPanel1.Controls.Add(df);
+                    df.Width = flowLayoutPanel1.Width-20;
+                    flowLayoutPanel1.SizeChanged += (o, e) =>
+                    {
+                        df.Width = flowLayoutPanel1.Width-20;
+                    };
                 }
             }
             this.filter = filter;
@@ -140,7 +145,14 @@ namespace Gos.Forms
                 }
                 if(er == "")
                 {
-                    ec.InvokeUpdateTable();
+                    if (ec.IsNullEFT)
+                    {
+                        ec.InvokeUpdateTable();
+                    }
+                    else
+                    {
+                        ec.InvokeEditFilterTable();
+                    }
                     Close();
                 }
                 else
@@ -182,11 +194,22 @@ namespace Gos.Forms
                                     }
                                     else if (((DataField<T, F>)field).Data.GetType() == typeof(ComboBox))
                                     {
-                                        ((ComboBox)((DataField<T, F>)field).Data).SelectedItem =
-                                            ((ComboBox)((DataField<T, F>)field).Data).Items.Cast<DataRowView>().ToList()
-                                            .FirstOrDefault(i => i.Row
-                                            == ((DataTable)((ComboBox)((DataField<T, F>)field).Data).DataSource)
-                                            .Select($"{item.Name} = {item.GetValue(table[0])}")[0]);
+                                        try
+                                        {
+                                            ((ComboBox)((DataField<T, F>)field).Data).SelectedItem =
+                                                ((ComboBox)((DataField<T, F>)field).Data).Items.Cast<DataRowView>().ToList()
+                                                .FirstOrDefault(i => i.Row
+                                                == ((DataTable)((ComboBox)((DataField<T, F>)field).Data).DataSource)
+                                                .Select($"{item.Name} = {item.GetValue(table[0])}")[0]);
+                                        }
+                                        catch
+                                        {
+                                            ((ComboBox)((DataField<T, F>)field).Data).SelectedItem =
+                                                ((ComboBox)((DataField<T, F>)field).Data).Items.Cast<DataRowView>().ToList()
+                                                .FirstOrDefault(i => i.Row
+                                                == ((DataTable)((ComboBox)((DataField<T, F>)field).Data).DataSource)
+                                                .Select($"id = {item.GetValue(table[0])}")[0]);
+                                        }
                                     }
                                     else if (((DataField<T, F>)field).Data.GetType() == typeof(DateTimePicker))
                                     {

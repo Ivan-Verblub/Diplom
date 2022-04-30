@@ -45,6 +45,8 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.untiled = new System.Windows.Forms.SaveFileDialog();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label8
@@ -139,7 +141,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(979, 127);
+            this.button3.Location = new System.Drawing.Point(983, 189);
             this.button3.Margin = new System.Windows.Forms.Padding(5);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(303, 35);
@@ -181,7 +183,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(979, 163);
+            this.button5.Location = new System.Drawing.Point(983, 225);
             this.button5.Margin = new System.Windows.Forms.Padding(5);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(303, 35);
@@ -208,11 +210,31 @@
             this.label5.TabIndex = 39;
             this.label5.Text = "Количество";
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(979, 153);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(5);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(301, 26);
+            this.textBox4.TabIndex = 42;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(975, 132);
+            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(169, 20);
+            this.label6.TabIndex = 41;
+            this.label6.Text = "Название документа";
+            // 
             // CharsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1298, 997);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button5);
@@ -256,5 +278,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.SaveFileDialog untiled;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label6;
     }
 }

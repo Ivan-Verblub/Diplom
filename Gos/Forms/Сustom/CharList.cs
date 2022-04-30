@@ -12,6 +12,8 @@ namespace Gos.Forms.Сustom
 {
     public partial class CharList : UserControl
     {
+        private int _width = 0;
+        private int _height = 0;
         public string Title
         {
             get
@@ -93,7 +95,15 @@ namespace Gos.Forms.Сustom
 
         private void flowLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
         {
+            _width = Width;
+            _height = Height;
             DoDragDrop(this, DragDropEffects.Copy);
+        }
+
+        public void Resize()
+        {
+            Width = _width;
+            Height = _height;
         }
     }
 }

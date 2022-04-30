@@ -29,11 +29,25 @@ namespace Gos.Forms
             if(UpdateTable != null)
                 UpdateTable.Invoke(this, EventArgs.Empty);
         }
+        public bool IsNullUT
+        {
+            get
+            {
+                return (UpdateTable == null);
+            }
+        }
         public event EventHandler<EventArgs> UpdateFilterTable;
         public void InvokeUpdateFilterTable(object filter)
         {
             if(UpdateFilterTable != null)
                 UpdateFilterTable.Invoke(filter, EventArgs.Empty);
+        }
+        public bool IsNullUFT
+        {
+            get
+            {
+                return (UpdateFilterTable == null);
+            }
         }
         public event EventHandler<EventArgs> EditFilterTable;
         public void InvokeEditFilterTable()
@@ -41,12 +55,25 @@ namespace Gos.Forms
             if(EditFilterTable != null)
                 EditFilterTable.Invoke(this, EventArgs.Empty);
         }
-
+        public bool IsNullEFT
+        {
+            get
+            {
+                return (EditFilterTable == null);
+            }
+        }
         public event EventHandler<EventArgs> FieldTable;
         public void InvokeFieldTable(object field)
         {
             if(FieldTable != null)
                 FieldTable.Invoke(field, EventArgs.Empty);
+        }
+        public bool IsNullFT
+        {
+            get
+            {
+                return (FieldTable == null);
+            }
         }
     }
 }

@@ -62,19 +62,33 @@ namespace Gos.Forms.Сustom
                 Dock = DockStyle.Fill,
                 AllowDrop = true                
             };
-            flow.Controls.Add(new Label()
+            var lab = new Label()
             {
                 Text = textBox1.Text,
                 AutoSize = false,
-                Width = flow.Width-10
-            });
+                Width = flow.Width-10,
+            };
+            flow.Resize += (o, ea) =>
+            {
+                lab.Width = flow.Width-10;
+            };
+            flow.Controls.Add(lab);
             flow.DragDrop += (o,ea) =>
             {
                 flow.Controls.Add((CharList)ea.Data.GetData(ea.Data.GetFormats()[0]));
+                try
+                {
+                    ((CharList)ea.Data.GetData(typeof(CharList))).Resize();
+                }
+                catch
+                {
+
+                }
             };
             flow.DragEnter += (o, ea) =>
             {
                 ea.Effect = DragDropEffects.Copy;
+                
             };
             tab.Controls.Add(flow);
             tabControl1.TabPages.Add(tab);
@@ -85,6 +99,14 @@ namespace Gos.Forms.Сustom
         private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
         {
             flowLayoutPanel1.Controls.Add((CharList)e.Data.GetData(e.Data.GetFormats()[0]));
+            try
+            {
+                ((CharList)e.Data.GetData(typeof(CharList))).Resize();
+            }
+            catch
+            {
+
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -95,7 +117,10 @@ namespace Gos.Forms.Сustom
         private void button3_Click(object sender, EventArgs e)
         {
             Clear();
-            CreateDoc(_finals);
+            if (untiled.ShowDialog() == DialogResult.OK)
+            {
+                CreateDoc(_finals);
+            }
         }
         private void Clear()
         {
@@ -363,9 +388,9 @@ namespace Gos.Forms.Сustom
                 #endregion
                 try
                 {
-                    doc.SaveAs(@"C:\Users\Untoshka\Documents\my.docx", Word.WdSaveFormat.wdFormatDocumentDefault);
+                    doc.SaveAs(untiled.FileName+".docx", Word.WdSaveFormat.wdFormatDocumentDefault);
                     doc.Close();
-                    Process.Start(@"C:\Users\Untoshka\Documents\my.docx");
+                    Process.Start(untiled.FileName+".docx");
                 }
                 catch (Exception ex)
                 {
@@ -421,12 +446,12 @@ namespace Gos.Forms.Сustom
                                     "установил заказчик.";
                                 break;
                             case 1:
-                                value = '\uf03e'+((CharList)item).Value;
+                                value = '\u003e'+((CharList)item).Value;
                                 instruction = "Участник закупки указывает " +
                                     "конкретное (единственное) значение " +
                                     "показателя, которое должно быть " +
                                     "равно или  больше установленного " +
-                                    $"заказчиком значения. Знак «{'\uf03e'}»  " +
+                                    $"заказчиком значения. Знак «{'\u003e'}»  " +
                                     "не должен использоваться участником.";
                                 break;
                             case 2:
@@ -439,26 +464,26 @@ namespace Gos.Forms.Сustom
                                     "не должен использоваться участником.";
                                 break;
                             case 3:
-                                value = '\uf03c'+((CharList)item).Value;
+                                value = '\u003c'+((CharList)item).Value;
                                 instruction = "Участник закупки указывает " +
                                     "конкретное (единственное) значение " +
                                     "показателя, которое должно быть " +
                                     "равно или  больше установленного " +
-                                    $"заказчиком значения. Знак «{'\uf03c'}»  " +
+                                    $"заказчиком значения. Знак «{'\u003c'}»  " +
                                     "не должен использоваться участником.";
                                 break;
                             case 4:
-                                value = '\uf0a3'+((CharList)item).Value;
+                                value = '\u2264'+((CharList)item).Value;
                                 instruction = "Участник закупки указывает " +
                                     "конкретное (единственное) значение " +
                                     "показателя, которое должно быть " +
                                     "равно или  больше установленного " +
-                                    $"заказчиком значения. Знак «{'\uf0a3'}»  " +
+                                    $"заказчиком значения. Знак «{'\u2264'}»  " +
                                     "не должен использоваться участником.";
                                 break;
                             case 5:
-                                value = '\uf03e'+" "+((CharList)item).Start
-                                    +" "+'\uf03c'+" "+((CharList)item).End;
+                                value = '\u003e'+" "+((CharList)item).Start
+                                    +" "+'\u003c'+" "+((CharList)item).End;
                                 instruction = "Участник закупки указывает" +
                                     " конкретное (единственное) значение" +
                                     " показателя из заданного диапазона";
@@ -479,57 +504,69 @@ namespace Gos.Forms.Сustom
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var bytes = File.ReadAllBytes(@"C:\Users\Untoshka\Documents\my.docx");
-            using (var requester = new Requester<Request,
-                RequestFilter>(Param.Serv.host))
+            if (File.Exists(untiled.FileName+".docx"))
             {
-                var res = requester.Select();
-                int idReq = res == null ? 0 : res.Count();
-                var request = new Request()
+                var bytes = File.ReadAllBytes(untiled.FileName+".docx");
+                using (var requester = new Requester<Request,
+                    RequestFilter>(Param.Serv.host))
                 {
-                    id = idReq,
-                    name = "my.docx",
-                    file = Convert.ToBase64String(bytes),
-                    idLearning = _id
-                };
-                requester.Insert(request);
-                using (var requester2 = new Requester<RequestInner,
-                    RequestInnerFilter>(Param.Serv.host))
-                {
-                    foreach (var final in _finals)
+                    var res = requester.Select();
+                    int idReq = res == null ? 0 : res.Count();
+                    var request = new Request()
                     {
-                        var res2 = requester2.Select();
-                        int idReqInner = res2 == null ? 0 : res.Count();
-                        requester2.Insert(new RequestInner()
+                        id = idReq,
+                        name = textBox4.Text,
+                        file = Convert.ToBase64String(bytes),
+                        idLearning = _id
+                    };
+                    requester.Insert(request);
+                    using (var requester2 = new Requester<RequestInner,
+                        RequestInnerFilter>(Param.Serv.host))
+                    {
+                        foreach (var final in _finals)
                         {
-                            id = idReqInner,
-                            name = final.Name,
-                            count = final.Count,
-                            cost = final.Cost,
-                            idRequest = idReq
-                        });
-                        using (var requester3 = new Requester<CharListRequest,
-                            CharListRequestFilter>(Param.Serv.host))
-                        {
-                            foreach (var about in final.Abouts)
+                            var res2 = requester2.Select();
+                            int idReqInner = res2 == null ? 0 : res.Count();
+                            requester2.Insert(new RequestInner()
                             {
-                                foreach (var result in about.Results)
+                                id = idReqInner,
+                                name = final.Name,
+                                count = final.Count,
+                                cost = final.Cost,
+                                idRequest = idReq,
+                                idCat = 7
+                            });
+                            using (var requester3 = new Requester<CharListRequest,
+                                CharListRequestFilter>(Param.Serv.host))
+                            {
+                                foreach (var about in final.Abouts)
                                 {
-                                    requester3.Insert(new CharListRequest()
+                                    foreach (var result in about.Results)
                                     {
-                                         idRequest = idReqInner,
-                                         name = result.Title,
-                                         value = result.Value
-                                    });
+                                        requester3.Insert(new CharListRequest()
+                                        {
+                                            idRequest = idReqInner,
+                                            name = result.Title,
+                                            value = result.Value
+                                        });
+                                    }
                                 }
                             }
                         }
+
                     }
-                    
+
                 }
-                
+                Dispose();
             }
-            Dispose();
+            else
+            {
+                MessageBox.Show(
+                    "Файл пропал",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

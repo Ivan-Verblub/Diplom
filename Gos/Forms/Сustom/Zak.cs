@@ -57,30 +57,26 @@ namespace Gos.Forms.Сustom
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string inv = "";
-            using (var requester = new Requester<Objects,
-                ObjectsFilter>(Param.Serv.host))
+            for(int j = 0; j<int.Parse(textBox3.Text); j++)
             {
-                var obj = requester.Select();
-                inv = obj == null ? "0000000001" : obj.Max(x => x.invNumber);
+                if(String.IsNullOrWhiteSpace(flowLayoutPanel1.Controls[j].Text))
+                {
+                    MessageBox.Show(
+                        "Заполните инвентарные номера",
+                        "Внимание",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
             }
-
             for (int j = 0; j<int.Parse(textBox3.Text); j++)
             {
-                int col = int.Parse(inv)+1;
-                inv = "";
-                for (int i = 0; i<(10-col.ToString().Length); i++)
-                {
-                    inv += "0";
-                }
-                inv += col.ToString();
-
                 using (var requester = new Requester<Objects,
                     ObjectsFilter>(Param.Serv.host))
                 {
                     requester.Insert(new Objects()
                     {
-                        invNumber = inv,
+                        invNumber = flowLayoutPanel1.Controls[j].Text,
                         name = textBox1.Text,
                         cost = int.Parse(textBox2.Text),
                         idStatus = (int)comboBox2.SelectedValue,
@@ -94,7 +90,7 @@ namespace Gos.Forms.Сustom
                 {
                     requester.Insert(new ObjectsHistory()
                     {
-                        invNumber = inv,
+                        invNumber = flowLayoutPanel1.Controls[j].Text,
                         idStatus = (int)comboBox2.SelectedValue,
                         idLocation = (int)comboBox3.SelectedValue,
                         date = dateTimePicker1.Value
@@ -116,7 +112,7 @@ namespace Gos.Forms.Сustom
                             {
                                 name = item.name,
                                 value = item.value,
-                                idObject = inv
+                                idObject = flowLayoutPanel1.Controls[j].Text
                             });
                         }
                     }
@@ -167,6 +163,30 @@ namespace Gos.Forms.Сustom
         }
 
         private void Zak_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                flowLayoutPanel1.Controls.Clear();
+                for (int i = 0; i<int.Parse(textBox3.Text); i++)
+                {
+                    flowLayoutPanel1.Controls.Add(new TextBox()
+                    {
+                        Width = flowLayoutPanel1.Width-10
+                    });
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }

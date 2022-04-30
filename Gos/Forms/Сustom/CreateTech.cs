@@ -23,6 +23,11 @@ namespace Gos.Forms.Сustom
 {
     public partial class CreateTech : Form
     {
+        private class CustomData
+        {
+            public int? Id { get; set; }
+            public string Name { get; set; }
+        }
         private CharsList list = null;
         public CreateTech()
         {
@@ -42,12 +47,21 @@ namespace Gos.Forms.Сustom
 
         private void CreateTech_Load(object sender, EventArgs e)
         {
-            using (var requster = new 
-                Requester<Contextable,ContextableFilter>(Param.Serv.host))
+            using (var requster = new
+                Requester<Contextable, ContextableFilter>(Param.Serv.host))
             {
-                comboBox1.DisplayMember = "version";
-                comboBox1.ValueMember = "id";
-                comboBox1.DataSource = DataTableParser.Parse(requster.Select());
+                comboBox1.DisplayMember = "Name";
+                comboBox1.ValueMember = "Id";
+                using (var requster2 = new
+                Requester<Actual, ActualFilter>(Param.Serv.host))
+                {
+                    var con = requster.Select();
+                    var act = requster2.Select();
+                    var data = from c in con
+                    join a in act on c.id equals a.idLearningHistory
+                    select new CustomData() { Id = c.id, Name = a.name };
+                    comboBox1.DataSource = DataTableParser.Parse(data.ToArray());
+                }
             }
         }
 
