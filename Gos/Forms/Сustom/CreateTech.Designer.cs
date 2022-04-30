@@ -51,9 +51,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -238,7 +235,7 @@
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(570, 530);
+            this.dataGridView2.Size = new System.Drawing.Size(570, 654);
             this.dataGridView2.TabIndex = 14;
             // 
             // valueL
@@ -258,7 +255,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(603, 558);
+            this.button3.Location = new System.Drawing.Point(603, 683);
             this.button3.Margin = new System.Windows.Forms.Padding(6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(574, 42);
@@ -269,7 +266,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(603, 611);
+            this.button4.Location = new System.Drawing.Point(603, 736);
             this.button4.Margin = new System.Windows.Forms.Padding(6);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(574, 42);
@@ -288,35 +285,6 @@
             this.button5.Text = "Удалить требование";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(603, 689);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(6);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(570, 29);
-            this.textBox3.TabIndex = 19;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(601, 657);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 24);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Название";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(603, 737);
-            this.button6.Margin = new System.Windows.Forms.Padding(6);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(574, 42);
-            this.button6.TabIndex = 20;
-            this.button6.Text = "Сформировать по названию";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -343,9 +311,6 @@
             this.ClientSize = new System.Drawing.Size(1619, 792);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -399,9 +364,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn elementId;
         private System.Windows.Forms.DataGridViewTextBoxColumn valueL;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameL;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button7;
     }
