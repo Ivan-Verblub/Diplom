@@ -50,7 +50,6 @@ namespace Server.Controllers.Tech
                         html = html.Replace(row.Field<string>("value"), "");
                         break;
                 }
-
             }
 
             HtmlDocument doc = new HtmlDocument();
