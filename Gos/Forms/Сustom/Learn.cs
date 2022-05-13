@@ -174,10 +174,19 @@ namespace Gos.Forms.Сustom
             var request = WebRequest.Create(url);
             request.Method = "POST";
             string bytes = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
+            object buff;
+            try
+            {
+                buff = int.Parse((string)comboBox1.SelectedValue);
+            }
+            catch
+            {
+                buff = comboBox1.SelectedValue;
+            }
             var learning = new LearningHistory()
             {
                 date = DateTime.Now,
-                idDataSet = (int)comboBox1.SelectedValue,
+                idDataSet = (int)buff,
                 version = textBox2.Text,
                 comment = textBox3.Text,
                 iter = 1000

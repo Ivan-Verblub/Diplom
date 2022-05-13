@@ -1,4 +1,5 @@
-﻿using Gos.Server;
+﻿using Gos.Forms.Generic;
+using Gos.Server;
 using Gos.Server.Atribute;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,14 @@ namespace Gos.Forms
                 {
                     if (((Key)key[0]).IsKey)
                     {
-                        prop.SetValue(filter, df.SelectId());
+                        try
+                        {
+                            prop.SetValue(filter, int.Parse((string)df.SelectId()));
+                        }
+                        catch
+                        {
+                            prop.SetValue(filter, df.SelectId());
+                        }
                     }
                 }
             }
@@ -72,7 +80,14 @@ namespace Gos.Forms
                     {
                         if (((Key)key[0]).IsKey)
                         {
-                            prop.SetValue(table, df.SelectId());
+                            try
+                            {
+                                prop.SetValue(table, int.Parse((string)df.SelectId()));
+                            }
+                            catch
+                            {
+                                prop.SetValue(table, df.SelectId());
+                            }
                         }
                     }
                 }
@@ -95,6 +110,13 @@ namespace Gos.Forms
                     }
                 }
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var i = new InfoDictionary();
+            var info = new Info(i.InfoForm[typeof(T).Name]);
+            info.ShowDialog();
         }
     }
 }

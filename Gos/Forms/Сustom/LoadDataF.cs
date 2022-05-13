@@ -94,7 +94,7 @@ namespace Gos.Forms.Сustom
             if (checkBox1.Checked)
                 dl.IdContext = (int)comboBox2.SelectedValue;
 
-            var request = WebRequest.Create("https://localhost:5001/Tech/DataLoad/SetData");
+            var request = WebRequest.Create(Param.Serv.host+"/Tech/DataLoad/SetData");
             request.Method = "POST";
             var options = new JsonSerializerOptions
             {
@@ -109,6 +109,21 @@ namespace Gos.Forms.Сustom
             {
                 stream.Write(bytes, 0, bytes.Length);
                 stream.Close();
+            }
+            try
+            {
+                request.GetResponse();
+                Close();
+            }
+            catch
+            {
+                MessageBox.Show(
+                    "Нечеткие пути, нельзя найти " +
+                    "строки в предпологаемой таблице или " +
+                    "столбцы в строке.",
+                    "Внимание",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
 

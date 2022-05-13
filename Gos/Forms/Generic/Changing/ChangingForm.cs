@@ -22,6 +22,7 @@ namespace Gos.Forms
         public ChangingForm()
         {    
             InitializeComponent();
+            Text = "Добавление";
             var props = typeof(T).GetProperties();
             foreach(var prop in props)
             {
@@ -41,6 +42,7 @@ namespace Gos.Forms
         public ChangingForm(F filter)
         {
             InitializeComponent();
+            Text = "Изменение";
             var props = typeof(T).GetProperties();
             foreach (var prop in props)
             {
@@ -91,7 +93,11 @@ namespace Gos.Forms
                         {
                             if(String.IsNullOrWhiteSpace(((TextBox)df).Text))
                             {
-                                MessageBox.Show("");
+                                MessageBox.Show(
+                                    "Заполните все поля",
+                                    "Внимание",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
                                 df.Focus();
                                 return ;
                             }
@@ -107,7 +113,11 @@ namespace Gos.Forms
                         {
                             if(((DateTimePicker)df).Checked)
                             {
-                                MessageBox.Show("");
+                                MessageBox.Show(
+                                    "Заполните все поля",
+                                    "Внимание",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
                                 df.Focus();
                                 return;
                             }
@@ -117,11 +127,22 @@ namespace Gos.Forms
                         {
                             if(((ComboBox)df).SelectedIndex == -1)
                             {
-                                MessageBox.Show("");
+                                MessageBox.Show(
+                                    "Заполните все поля",
+                                    "Внимание",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
                                 df.Focus();
                                 return;
                             }
-                            table.GetType().GetProperty(field.Name).SetValue(table, ((ComboBox)df).SelectedValue);
+                            try
+                            {
+                                table.GetType().GetProperty(field.Name).SetValue(table, int.Parse((string)((ComboBox)df).SelectedValue));
+                            }
+                            catch
+                            {
+                                table.GetType().GetProperty(field.Name).SetValue(table, ((ComboBox)df).SelectedValue);
+                            }
                         }
                         
                     }

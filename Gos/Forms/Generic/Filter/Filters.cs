@@ -84,7 +84,14 @@ namespace Gos.Forms.Filter
                         }
                         else if (data.GetType() == typeof(ComboBox))
                         {
-                            prop.SetValue(filter, ((ComboBox)data).SelectedValue);
+                            try
+                            {
+                                prop.SetValue(filter, int.Parse((string)((ComboBox)data).SelectedValue));
+                            }
+                            catch
+                            {
+                                prop.SetValue(filter, ((ComboBox)data).SelectedValue);
+                            }
                         }
                             
                     }

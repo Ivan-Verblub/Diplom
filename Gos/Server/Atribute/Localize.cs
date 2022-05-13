@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gos.Server.Atribute
 {
-    [System.AttributeUsage(AttributeTargets.Property
+    [System.AttributeUsage(AttributeTargets.Property |
+        AttributeTargets.Field 
         , AllowMultiple = true)]
     internal class Localize : Attribute, IDisposable
     {

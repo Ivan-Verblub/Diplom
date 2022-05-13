@@ -70,6 +70,21 @@ class Programm
             Param.Settings.user, Param.Settings.password);
         if (!st.Connector.Open())
         {
+            if (!st.Connector.TryOpen())
+            {
+                Console.WriteLine("Ошибка при подключении к серверу, " +
+                    "попробуйте использовать другие параметры");
+                Environment.Exit(0);
+            }
+            else
+            {
+                var _bk1 = Backuper.GetInstance(st.Connector);
+                _bk1.Import(System.IO.File.ReadAllText("Dump.sql"));
+                st.Connector.Close();
+            }
+        }
+        if(!st.Connector.Open())
+        {
             Console.WriteLine("Ошибка при подключении к БД, " +
                 "попробуйте использовать другие параметры");
             Environment.Exit(0);
@@ -79,6 +94,7 @@ class Programm
 
         var jsonD = JsonSerializer.Serialize<Dump>(Param.Dump);
         File.WriteAllText(Environment.CurrentDirectory+"\\Settings\\dump.json", jsonD);
+        var _bk = Backuper.GetInstance(st.Connector);
         st.ActualT = new(st.Connector);
         st.CharsOT = new(st.Connector);
         st.CharsRT = new(st.Connector);
