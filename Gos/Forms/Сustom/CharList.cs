@@ -69,6 +69,17 @@ namespace Gos.Forms.Сustom
                 textBox4.Text = value;
             }
         }
+        public bool Selected
+        {
+            get
+            {
+                return checkBox1.Checked;
+            }
+            set
+            {
+                checkBox1.Checked = value;
+            }
+        }
         public CharList()
         {
             InitializeComponent();
@@ -104,6 +115,11 @@ namespace Gos.Forms.Сustom
         {
             Width = _width;
             Height = _height;
+        }
+        public void SSize()
+        {
+            _width = Width;
+            _height = Height;
         }
     }
 }

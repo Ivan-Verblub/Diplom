@@ -10,7 +10,7 @@ namespace Server.MySQL
         private MySqlConnection _connection;
         public Connector(string host, string user, string pass)
         {
-            _connectionString = $"Data Source = {host};Database = gos;" +
+            _connectionString = $"Data Source = {host};" +
                 $"User = {user};password = {pass};charset = utf8";
             _connection = new MySqlConnection(_connectionString);
         }
@@ -18,10 +18,27 @@ namespace Server.MySQL
         {
             _connection.Dispose();
         }
+
+        public bool TryOpen()
+        {
+            try
+            {
+                _connection.ConnectionString = _connectionString;
+                _connection.Open();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool Open()
         {
             try
             {
+                _connection.ConnectionString = _connectionString;
+                _connection.ConnectionString += ";Database = gos;";
                 _connection.Open();
                 return true; 
             }

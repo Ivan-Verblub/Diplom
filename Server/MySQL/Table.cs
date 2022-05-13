@@ -270,114 +270,120 @@ namespace Server.MySQL
         }
         public DataTable Select(D obj)
         {
-            try
-            {
-                StringBuilder builder = new StringBuilder();
-                builder.Append("SELECT ");
-                foreach (var element in decryptTable.InfoFields)
+            int k = 0;
+            while (true)
+            {               
+                try
                 {
-                    builder.Append(element.Table);
-                    builder.Append('.');
-                    builder.Append(element.DBField);
-                    if (element != decryptTable.InfoFields.Last())
-                        builder.Append(',');
-                    builder.Append(' ');
-                }
-                builder.Append("FROM ");
-                for (int i = 0; i < decryptTable.UsedTable.Count - 1; i++)
-                    builder.Append('(');
-                if (decryptTable.FKeyFields.Count == 0)
-                {
-                    builder.Append(' ');
-                    builder.Append(decryptTable.UsedTable[0]);
-                }
-                foreach (var element in decryptTable.FKeyFields)
-                {
-                    if (element == decryptTable.FKeyFields.First())
-                        builder.Append(element.Table);
-                    builder.Append(' ');
-                    builder.Append(element.ConType.ToString());
-                    builder.Append(" JOIN ");
-                    builder.Append(element.CTable);
-                    builder.Append(" ON ");
-                    builder.Append(element.Table);
-                    builder.Append('.');
-                    builder.Append(element.DBField);
-                    builder.Append(" = ");
-                    builder.Append(element.CTable);
-                    builder.Append('.');
-                    builder.Append(element.DBField);
-                    builder.Append(')');
-                }
-                builder.Append(" WHERE ");
-
-                foreach (var element in decryptTable.Ranges)
-                {
-                    var t = false;
-                    builder.Append('(');
-                    foreach (var range in element.Range)
+                    StringBuilder builder = new StringBuilder();
+                    builder.Append("SELECT ");
+                    foreach (var element in decryptTable.InfoFields)
                     {
-                        if (obj.GetType().GetProperty(range.Field).GetValue(obj) != null)
+                        builder.Append(element.Table);
+                        builder.Append('.');
+                        builder.Append(element.DBField);
+                        if (element != decryptTable.InfoFields.Last())
+                            builder.Append(',');
+                        builder.Append(' ');
+                    }
+                    builder.Append("FROM ");
+                    for (int i = 0; i < decryptTable.UsedTable.Count - 1; i++)
+                        builder.Append('(');
+                    if (decryptTable.FKeyFields.Count == 0)
+                    {
+                        builder.Append(' ');
+                        builder.Append(decryptTable.UsedTable[0]);
+                    }
+                    foreach (var element in decryptTable.FKeyFields)
+                    {
+                        if (element == decryptTable.FKeyFields.First())
+                            builder.Append(element.Table);
+                        builder.Append(' ');
+                        builder.Append(element.ConType.ToString());
+                        builder.Append(" JOIN ");
+                        builder.Append(element.CTable);
+                        builder.Append(" ON ");
+                        builder.Append(element.Table);
+                        builder.Append('.');
+                        builder.Append(element.DBField);
+                        builder.Append(" = ");
+                        builder.Append(element.CTable);
+                        builder.Append('.');
+                        builder.Append(element.DBField);
+                        builder.Append(')');
+                    }
+                    builder.Append(" WHERE ");
+
+                    foreach (var element in decryptTable.Ranges)
+                    {
+                        var t = false;
+                        builder.Append('(');
+                        foreach (var range in element.Range)
+                        {
+                            if (obj.GetType().GetProperty(range.Field).GetValue(obj) != null)
+                            {
+                                foreach (var field in typeof(D).GetProperties())
+                                {
+                                    if (field.Name == range.Field)
+                                    {
+                                        builder.Append(range.Table);
+                                        builder.Append('.');
+                                        builder.Append(range.DBField);
+                                        builder.Append(range.FiltType);
+                                        SetData(builder, field, obj, range);
+                                        builder.Append(" OR ");
+                                        break;
+                                    }
+                                }
+                                t = true;
+                            }
+                        }
+                        if (t)
+                        {
+                            builder.Remove(builder.Length - 4, 4);
+                            builder.Append(')');
+                            builder.Append(" AND ");
+                            if (decryptTable.Filters.Count == 0)
+                                builder.Remove(builder.Length - 5, 5);
+                        }
+                        else
+                            builder.Remove(builder.Length - 1, 1);
+                    }
+
+                    foreach (var element in decryptTable.Filters)
+                    {
+                        if (obj.GetType().GetProperty(element.Field).GetValue(obj) != null)
                         {
                             foreach (var field in typeof(D).GetProperties())
                             {
-                                if (field.Name == range.Field)
+                                if (field.Name == element.Field)
                                 {
-                                    builder.Append(range.Table);
+                                    builder.Append(element.Table);
                                     builder.Append('.');
-                                    builder.Append(range.DBField);
-                                    builder.Append(range.FiltType);
-                                    SetData(builder, field, obj, range);
-                                    builder.Append(" OR ");
+                                    builder.Append(element.DBField);
+                                    builder.Append(element.FiltType);
+                                    SetData(builder, field, obj, element);
+                                    builder.Append(" AND ");
                                     break;
                                 }
                             }
-                            t = true;
                         }
                     }
-                    if (t)
-                    {
-                        builder.Remove(builder.Length - 4, 4);
-                        builder.Append(')');
-                        builder.Append(" AND ");
-                        if (decryptTable.Filters.Count == 0)
-                            builder.Remove(builder.Length - 5, 5);
-                    }
-                    else
-                        builder.Remove(builder.Length - 1, 1);
+                    if (decryptTable.Filters.Count != 0)
+                        builder.Remove(builder.Length - 5, 5);
+                    Console.WriteLine(builder.ToString());
+                    _command.CommandText = builder.ToString();
+                    DataTable dt = new DataTable();
+                    _adapter.Fill(dt);
+                    _command.Parameters.Clear();
+                    return dt;
                 }
-
-                foreach (var element in decryptTable.Filters)
+                catch
                 {
-                    if (obj.GetType().GetProperty(element.Field).GetValue(obj) != null)
-                    {
-                        foreach (var field in typeof(D).GetProperties())
-                        {
-                            if (field.Name == element.Field)
-                            {
-                                builder.Append(element.Table);
-                                builder.Append('.');
-                                builder.Append(element.DBField);
-                                builder.Append(element.FiltType);
-                                SetData(builder, field, obj, element);
-                                builder.Append(" AND ");
-                                break;
-                            }
-                        }
-                    }
+                    k++;
+                    if(k==5)
+                        return null;
                 }
-                if (decryptTable.Filters.Count != 0)
-                    builder.Remove(builder.Length - 5, 5);
-                Console.WriteLine(builder.ToString());
-                _command.CommandText = builder.ToString();
-                DataTable dt = new DataTable();
-                _adapter.Fill(dt);
-                _command.Parameters.Clear();
-                return dt;
-            }
-            catch
-            {
-                return null;
             }
         }
         bool IsDefault<Tp>(Tp o)
@@ -396,7 +402,11 @@ namespace Server.MySQL
             System.Reflection.PropertyInfo field, Tp obj,
             FieldInfo element)
         {
-            if (null == ((ByteArray)Attribute.GetCustomAttribute(field, typeof(ByteArray))))
+            if(obj.GetType().GetProperty(element.Field).GetValue(obj) == null)
+            {
+                builder.Append("null");
+            }
+            else if (null == ((ByteArray)Attribute.GetCustomAttribute(field, typeof(ByteArray))))
             {
 
                 builder.Append('\'');

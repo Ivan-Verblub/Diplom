@@ -47,7 +47,12 @@ namespace Gos.Forms.Changing
                 {
                     var rw = dt.NewRow();
                     rw["id"] = (int)ar;
-                    rw["name"] = ar.ToString();
+                    var loc = ar.GetType().GetMember(ar.ToString())[0]
+                        .GetCustomAttribute<Localize>();
+                    if (loc == null)
+                        rw["name"] = ar.ToString();
+                    else
+                        rw["name"] = loc.Name;
                     dt.Rows.Add(rw);
                 }
                 ((ComboBox)Data).DataSource = dt;
@@ -100,7 +105,7 @@ namespace Gos.Forms.Changing
                 
                 ((ComboBox)Data).DataSource =
                     (DataTable)typeof(DataTableParser).GetMethod("Parse").
-                    MakeGenericMethod(result.GetType().GetElementType())
+                    MakeGenericMethod(t)
                     .Invoke(null, new object[] { result });
                 var props = t.GetProperties();
                 foreach (var prop in props)

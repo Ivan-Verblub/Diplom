@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>загружено.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Words, Version=22.4.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
       <HintPath>..\packages\Aspose.Words.22.4.0\lib\net461\Aspose.Words.dll</HintPath>
@@ -145,6 +148,13 @@
     <Compile Include="Forms\Generic\Filter\FilterSelector.Designer.cs">
       <DependentUpon>FilterSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Generic\Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Generic\Info.Designer.cs">
+      <DependentUpon>Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InfoDictionary.cs" />
     <Compile Include="Forms\Load.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +214,12 @@
     </Compile>
     <Compile Include="Forms\Сustom\LoadDataF.Designer.cs">
       <DependentUpon>LoadDataF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Сustom\PathTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Сustom\PathTester.Designer.cs">
+      <DependentUpon>PathTester.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Сustom\ResObj.cs">
       <SubType>Form</SubType>
@@ -265,6 +281,8 @@
     <Compile Include="Server\Models\Requesting\Final.cs" />
     <Compile Include="Server\Models\Requesting\Metrics.cs" />
     <Compile Include="Server\Models\Requesting\Options.cs" />
+    <Compile Include="Server\Models\Requesting\PathC.cs" />
+    <Compile Include="Server\Models\Requesting\PathP.cs" />
     <Compile Include="Server\Models\Requesting\Result.cs" />
     <Compile Include="Server\Models\Requesting\Server.cs" />
     <Compile Include="Server\Models\Table\Actual.cs" />
@@ -316,6 +334,9 @@
     <EmbeddedResource Include="Forms\Generic\Filter\FilterSelector.resx">
       <DependentUpon>FilterSelector.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Generic\Info.resx">
+      <DependentUpon>Info.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Load.resx">
       <DependentUpon>Load.cs</DependentUpon>
     </EmbeddedResource>
@@ -346,6 +367,9 @@
     <EmbeddedResource Include="Forms\Сustom\LoadDataF.resx">
       <DependentUpon>LoadDataF.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Сustom\PathTester.resx">
+      <DependentUpon>PathTester.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Сustom\ResObj.resx">
       <DependentUpon>ResObj.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,6 +387,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -418,6 +443,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="загружено.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

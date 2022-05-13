@@ -10,6 +10,7 @@ using Server.ML;
 using Server.MySQL;
 using Server.MySQL.Tables;
 using Server.MySQL.Tables.Filter;
+using System;
 using System.Data;
 using System.Text;
 using System.Web;
@@ -26,7 +27,12 @@ namespace Server.Controllers.Tech
         private StaticTables st = StaticTables.Instance;
         private ML.ML ml = ML.ML.Instance;
         private Names? names;
+
         private List<Thread> _threads = new();
+        private const int _threadsMax = 10;
+
+        private List<string> _links = new();
+
         private string _un;
         [HttpPost("Select/{id}")]
         public ActionResult<Models.Char[]> TrySelect(int id, SOptions[] ops)
@@ -221,8 +227,6 @@ namespace Server.Controllers.Tech
         {
             List<Models.Char> result = new List<Models.Char>();
             List<Models.Char> newRes = new();
-            int max = 10;
-            int cur = 0;
             foreach (var context in names.ContextId)
             {
                 var filter = new ContextFilter()
@@ -244,6 +248,7 @@ namespace Server.Controllers.Tech
                 builder.Append($"?q={query}");
 
                 var edgeOptions = new EdgeOptions();
+                //edgeOptions.AddArgument("headless");
                 using (var driver = new EdgeDriver(edgeOptions))
                 {
                     driver.Url = builder.ToString();
@@ -265,65 +270,183 @@ namespace Server.Controllers.Tech
                             break;
                         }
                     }
+                    //
                     driver.Url = list;
                     while (true)
                     {
-                        filterO = new OptionsFilter()
-                        {
-                            IdContext = context,
-                            Type = (int)OpType.DELAY
-                        };
-                        var dtO = st.OptionsT.Select(filterO);
-                        if (dtO.Rows.Count != 0)
-                        {
-                            Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
-                        }
+                        _links.Add(driver.Url);
                         var pathF = new PathsFilter()
-                        {
-                            IdContext = context,
-                            Type = (int)PathType.CELL
-                        };
-                        var path = st.PathsT.Select(pathF);
-                        var elemensLink = driver.FindElements(
-                            By.XPath(path.Rows[0].Field<string?>("Path")));
-                        pathF = new PathsFilter()
-                        {
-                            IdContext = context,
-                            Type = (int)PathType.CELLNAME
-                        };
-                        path = st.PathsT.Select(pathF);
-                        var elemensNames = driver.FindElements(
-                            By.XPath(path.Rows[0].Field<string?>("Path")));
-                        for (int i = 0; i<elemensLink.Count; i++)
-                        {
-                            result.Add(new()
-                            {
-                                Name = elemensNames[i].Text,
-                                Value = elemensLink[i].GetDomProperty("href")
-                            });
-                            cur++;
-                            if (max == cur)
-                                break;
-                        }
-                        if (max == cur)
-                            break;
-                        pathF = new PathsFilter()
                         {
                             IdContext = context,
                             Type = (int)PathType.NEXT
                         };
-                        path = st.PathsT.Select(pathF);
+                        var path = st.PathsT.Select(pathF);
+
+                        if (_threads.Count == _threadsMax)
+                        {
+                            while (true)
+                            {
+                                if (_threads.Count < _threadsMax)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                        Thread thread = Thread.CurrentThread;
+                        thread = new Thread((ThreadStart)(() =>
+                        {
+                            try
+                            {
+                                var edgeOps = new EdgeOptions();
+                                //edgeOps.AddArgument("headless");
+                                using (var driverInner = new EdgeDriver(edgeOps))
+                                {
+                                    try
+                                    {
+                                        driverInner.Url = _links.Last();
+                                        filterO = new OptionsFilter()
+                                        {
+                                            IdContext = context,
+                                            Type = (int)OpType.DELAY
+                                        };
+                                        var dtO = st.OptionsT.Select(filterO);
+                                        if (dtO.Rows.Count != 0)
+                                        {
+                                            Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
+                                        }
+                                        var pathF = new PathsFilter()
+                                        {
+                                            IdContext = context,
+                                            Type = (int)PathType.CELL
+                                        };
+                                        var path = st.PathsT.Select(pathF);
+                                        var elemensLink = driverInner.FindElements(
+                                                By.XPath(path.Rows[0].Field<string?>("Path")));
+                                        pathF = new PathsFilter()
+                                        {
+                                            IdContext = context,
+                                            Type = (int)PathType.CELLNAME
+                                        };
+                                        path = st.PathsT.Select(pathF);
+                                        var elemensNames = driverInner.FindElements(
+                                                By.XPath(path.Rows[0].Field<string?>("Path")));
+                                        for (int i = 0; i<elemensLink.Count; i++)
+                                        {
+                                            result.Add(new()
+                                            {
+                                                Name = elemensNames[i].Text,
+                                                Value = elemensLink[i].GetDomProperty("href")
+                                            });
+                                        }
+                                        _threads.Remove(thread);
+                                    }
+                                    catch
+                                    {
+
+                                    }
+                                }
+                            }
+                            catch
+                            {
+
+                            }
+                        }));
+                        _threads.Add(thread);
+                        thread.Start();
                         try
                         {
-                            var next = driver.FindElement(
-                                By.XPath(path.Rows[0].Field<string?>("Path")));
-                            next.Click();
+                            int i = 0;
+                            while (true)
+                            {
+                                if (i == 10)
+                                    throw new Exception();
+                                i++;
+                                filterO = new OptionsFilter()
+                                {
+                                    IdContext = context,
+                                    Type = (int)OpType.DELAY
+                                };
+                                var dtO = st.OptionsT.Select(filterO);
+                                if (dtO.Rows.Count != 0)
+                                {
+                                    Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
+                                }
+                                try
+                                {
+                                    var next = driver.FindElement(
+                                        By.XPath(path.Rows[0].Field<string?>("Path")));
+                                    next.Click();
+                                    break;
+                                }
+                                catch
+                                {
+
+                                }
+                                throw new Exception();
+                            }
+
                         }
                         catch
                         {
+                            filterO = new OptionsFilter()
+                            {
+                                IdContext = context,
+                                Type = (int)OpType.DELAY
+                            };
+                            var dtO = st.OptionsT.Select(filterO);
+                            if (dtO.Rows.Count != 0)
+                            {
+                                Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
+                            }
+                            pathF = new PathsFilter()
+                            {
+                                IdContext = context,
+                                Type = (int)PathType.CELL
+                            };
+                            path = st.PathsT.Select(pathF);
+                            var elemensLink = driver.FindElements(
+                                By.XPath(path.Rows[0].Field<string?>("Path")));
+                            pathF = new PathsFilter()
+                            {
+                                IdContext = context,
+                                Type = (int)PathType.CELLNAME
+                            };
+                            path = st.PathsT.Select(pathF);
+                            try
+                            {
+                                var elemensNames = driver.FindElements(
+                                    By.XPath(path.Rows[0].Field<string?>("Path")));
+                                for (int i = 0; i<elemensLink.Count; i++)
+                                {
+                                    result.Add(new()
+                                    {
+                                        Name = elemensNames[i].Text,
+                                        Value = elemensLink[i].GetDomProperty("href")
+                                    });
+                                }
+                            }
+                            catch
+                            {
+                                break;
+                            }
                             break;
                         }
+
                     }
+
+                    if (_threads.Count > 0)
+                    {
+                        while (true)
+                        {
+                            if (_threads.Count == 0)
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                    //
                     var pathFs = new PathsFilter()
                     {
                         IdContext = context,
@@ -343,7 +466,7 @@ namespace Server.Controllers.Tech
                     pathFs.Type = (int)PathType.COLUMNTITLE;
                     paths = st.PathsT.Select(pathFs);
                     var columnTPath = paths.Rows[0].Field<string?>("Path");
-                    
+
                     foreach (var item in result)
                     {
                         if (op[0].Option == "-100")
@@ -352,12 +475,80 @@ namespace Server.Controllers.Tech
                         }
                         else
                         {
-                            driver.Url = Link(item.Value, context);
-                            var buff = Compare(driver.FindElement(By.XPath("//body"))
-                                .GetAttribute("outerHTML"), op,
-                                table, row, columnTPath, columnVPath, item);
-                            if (buff!=null)
-                                newRes.Add(buff);
+                            if (_threads.Count == _threadsMax)
+                            {
+                                while (true)
+                                {
+                                    if (_threads.Count < _threadsMax)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                            Thread thread = Thread.CurrentThread;
+                            thread = new Thread((ThreadStart)(() =>
+                            {
+                                try
+                                {
+                                    using (var driverInner = new EdgeDriver())
+                                    {
+                                        try
+                                        {
+                                            int i = 0;
+                                            while (true)
+                                            {
+                                                try
+                                                {
+                                                    driverInner.Url = Link(item.Value, context);
+                                                    break;
+                                                }
+                                                catch
+                                                {
+                                                    i++;
+                                                    if (i == 5)
+                                                    {
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            var buff = Compare(driverInner.FindElement(By.XPath("//body"))
+                                                .GetAttribute("outerHTML"), op,
+                                                table, row, columnTPath, columnVPath, item);
+                                            if (buff!=null)
+                                                newRes.Add(buff);
+                                            _threads.Remove(thread);
+                                        }
+                                        catch
+                                        {
+
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+
+                                }
+                            }));
+                            _threads.Add(thread);
+                            thread.Start();
+                        }
+                    }
+                    if (_threads.Count > 0)
+                    {
+                        while (true)
+                        {
+                            for(int i = 0;i<_threads.Count;i++)
+                            {
+                                if(_threads[i].ThreadState == ThreadState.Stopped)
+                                {
+                                    _threads.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                            if (_threads.Count == 0)
+                            {
+                                break;
+                            }
                         }
                     }
 

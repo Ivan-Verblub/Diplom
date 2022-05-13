@@ -47,7 +47,12 @@ namespace Gos.Forms.Filter
                 {
                     var rw = dt.NewRow();
                     rw["id"] = (int)ar;
-                    rw["name"] = ar.ToString();
+                    var loc = ar.GetType().GetMember(ar.ToString())[0]
+                        .GetCustomAttribute<Localize>();
+                    if (loc == null)
+                        rw["name"] = ar.ToString();
+                    else
+                        rw["name"] = loc.Name;
                     dt.Rows.Add(rw);
                 }
                 ((ComboBox)Data).DataSource = dt;

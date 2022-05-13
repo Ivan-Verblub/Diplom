@@ -504,9 +504,23 @@ namespace Gos.Forms.Сustom
 
         private void button5_Click(object sender, EventArgs e)
         {
+            
             if (File.Exists(untiled.FileName+".docx"))
             {
-                var bytes = File.ReadAllBytes(untiled.FileName+".docx");
+                byte[] bytes;
+                try
+                {
+                    bytes = File.ReadAllBytes(untiled.FileName+".docx");
+                }
+                catch
+                {
+                    MessageBox.Show(
+                    "Файл используется",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    return;
+                }
                 using (var requester = new Requester<Request,
                     RequestFilter>(Param.Serv.host))
                 {
@@ -534,7 +548,7 @@ namespace Gos.Forms.Сustom
                                 count = final.Count,
                                 cost = final.Cost,
                                 idRequest = idReq,
-                                idCat = 7
+                                idCat = null
                             });
                             using (var requester3 = new Requester<CharListRequest,
                                 CharListRequestFilter>(Param.Serv.host))
@@ -567,6 +581,46 @@ namespace Gos.Forms.Сustom
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.TabPages.Count != 0)
+                for(int i = 0;i<flowLayoutPanel1.Controls.Count;i++)
+                {
+                    Control element = flowLayoutPanel1.Controls[i];
+                    if (element.GetType() == typeof(CharList))
+                    {
+                        if (((CharList)element).Selected)
+                        {
+                            ((CharList)element).SSize();
+                            tabControl1.SelectedTab.
+                                Controls[0].Controls.Add(element);
+                            i--;
+                            ((CharList)element).Resize();
+                        }
+                    }
+                }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.TabPages.Count != 0)
+                for (int i = 0; i<tabControl1.SelectedTab.Controls[0].Controls.Count; i++)
+                {
+                    Control element = tabControl1.
+                        SelectedTab.Controls[0].Controls[i];
+                    if (element.GetType() == typeof(CharList))
+                    {
+                        if (((CharList)element).Selected)
+                        {
+                            ((CharList)element).SSize();
+                            flowLayoutPanel1.Controls.Add(element);
+                            i--;
+                            ((CharList)element).Resize();
+                        }
+                    }
+                }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Controllers.Models;
+using Server.MySQL;
 using System.Diagnostics;
 
 namespace Server.Controllers
@@ -11,6 +12,7 @@ namespace Server.Controllers
     {
         private static string _result = "";
         private static bool isBusy = false;
+        private Backuper _bk = Backuper.GetInstance();
         [HttpGet("Save/{pass}")]
         public ActionResult<string> TrySave(string pass)
         {
@@ -50,23 +52,10 @@ namespace Server.Controllers
 
         private void Save()
         {
+            
             isBusy = true;
-            Console.WriteLine("Engage");
-            var info = new ProcessStartInfo(Param.Dump.Path+"mysqldump.exe");
-            info.Arguments = $"-u{Param.Settings.user} " +
-                $"-h{Param.Settings.host} " +
-                $"-p{Param.Settings.password} " +
-                $"gos";
-            Console.WriteLine("Running");
-            info.RedirectStandardOutput = true;
-            info.StandardOutputEncoding = System.Text.Encoding.UTF8;
-            var p = new Process();
-            p.StartInfo = info;
-            Console.WriteLine("Start");
-            p.Start();
-            _result = p.StandardOutput.ReadToEnd();
+            _result = _bk.Export();
             isBusy = false;
-            Console.WriteLine("End");
         }
         [HttpPost("Load/{pass}")]
         public ActionResult<string> TryLoad(string[] path, string pass)
@@ -107,17 +96,7 @@ namespace Server.Controllers
         private async void Load(string path)
         {
             isBusy = true;
-            var info = new ProcessStartInfo(Param.Dump.Path+"mysql.exe");
-            info.Arguments = $"-u{Param.Settings.user} " +
-                $"-h{Param.Settings.host} " +
-                $"-p{Param.Settings.password} " +
-                $"gos";
-            info.RedirectStandardInput = true;
-            info.StandardInputEncoding = System.Text.Encoding.UTF8;
-            var p = new Process();
-            p.StartInfo = info;
-            p.Start();
-            p.StandardInput.Write(path);
+            _bk.Import(path);
             _result = "1";
             isBusy = false;            
         }

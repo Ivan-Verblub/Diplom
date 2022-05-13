@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Gos.Server.Atribute;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,10 +18,12 @@ namespace Gos.Server
             foreach(var prop in props)
             {
                 DataColumn col;
-                if(Nullable.GetUnderlyingType(prop.PropertyType) == null)
+                if (prop.GetCustomAttributes<EnumList>().Count() != 0)
+                    col = dt.Columns.Add(prop.Name, typeof(string));
+                else if (Nullable.GetUnderlyingType(prop.PropertyType) == null)
                     col = dt.Columns.Add(prop.Name, prop.PropertyType);
                 else
-                    col = dt.Columns.Add(prop.Name, 
+                    col = dt.Columns.Add(prop.Name,
                         Nullable.GetUnderlyingType(prop.PropertyType));
                 col.AllowDBNull = true;
             }
@@ -31,7 +35,20 @@ namespace Gos.Server
                 foreach(var prop in props)
                 {
                     var value = prop.GetValue(row);
-                    if(value == null)
+                    var en = prop.GetCustomAttribute<EnumList>();
+                    if (en != null)
+                    {
+                        foreach (var ar in en.EnumType.GetEnumValues())
+                        {
+                            var loc = ar.GetType().GetMember(ar.ToString())[0]
+                                .GetCustomAttribute<Localize>();
+                            if (loc == null)
+                                rw[prop.Name] = ar.ToString();
+                            else
+                                rw[prop.Name] = loc.Name;
+                        }
+                    }
+                    else if (value == null)
                         rw[prop.Name] = DBNull.Value;
                     else
                         rw[prop.Name] = value;

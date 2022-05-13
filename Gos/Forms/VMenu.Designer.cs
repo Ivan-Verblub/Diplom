@@ -56,6 +56,8 @@
             this.button25 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -353,6 +355,8 @@
             this.flowLayoutPanel1.Controls.Add(this.button25);
             this.flowLayoutPanel1.Controls.Add(this.button26);
             this.flowLayoutPanel1.Controls.Add(this.button27);
+            this.flowLayoutPanel1.Controls.Add(this.button28);
+            this.flowLayoutPanel1.Controls.Add(this.button29);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -395,10 +399,33 @@
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
+            // button28
+            // 
+            this.button28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button28.Location = new System.Drawing.Point(3, 786);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(200, 23);
+            this.button28.TabIndex = 27;
+            this.button28.Text = "Тестирование путей";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // button29
+            // 
+            this.button29.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button29.Location = new System.Drawing.Point(3, 815);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(200, 23);
+            this.button29.TabIndex = 28;
+            this.button29.Text = "Экскурс";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
             // VMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(236, 797);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -440,5 +467,7 @@
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.Button button29;
     }
 }
