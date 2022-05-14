@@ -29,7 +29,7 @@ namespace Server.Controllers.Tech
         private Names? names;
 
         private List<Thread> _threads = new();
-        private const int _threadsMax = 10;
+        private const int _threadsMax = 2;
 
         private List<string> _links = new();
 
@@ -304,7 +304,10 @@ namespace Server.Controllers.Tech
                                 {
                                     try
                                     {
-                                        driverInner.Url = _links.Last();
+                                        var link = _links.Last();
+                                        _links.Remove(_links.Last());
+                                        driverInner.Url = link;
+
                                         filterO = new OptionsFilter()
                                         {
                                             IdContext = context,

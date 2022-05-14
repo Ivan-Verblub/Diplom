@@ -93,13 +93,24 @@ namespace Gos.Forms.Сustom
                 var requeset = WebRequest.Create(url);
                 requeset.Method = "GET";
                 Invoke((Action)(() => { progressBar1.Value = progressBar1.Maximum; }));
-                string json = new StreamReader(requeset.GetResponse().GetResponseStream()).ReadToEnd();
-                var metrics = JsonSerializer.Deserialize<Metrics>(json);
-                MessageBox.Show(
-                metrics.ToString(),
+                try
+                {
+                    string json = new StreamReader(requeset.GetResponse().GetResponseStream()).ReadToEnd();
+                    MessageBox.Show(
+                "Обучение прошло успешно",
                 "Внимаение",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MessageBox.Show(
+                "Обучение прошло не успешно",
+                "Внимаение",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+                }
+                
             });
 
             Task.Run(() =>

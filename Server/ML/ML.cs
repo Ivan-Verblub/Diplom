@@ -33,6 +33,7 @@ namespace Server.ML
             DatabaseSource source;
             using (Connector connector = new Connector("localhost", "root", "qwerty"))
             {
+                connector.Connection.ConnectionString += ";DataBase = gos;";
                 source = new DatabaseSource(
                     MySqlClientFactory.Instance,
                     connector.Connection.ConnectionString,

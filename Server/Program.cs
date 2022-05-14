@@ -81,14 +81,17 @@ class Programm
                 var _bk1 = Backuper.GetInstance(st.Connector);
                 _bk1.Import(System.IO.File.ReadAllText("Dump.sql"));
                 st.Connector.Close();
+                st.Connector = new Connector(Param.Settings.host,
+                    Param.Settings.user, Param.Settings.password);
+                if (!st.Connector.Open())
+                {
+                    Console.WriteLine("Ошибка при подключении к БД, " +
+                        "попробуйте использовать другие параметры");
+                    Environment.Exit(0);
+                }
             }
         }
-        if(!st.Connector.Open())
-        {
-            Console.WriteLine("Ошибка при подключении к БД, " +
-                "попробуйте использовать другие параметры");
-            Environment.Exit(0);
-        }
+        
         var json = JsonSerializer.Serialize<Settings>(Param.Settings);
         File.WriteAllText(Environment.CurrentDirectory+"\\Settings\\host.json", json);
 

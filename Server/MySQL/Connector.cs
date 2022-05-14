@@ -42,7 +42,7 @@ namespace Server.MySQL
                 _connection.Open();
                 return true; 
             }
-            catch(MySqlException)
+            catch(MySqlException ex)
             {
                 return false;
             }

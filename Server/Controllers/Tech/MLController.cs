@@ -21,11 +21,12 @@ namespace Server.Controllers.Tech
         }
 
         [HttpGet("Train")]
-        public async Task<MulticlassClassificationMetrics> Train()
+        public async Task<string> Train()
         {
             return await Task.Run(() =>
             {
-                return ml.Train();
+                ml.Train();
+                return "";
             });
         }
 

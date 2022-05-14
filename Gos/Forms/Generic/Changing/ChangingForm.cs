@@ -210,8 +210,15 @@ namespace Gos.Forms
                                 {
                                     if (((DataField<T, F>)field).Data.GetType() == typeof(TextBox))
                                     {
-                                        ((TextBox)((DataField<T, F>)field).Data).Text =
-                                            item.GetValue(table[0]).ToString();
+                                        try
+                                        {
+                                            ((TextBox)((DataField<T, F>)field).Data).Text =
+                                                item.GetValue(table[0]).ToString();
+                                        }
+                                        catch
+                                        {
+
+                                        }
                                     }
                                     else if (((DataField<T, F>)field).Data.GetType() == typeof(ComboBox))
                                     {

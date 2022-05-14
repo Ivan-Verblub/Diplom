@@ -56,7 +56,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1648, 1115);
+            this.splitContainer1.Size = new System.Drawing.Size(1648, 1055);
             this.splitContainer1.SplitterDistance = 491;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 1;
@@ -76,8 +76,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1150, 1115);
-            this.splitContainer2.SplitterDistance = 895;
+            this.splitContainer2.Size = new System.Drawing.Size(1150, 1055);
+            this.splitContainer2.SplitterDistance = 846;
             this.splitContainer2.SplitterWidth = 7;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -88,8 +88,8 @@
             this.splitContainer4.Margin = new System.Windows.Forms.Padding(6);
             this.splitContainer4.Name = "splitContainer4";
             this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.splitContainer4.Size = new System.Drawing.Size(1150, 895);
-            this.splitContainer4.SplitterDistance = 188;
+            this.splitContainer4.Size = new System.Drawing.Size(1150, 846);
+            this.splitContainer4.SplitterDistance = 177;
             this.splitContainer4.SplitterWidth = 7;
             this.splitContainer4.TabIndex = 0;
             // 
@@ -99,7 +99,7 @@
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
             this.splitContainer3.Margin = new System.Windows.Forms.Padding(6);
             this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Size = new System.Drawing.Size(1150, 213);
+            this.splitContainer3.Size = new System.Drawing.Size(1150, 202);
             this.splitContainer3.SplitterDistance = 583;
             this.splitContainer3.SplitterWidth = 7;
             this.splitContainer3.TabIndex = 0;
@@ -107,10 +107,10 @@
             // 
             // MainF
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1648, 1115);
+            this.ClientSize = new System.Drawing.Size(1648, 1055);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -119,6 +119,7 @@
             this.Name = "MainF";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ГОБУЗ \"МООД\"";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainF_Load);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
