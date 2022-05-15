@@ -27,7 +27,7 @@ namespace Gos.Server.Models.Table
         [EnumList(typeof(PathClass))]
         public int? cclass { get; set; }
 
-        [Localize("Код контекста")]
+        [Localize("Контекст")]
         [Invisible]
         [Typeable(typeof(Context),typeof(ContextFilter))]
         public int? idContext { get; set; }

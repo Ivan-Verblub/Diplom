@@ -18,10 +18,11 @@ namespace Gos.Server.Models.Table
         public string name { get; set; }
 
         [Localize("Конфигурация")]
+        [AI]
         [Invisible]
         public string conf { get; set; }
 
-        [Localize("Код обучения")]
+        [Localize("Обучение")]
         [Invisible]
         [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
         public int? idLearningHistory { get; set; }

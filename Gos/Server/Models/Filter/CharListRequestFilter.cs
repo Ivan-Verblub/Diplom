@@ -12,13 +12,13 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Название")]
         public string Name { get; set; }
-        [Localize("Примерное название")]
+        [Localize("Частичное название")]
         [Atribute.Filter(Filtration.LIKE)]
         public string NameL { get; set; }
 
         [Localize("Значение")]
         public string Value { get; set; }
-        [Localize("Примерное значение")]
+        [Localize("Частичное значение")]
         [Atribute.Filter(Filtration.LIKE)]
         public string ValueL { get; set; }
 
@@ -28,7 +28,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Название ТЗ")]
         public string RequestName { get; set; }
-        [Localize("Примерное название ТЗ")]
+        [Localize("Частичное название ТЗ")]
         [Atribute.Filter(Filtration.LIKE)]
         public string RequestNameL { get; set; }
     }

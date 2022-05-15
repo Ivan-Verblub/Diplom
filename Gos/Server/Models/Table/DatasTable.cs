@@ -15,19 +15,19 @@ namespace Gos.Server.Models.Table
         [Invisible]
         public int? idData { get; set; }
 
-        [Localize("Feature")]
+        [Localize("Значение")]
         [Key(false)]
         public string feature { get; set; }
 
-        [Localize("Label")]
+        [Localize("Признак")]
         public string label { get; set; }
 
-        [Localize("Код сета")]
+        [Localize("Набор данных")]
         [Invisible]
         [Typeable(typeof(DataSet),typeof(DataSetFilter))]
         public int? idDataSet { get; set; }
 
-        [Localize("Название сета")]
+        [Localize("Название набора данных")]
         [AI]
         public string setName { get; set; }
     }

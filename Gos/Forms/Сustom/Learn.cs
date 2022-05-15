@@ -1,4 +1,5 @@
-﻿using Gos.Server;
+﻿using Gos.Forms.Generic;
+using Gos.Server;
 using Gos.Server.Models.Filter;
 using Gos.Server.Models.Requesting;
 using Gos.Server.Models.Table;
@@ -132,32 +133,47 @@ namespace Gos.Forms.Сustom
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string url = $"{Param.Serv.host}/Tech/ML/Predict";
-            var request = WebRequest.Create(url);
-            request.Method = "POST";
-            var options = new JsonSerializerOptions
+            try
             {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
-                WriteIndented = true
-            };
-            var data = new Data()
-            {
-                Feature = textBox1.Text,
-                Label = ""
-            };
-            string json = JsonSerializer.Serialize<Data>(data, options);
-            var bytes = UnicodeEncoding.UTF8.GetBytes(json);
-            request.ContentLength = bytes.Length;
-            request.ContentType = "application/json";
-            using (var stream = request.GetRequestStream())
-            {
-                stream.Write(bytes, 0, bytes.Length);
-                stream.Close();
-            }
+                string url = $"{Param.Serv.host}/Tech/ML/Predict";
+                var request = WebRequest.Create(url);
+                request.Method = "POST";
+                var options = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                    WriteIndented = true
+                };
+                var data = new Data()
+                {
+                    Feature = textBox1.Text,
+                    Label = ""
+                };
+                string json = JsonSerializer.Serialize<Data>(data, options);
+                var bytes = UnicodeEncoding.UTF8.GetBytes(json);
+                request.ContentLength = bytes.Length;
+                request.ContentType = "application/json";
+                using (var stream = request.GetRequestStream())
+                {
+                    stream.Write(bytes, 0, bytes.Length);
+                    stream.Close();
+                }
 
-            var jsons = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
-            var pData = JsonSerializer.Deserialize<PData>(jsons);
-            MessageBox.Show(pData.predictedLabel);
+                var jsons = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
+                var pData = JsonSerializer.Deserialize<PData>(jsons);
+                MessageBox.Show(
+                    "Результат:"+pData.predictedLabel,
+                    "Успех",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show(
+                    "Ошибка при тестировании",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -255,6 +271,44 @@ namespace Gos.Forms.Сustom
         private void button5_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F1)
+            {
+                var str = "Для обучения необходимо:\n" +
+                    "1.Выбрать набор данных\n" +
+                    "2.Выбрать разделение данных, " +
+                    "используется для разделения набора " +
+                    "данных на данные для теста и обучения, если не знаете " +
+                    "зачем это, то оставьте на стандартном значении\n" +
+                    "3.Загрузите данные\n" +
+                    "4.Нажмите кнопку \"Обучить\", ожидайте пока не появится сообщение\n" +
+                    "5.Опционально, можете провести свой собственный тест, " +
+                    "результатом будет признак, который вы установили ранее\n" +
+                    "6.Заполните версию, название, коментарий и нажмите сохранить";
+                var info = new Info(str);
+                info.ShowDialog();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var str = "Для обучения необходимо:\n" +
+                    "1.Выбрать набор данных\n" +
+                    "2.Выбрать разделение данных, " +
+                    "используется для разделения набора " +
+                    "данных на данные для теста и обучения, если не знаете " +
+                    "зачем это, то оставьте на стандартном значении\n" +
+                    "3.Загрузите данные\n" +
+                    "4.Нажмите кнопку \"Обучить\", ожидайте пока не появится сообщение\n" +
+                    "5.Опционально, можете провести свой собственный тест, " +
+                    "результатом будет признак, который вы установили ранее\n" +
+                    "6.Заполните версию, название, коментарий и нажмите сохранить";
+            var info = new Info(str);
+            info.ShowDialog();
         }
     }
 }

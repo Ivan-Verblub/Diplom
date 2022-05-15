@@ -16,7 +16,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Значение")]
         public string Value { get; set; }
-        [Localize("Примерное значение")]
+        [Localize("Частичное значение")]
         [Atribute.Filter(Filtration.LIKE)]
         public string ValueL { get; set; }
 
@@ -26,7 +26,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Домен")]
         public string Domen { get; set; }
-        [Localize("Примерный домен")]
+        [Localize("Частичный домен")]
         [Atribute.Filter(Filtration.LIKE)]
         public string DomenL { get; set; }
     }

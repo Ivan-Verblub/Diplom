@@ -8,9 +8,9 @@ namespace Gos.Server.Models.Filter
         [Key(true)]
         [Invisible]
         public int? IdDataSet { get; set; }
-        [Localize("Название сета")]
+        [Localize("Название набора данных")]
         public string SetName { get; set; }
-        [Localize("Примерное название сета")]
+        [Localize("Частичное название набора данных")]
         [Atribute.Filter(Filtration.LIKE)]
         public string SetNameL { get; set; }
     }

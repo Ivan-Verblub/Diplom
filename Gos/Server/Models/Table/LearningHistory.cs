@@ -21,7 +21,7 @@ namespace Gos.Server.Models.Table
         [Localize("Количество итераций")]
         public int? iter { get; set; }
 
-        [Localize("Код набора данных")]
+        [Localize("Набор данных")]
         [Typeable(typeof(DataSet),typeof(DataSetFilter))]
         [Invisible]
         public int? idDataSet { get; set; }

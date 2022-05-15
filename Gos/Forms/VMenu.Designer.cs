@@ -417,7 +417,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 23);
             this.button29.TabIndex = 28;
-            this.button29.Text = "Экскурс";
+            this.button29.Text = "Справка";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -429,9 +429,12 @@
             this.ClientSize = new System.Drawing.Size(236, 797);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "VMenu";
             this.Text = "VMenu";
             this.Load += new System.EventHandler(this.VMenu_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.VMenu_KeyPress);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.VMenu_PreviewKeyDown);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

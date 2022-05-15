@@ -1,6 +1,7 @@
 ﻿using Microsoft.ML;
 using Microsoft.ML.Data;
 using MySql.Data.MySqlClient;
+using Server.Controllers.Models;
 using Server.MySQL;
 
 namespace Server.ML
@@ -31,7 +32,8 @@ namespace Server.ML
 
             DatabaseLoader loader = _mlContext.Data.CreateDatabaseLoader<Data>();
             DatabaseSource source;
-            using (Connector connector = new Connector("localhost", "root", "qwerty"))
+            using (Connector connector = new Connector(
+                Param.Settings.host, Param.Settings.user, Param.Settings.user))
             {
                 connector.Connection.ConnectionString += ";DataBase = gos;";
                 source = new DatabaseSource(

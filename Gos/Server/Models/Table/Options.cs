@@ -15,7 +15,7 @@ namespace Gos.Server.Models.Table
         [Invisible]
         public int? id { get; set; }
 
-        [Localize("Код типа")]
+        [Localize("Тип")]
         [EnumList(typeof(OpType))]
         public int? type { get; set; }
 
@@ -23,7 +23,7 @@ namespace Gos.Server.Models.Table
         [Key(false)]
         public string value { get; set; }
 
-        [Localize("Код контекста")]
+        [Localize("Контекст")]
         [Typeable(typeof(Context),typeof(ContextFilter))]
         [Invisible]
         public int? idContext { get; set; }

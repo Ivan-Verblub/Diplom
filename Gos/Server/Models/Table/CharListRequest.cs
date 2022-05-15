@@ -22,7 +22,7 @@ namespace Gos.Server.Models.Table
         [Localize("Значение характеристики")]
         public string value { get; set; }
 
-        [Localize("Код ТЗ")]
+        [Localize("ТЗ")]
         [Invisible]
         [Typeable(typeof(Request),typeof(RequestFilter))]
         public int? idRequest { get; set; }

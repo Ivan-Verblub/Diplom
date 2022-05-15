@@ -28,13 +28,13 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Коментарий")]
         public string Comment { get; set; }
-        [Localize("Примерный коментарий")]
+        [Localize("Частичный коментарий")]
         [Atribute.Filter(Filtration.LIKE)]
         public string CommentL { get; set; }
 
         [Localize("Версия")]
         public string Version { get; set; }
-        [Localize("Примерная версия")]
+        [Localize("Частичная версия")]
         [Atribute.Filter(Filtration.LIKE)]
         public string VersionL { get; set; }
     }

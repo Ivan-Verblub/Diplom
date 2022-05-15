@@ -44,7 +44,6 @@
             this.label1.Size = new System.Drawing.Size(694, 426);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button1
             // 
@@ -70,7 +69,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Info";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Инфо";
+            this.Text = "Справка";
             this.Load += new System.EventHandler(this.Info_Load);
             this.ResumeLayout(false);
 

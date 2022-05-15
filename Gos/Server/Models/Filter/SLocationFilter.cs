@@ -11,7 +11,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Расположение")]
         public string Location { get; set; }
-        [Localize("Примерное расположение")]
+        [Localize("Частичное расположение")]
         [Atribute.Filter(Filtration.LIKE)]
         public string LocationL { get; set; }
     }

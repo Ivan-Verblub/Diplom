@@ -29,7 +29,7 @@ namespace Server.Controllers.Tech
         private Names? names;
 
         private List<Thread> _threads = new();
-        private const int _threadsMax = 2;
+        private const int _threadsMax = 10;
 
         private List<string> _links = new();
 
@@ -243,7 +243,7 @@ namespace Server.Controllers.Tech
                 StringBuilder builder = new();
                 builder.Append("https://www.google.com/search");
                 string query =
-                    HttpUtility.UrlEncode($"{sdt.Rows[0].Field<string>("name")} " +
+                    HttpUtility.UrlEncode($"{sdt.Rows[0].Field<string>("name1")} " +
                     $"site: {dt.Rows[0].Field<string>("Domen")}");
                 builder.Append($"?q={query}");
 
@@ -274,6 +274,7 @@ namespace Server.Controllers.Tech
                     driver.Url = list;
                     while (true)
                     {
+                        int count = 1;
                         _links.Add(driver.Url);
                         var pathF = new PathsFilter()
                         {
@@ -380,6 +381,7 @@ namespace Server.Controllers.Tech
                                     var next = driver.FindElement(
                                         By.XPath(path.Rows[0].Field<string?>("Path")));
                                     next.Click();
+                                    count++;
                                     break;
                                 }
                                 catch
@@ -392,48 +394,52 @@ namespace Server.Controllers.Tech
                         }
                         catch
                         {
-                            filterO = new OptionsFilter()
+                            if (count != 1)
                             {
-                                IdContext = context,
-                                Type = (int)OpType.DELAY
-                            };
-                            var dtO = st.OptionsT.Select(filterO);
-                            if (dtO.Rows.Count != 0)
-                            {
-                                Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
-                            }
-                            pathF = new PathsFilter()
-                            {
-                                IdContext = context,
-                                Type = (int)PathType.CELL
-                            };
-                            path = st.PathsT.Select(pathF);
-                            var elemensLink = driver.FindElements(
-                                By.XPath(path.Rows[0].Field<string?>("Path")));
-                            pathF = new PathsFilter()
-                            {
-                                IdContext = context,
-                                Type = (int)PathType.CELLNAME
-                            };
-                            path = st.PathsT.Select(pathF);
-                            try
-                            {
-                                var elemensNames = driver.FindElements(
-                                    By.XPath(path.Rows[0].Field<string?>("Path")));
-                                for (int i = 0; i<elemensLink.Count; i++)
+                                filterO = new OptionsFilter()
                                 {
-                                    result.Add(new()
+                                    IdContext = context,
+                                    Type = (int)OpType.DELAY
+                                };
+                                var dtO = st.OptionsT.Select(filterO);
+                                if (dtO.Rows.Count != 0)
+                                {
+                                    Thread.Sleep(int.Parse(dtO.Rows[0].Field<string>("value")));
+                                }
+                                pathF = new PathsFilter()
+                                {
+                                    IdContext = context,
+                                    Type = (int)PathType.CELL
+                                };
+                                path = st.PathsT.Select(pathF);
+                                var elemensLink = driver.FindElements(
+                                    By.XPath(path.Rows[0].Field<string?>("Path")));
+                                pathF = new PathsFilter()
+                                {
+                                    IdContext = context,
+                                    Type = (int)PathType.CELLNAME
+                                };
+                                path = st.PathsT.Select(pathF);
+                                try
+                                {
+                                    var elemensNames = driver.FindElements(
+                                        By.XPath(path.Rows[0].Field<string?>("Path")));
+                                    for (int i = 0; i<elemensLink.Count; i++)
                                     {
-                                        Name = elemensNames[i].Text,
-                                        Value = elemensLink[i].GetDomProperty("href")
-                                    });
+                                        result.Add(new()
+                                        {
+                                            Name = elemensNames[i].Text,
+                                            Value = elemensLink[i].GetDomProperty("href")
+                                        });
+                                    }
+                                }
+                                catch
+                                {
+                                    break;
                                 }
                             }
-                            catch
-                            {
-                                break;
-                            }
                             break;
+                            
                         }
 
                     }
@@ -542,9 +548,16 @@ namespace Server.Controllers.Tech
                         {
                             for(int i = 0;i<_threads.Count;i++)
                             {
-                                if(_threads[i].ThreadState == ThreadState.Stopped)
+                                try
                                 {
-                                    _threads.RemoveAt(i);
+                                    if ((_threads[i] == null)||(_threads[i].ThreadState == ThreadState.Stopped))
+                                    {
+                                        _threads.RemoveAt(i);
+                                        i--;
+                                    }
+                                }
+                                catch(ArgumentOutOfRangeException)
+                                {
                                     i--;
                                 }
                             }
@@ -594,24 +607,27 @@ namespace Server.Controllers.Tech
                         Name = op.Option.Split(';')[1],
                         Data = local.SelectNodes(value)[0].InnerText.Trim(),
                         Value = Fuzz.PartialRatio(op.Option,
-                        local.SelectNodes(value)[0].InnerText.Trim())<70
-                        ?0: Fuzz.PartialRatio(op.Option,
-                        local.SelectNodes(value)[0].InnerText.Trim())*2
+                        local.SelectNodes(value)[0].InnerText.Trim()+" ")<80
+                        ? Fuzz.PartialRatio(op.Option,
+                        local.SelectNodes(value)[0].InnerText.Trim()+" ")*(-3) 
+                        : Fuzz.PartialRatio(op.Option,
+                        local.SelectNodes(value)[0].InnerText.Trim()+" ")*3
                     });
                     int[] values = new int[res.Count];
                     for (int i = 0; i < res.Count; i++)
                     {
-                        values[i] = res[i].Value<=30?0:res[i].Value;
+                        values[i] = res[i].Value<60?(res[i].Value<0? res[i].Value*5: res[i].Value*(-5)) :res[i].Value*3;
+
                     }
                     groups.Add(new()
                     {
                         Results = res,
-                        Avg = (int)values.Average()
+                        Avg = Avg(values)
                     });
                 }
                 var groups2 = groups.OrderBy(x => x.Avg);
                 var max = groups2.Last();
-                if(max.Avg > 50)
+                if(max.Avg > 60)
                 {
                     control++;
                 }
@@ -622,7 +638,15 @@ namespace Server.Controllers.Tech
             }
             return null;
         }
-
+        private int Avg(int[] ar)
+        {
+            int sum = 0;
+            for (int i = 0;i<ar.Length;i++)
+            {
+                sum+=ar[i];
+            }
+            return sum/ar.Length;
+        }
         private string? Link(string link, int context)
         {
             string? newLink = "";

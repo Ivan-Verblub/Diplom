@@ -15,7 +15,7 @@ namespace Gos.Server.Models.Table
         [Invisible]
         public int? id { get; set; }
 
-        [Localize("Код контекста")]
+        [Localize("Контекст")]
         [Typeable(typeof(SearchContext),typeof(SearchContextFilter))]
         [Invisible]
         public int? idSearch { get; set; }

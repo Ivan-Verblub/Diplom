@@ -10,23 +10,23 @@ namespace Gos.Server.Models.Filter
         [Invisible]
         public int? Id { get; set; }
 
-        [Localize("Код контектса")]
+        [Localize("Контекст")]
         [Typeable(typeof(Context),typeof(ContextFilter))]
         public int? IdContext { get; set; }
 
         [Localize("Домен")]
         public string Domen { get; set; }
-        [Localize("Примерный домен")]
+        [Localize("Частичный домен")]
         [Atribute.Filter(Filtration.LIKE)]
         public string DomenL { get; set; }
 
-        [Localize("Код обучения")]
+        [Localize("Контекстное обучение")]
         [Typeable(typeof(Contextable),typeof(ContextableFilter))]
         public int? IdContextable { get; set; }
 
         [Localize("Коментарий")]
         public string Comment { get; set; }
-        [Localize("Примерный коментарий")]
+        [Localize("Частичный коментарий")]
         [Atribute.Filter(Filtration.LIKE)]
         public string CommentL { get; set; }
     }

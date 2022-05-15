@@ -16,13 +16,13 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Название контекста")]
         public string SearchName { get; set; }
-        [Localize("Примерное название контекста")]
+        [Localize("Частичное название контекста")]
         [Atribute.Filter(Filtration.LIKE)]
         public string SearchNameL { get; set; }
 
         [Localize("Название")]
         public string Name { get; set; }
-        [Localize("Примерное название")]
+        [Localize("Частичное название")]
         [Atribute.Filter(Filtration.LIKE)]
         public string NameL { get; set; }
     }

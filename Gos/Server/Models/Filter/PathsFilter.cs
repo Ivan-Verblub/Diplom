@@ -12,7 +12,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Путь")]
         public string Path { get; set; }
-        [Localize("Примерный путь")]
+        [Localize("Частичный путь")]
         [Atribute.Filter(Filtration.LIKE)]
         public string PathL { get; set; }
 
@@ -30,7 +30,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Домен")]
         public string Domen { get; set; }
-        [Localize("Примерный домен")]
+        [Localize("Частичный домен")]
         [Atribute.Filter(Filtration.LIKE)]
         public string DomenL { get; set; }
     }

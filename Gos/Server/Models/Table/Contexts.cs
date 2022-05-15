@@ -15,7 +15,7 @@ namespace Gos.Server.Models.Table
         [Invisible]
         public int? id { get; set; }
 
-        [Localize("Код контекста")]
+        [Localize("Контекст")]
         [Typeable(typeof(Context),typeof(ContextFilter))]
         [Invisible]
         public int? idContext { get; set; }
@@ -25,7 +25,7 @@ namespace Gos.Server.Models.Table
         [Key(false)]
         public string domen { get; set; }
 
-        [Localize("Код обучения")]
+        [Localize("Контекстное обучение")]
         [Typeable(typeof(Contextable), typeof(ContextableFilter))]
         [Invisible]
         public int? idContextable { get; set; }

@@ -14,13 +14,13 @@ namespace Gos.Server.Models.Filter
         [Localize("Инвентарный номер")]
         [Typeable(typeof(Objects),typeof(ObjectsFilter))]
         public string InvNumber { get; set; }
-        [Localize("Инвентарный номер")]
+        [Localize("Частичный инвентарный номер")]
         [Atribute.Filter(Filtration.LIKE)]
         public string InvNumberL { get; set; }
 
         [Localize("Название")]
         public string Name { get; set; }
-        [Localize("Примерное название")]
+        [Localize("Частичное название")]
         [Atribute.Filter(Filtration.LIKE)]
         public string NameL { get; set; }
 
@@ -30,7 +30,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Название статуса")]
         public string Status { get; set; }
-        [Localize("Примерное название статуса")]
+        [Localize("Частичное название статуса")]
         [Atribute.Filter(Filtration.LIKE)]
         public string StatusL { get; set; }
 
@@ -41,7 +41,7 @@ namespace Gos.Server.Models.Filter
         [Localize("Место расположение")]
         public string Location { get; set; }
         [Atribute.Filter(Filtration.LIKE)]
-        [Localize("Примерное место расположение")]
+        [Localize("Частичное место расположение")]
         public string LocationL { get; set; }
 
         [Localize("Дата")]
@@ -53,7 +53,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Коментарий")]
         public string Comment { get; set; }
-        [Localize("Примерный коментарий")]
+        [Localize("Частичный коментарий")]
         [Atribute.Filter(Filtration.LIKE)]
         public string CommentL { get; set; }
     }

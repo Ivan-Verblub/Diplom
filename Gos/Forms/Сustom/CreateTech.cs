@@ -99,7 +99,7 @@ namespace Gos.Forms.Сustom
                                     Id = (int)comboBox1.SelectedValue
                                 })[0].idSearch
                             }));
-                        comboBox2.DisplayMember = "name";
+                        comboBox2.DisplayMember = "searchName";
                         comboBox2.ValueMember = "id";
                     }
                 }

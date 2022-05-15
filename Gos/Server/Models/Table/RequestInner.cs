@@ -22,7 +22,7 @@ namespace Gos.Server.Models.Table
         [Localize("Стоимость")]
         public float? cost { get; set; }
 
-        [Localize("Код категории")]
+        [Localize("Категория")]
         [Typeable(typeof(Scat),typeof(ScatFilter))]
         [Invisible]
         public int? idCat { get; set; }
@@ -31,7 +31,7 @@ namespace Gos.Server.Models.Table
         [AI]
         public string cat { get; set; }
 
-        [Localize("Код ТЗ")]
+        [Localize("ТЗ")]
         [Typeable(typeof(Request), typeof(RequestFilter))]
         [Invisible]
         public int? idRequest { get; set; }

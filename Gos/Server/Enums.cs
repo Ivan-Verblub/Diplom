@@ -43,13 +43,13 @@ namespace Gos.Server
         REMOVE = 1,
         [Localize("Колличество элементов у базовой ссылки")]
         LINKFORMAT = 2,
-        [Localize("Раздел с информацией о каталоге")]
+        [Localize("Раздел с информацией о товаре")]
         LINKADD = 3,
         [Localize("Признак страницы с товаром")]
         LINKISAVAILIBLE = 4,
         [Localize("Время для ожидания прогрузки (мс)")]
         DELAY = 5,
-        [Localize("Признак страницы с коталог")]
+        [Localize("Признак страницы с каталогом")]
         LINKISSEARCH = 6
 
     }

@@ -115,9 +115,15 @@ namespace Gos.Forms
                 File.WriteAllText("Settings\\Server.json", json);
                 Invoke((Action)(() =>
                 {
-                    Close();
+                    label1.Text = "Приложение готово к запуску";
+                    button1.Enabled = true;
                 }));
             });
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

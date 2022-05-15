@@ -11,7 +11,7 @@ namespace Gos.Server.Models.Filter
         public int? IdCat { get; set; }
         [Localize("Название категории")]
         public string Name { get; set; }
-        [Localize("Примерное название категории")]
+        [Localize("Частичное название категории")]
         [Atribute.Filter(Filtration.LIKE)]
         public string NameL { get; set; }
     }

@@ -23,7 +23,7 @@ namespace Gos.Server.Models.Table
         [Localize("Название")]
         public string name { get; set; }
 
-        [Localize("Код статуса")]
+        [Localize("Статус")]
         [Typeable(typeof(SStatus),typeof(SStatusFilter))]
         [Invisible]
         public int? idStatus { get; set; }
@@ -32,7 +32,7 @@ namespace Gos.Server.Models.Table
         [AI]
         public string status { get; set; }
 
-        [Localize("Код расположения")]
+        [Localize("Расположение")]
         [Typeable(typeof(SLocation), typeof(SLocationFilter))]
         [Invisible]
         public int? idLocation { get; set; }

@@ -19,10 +19,11 @@ namespace Gos.Server.Models.Table
         public string name { get; set; }
 
         [Localize("Файл")]
+        [AI]
         [Invisible]
         public string file { get; set; }
 
-        [Localize("Код обучения")]
+        [Localize("Обучение")]
         [Invisible]
         [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
         public int? idLearning { get; set; }

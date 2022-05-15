@@ -118,5 +118,20 @@ namespace Gos.Forms
             var info = new Info(i.InfoForm[typeof(T).Name]);
             info.ShowDialog();
         }
+
+        public void Buttons_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        public void Buttons_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == Keys.F1)
+            {
+                var i = new InfoDictionary();
+                var info = new Info(i.InfoForm[typeof(T).Name]);
+                info.ShowDialog();
+            }
+        }
     }
 }

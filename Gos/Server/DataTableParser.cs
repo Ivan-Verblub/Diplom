@@ -42,10 +42,13 @@ namespace Gos.Server
                         {
                             var loc = ar.GetType().GetMember(ar.ToString())[0]
                                 .GetCustomAttribute<Localize>();
-                            if (loc == null)
-                                rw[prop.Name] = ar.ToString();
-                            else
-                                rw[prop.Name] = loc.Name;
+                            if (((int)value) == (int)ar)
+                            {
+                                if (loc == null)
+                                    rw[prop.Name] = ar.ToString();
+                                else
+                                    rw[prop.Name] = loc.Name;
+                            }
                         }
                     }
                     else if (value == null)

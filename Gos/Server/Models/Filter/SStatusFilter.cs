@@ -11,7 +11,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Статус")]
         public string Status { get; set; }
-        [Localize("Примерный статус")]
+        [Localize("Частичный статус")]
         [Atribute.Filter(Filtration.LIKE)]
         public string StatusL { get; set; }
     }

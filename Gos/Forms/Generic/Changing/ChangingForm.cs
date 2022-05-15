@@ -1,4 +1,5 @@
 ﻿using Gos.Forms.Changing;
+using Gos.Forms.Generic;
 using Gos.Server;
 using Gos.Server.Atribute;
 using System;
@@ -250,7 +251,24 @@ namespace Gos.Forms
                     }
                 }
         }
-
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F1)
+            {
+                var i = new InfoDictionary();
+                var info = new Info(i.InfoForm[typeof(T).Name]);
+                info.ShowDialog();
+            }
+            else if(keyData == Keys.Escape)
+            {
+                button2.PerformClick();
+            }
+            else if(keyData == Keys.Enter)
+            {
+                button1.PerformClick();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         private void flowLayoutPanel1_SizeChanged(object sender, EventArgs e)
         {
 

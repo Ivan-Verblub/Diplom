@@ -77,5 +77,23 @@ namespace Gos.Forms
         {
 
         }
+
+        private void MainF_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (splitContainer4.Panel1.Controls.Count == 0)
+            {
+                (splitContainer1.Panel1.Controls[0] as VMenu).VMenu_PreviewKeyDown(null, new PreviewKeyDownEventArgs(keyData));
+            }
+            else
+            {
+                splitContainer4.Panel1.Controls[0].GetType().GetMethod("Buttons_PreviewKeyDown").
+                    Invoke(splitContainer4.Panel1.Controls[0], new object[] { null, new PreviewKeyDownEventArgs(keyData) });
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

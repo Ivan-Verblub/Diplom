@@ -13,14 +13,14 @@ namespace Gos.Server.Models.Filter
         [Localize("Feature")]
         public string Feature { get; set; }
 
-        [Localize("Примерное feature")]
+        [Localize("Частичное feature")]
         [Atribute.Filter(Filtration.LIKE)]
         public string FeatureL { get; set; }
 
         [Localize("Label")]
         public string Label { get; set; }
 
-        [Localize("Примерное label")]
+        [Localize("Частичное label")]
         [Atribute.Filter(Filtration.LIKE)]
         public string LabelL { get; set; }
 
@@ -31,7 +31,7 @@ namespace Gos.Server.Models.Filter
         [Localize("Название набора данных")]
         public string SetName { get; set; }
 
-        [Localize("Примерное название набора данных")]
+        [Localize("Частичное название набора данных")]
         [Atribute.Filter(Filtration.LIKE)]
         public string SetNameL { get; set; }
     }

@@ -8,13 +8,13 @@ namespace Gos.Server.Models.Filter
         [Localize("Инвентарный номер")]
         [Key(true)]
         public string InvNumber { get; set; }
-        [Localize("Примерный инвентарный номер")]
+        [Localize("Частичный инвентарный номер")]
         [Atribute.Filter(Filtration.LIKE)]
         public string InvNumberL { get; set; }
 
         [Localize("Название")]
         public string Name { get; set; }
-        [Localize("Примерное название")]
+        [Localize("Частичное название")]
         [Atribute.Filter(Filtration.LIKE)]
         public string NameL { get; set; }
 
@@ -31,7 +31,7 @@ namespace Gos.Server.Models.Filter
         
         [Localize("Название статуса")]
         public string Status { get; set; }
-        [Localize("Примерное название статуса")]
+        [Localize("Частичное название статуса")]
         [Atribute.Filter(Filtration.LIKE)]
         public string StatusL { get; set; }
 
@@ -41,7 +41,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Название расположения")]
         public string Location { get; set; }
-        [Localize("Примерное расположения")]
+        [Localize("Частичное расположения")]
         [Atribute.Filter(Filtration.LIKE)]
         public string LocationL { get; set; }
 
@@ -51,7 +51,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Название категории")]
         public string NameC { get; set; }
-        [Localize("Примерное название категории")]
+        [Localize("Частичное название категории")]
         [Atribute.Filter(Filtration.LIKE)]
         public string NameCL { get; set; }
 
@@ -61,7 +61,7 @@ namespace Gos.Server.Models.Filter
 
         [Localize("Название ТЗ")]
         public string NameR { get; set; }
-        [Localize("Примерное название ТЗ")]
+        [Localize("Частичное название ТЗ")]
         [Atribute.Filter(Filtration.LIKE)]
         public string NameRL { get; set; }
     }

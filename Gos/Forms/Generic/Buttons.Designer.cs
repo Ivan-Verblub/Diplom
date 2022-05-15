@@ -73,7 +73,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 3;
-            this.button4.Text = "Инфо";
+            this.button4.Text = "Справка";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -89,6 +89,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Buttons";
             this.Text = "Buttons";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Buttons_KeyPress);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Buttons_PreviewKeyDown);
             this.ResumeLayout(false);
 
         }

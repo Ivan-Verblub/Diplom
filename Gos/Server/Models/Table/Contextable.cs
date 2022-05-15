@@ -24,7 +24,7 @@ namespace Gos.Server.Models.Table
         [AI]
         public int? iter { get; set; }
 
-        [Localize("Код набора данных")]
+        [Localize("Набор данных")]
         [Typeable(typeof(DataSet),typeof(DataSetFilter))]
         [Invisible]
         [AI]
@@ -43,7 +43,7 @@ namespace Gos.Server.Models.Table
         [AI]
         public string version { get; set; }
 
-        [Localize("Код поиска контекста")]
+        [Localize("Контекст поиска")]
         [Typeable(typeof(SearchContext),typeof(SearchContextFilter))]
 
         [Invisible]
