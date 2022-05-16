@@ -33,7 +33,7 @@ namespace Server.ML
             DatabaseLoader loader = _mlContext.Data.CreateDatabaseLoader<Data>();
             DatabaseSource source;
             using (Connector connector = new Connector(
-                Param.Settings.host, Param.Settings.user, Param.Settings.user))
+                Param.Settings.host, Param.Settings.user, Param.Settings.password))
             {
                 connector.Connection.ConnectionString += ";DataBase = gos;";
                 source = new DatabaseSource(

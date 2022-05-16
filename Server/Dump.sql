@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: gos
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `actual` (
   PRIMARY KEY (`idactual`),
   KEY `fk_lerning_actual_idx` (`idlearninghistroy`),
   CONSTRAINT `fk_lerning_actual` FOREIGN KEY (`idlearninghistroy`) REFERENCES `learninghistroy` (`idlearninghistroy`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `context` (
   `idContext` int NOT NULL AUTO_INCREMENT,
   `domen` longtext,
   PRIMARY KEY (`idContext`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `data` (
   PRIMARY KEY (`idData`),
   KEY `fk_set_data_idx` (`idDataSet`),
   CONSTRAINT `fk_set_data` FOREIGN KEY (`idDataSet`) REFERENCES `dataset` (`iddataset`)
-) ENGINE=InnoDB AUTO_INCREMENT=9410 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9509 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `dataset` (
   `iddataset` int NOT NULL AUTO_INCREMENT,
   `setName` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`iddataset`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,7 +170,7 @@ CREATE TABLE `learninghistroy` (
   PRIMARY KEY (`idlearninghistroy`),
   KEY `fk_set_learning_idx` (`iddataset`),
   CONSTRAINT `fk_set_learning` FOREIGN KEY (`iddataset`) REFERENCES `dataset` (`iddataset`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +239,7 @@ CREATE TABLE `options` (
   PRIMARY KEY (`idOptions`),
   KEY `fk_options_context_idx` (`idContext`),
   CONSTRAINT `fk_options_context` FOREIGN KEY (`idContext`) REFERENCES `context` (`idContext`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +258,7 @@ CREATE TABLE `paths` (
   PRIMARY KEY (`idPaths`),
   KEY `fk_context_paths_idx` (`idContext`),
   CONSTRAINT `fk_context_paths` FOREIGN KEY (`idContext`) REFERENCES `context` (`idContext`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,7 +326,7 @@ CREATE TABLE `searchcontext` (
   `idSearchContext` int NOT NULL AUTO_INCREMENT,
   `name` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idSearchContext`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,8 +341,9 @@ CREATE TABLE `searchnames` (
   `idSearchContext` int DEFAULT NULL,
   `name` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idSearchNames`),
-  CONSTRAINT `fk_searchC_searchN` FOREIGN KEY (`idSearchNames`) REFERENCES `searchcontext` (`idSearchContext`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_search_names_idx` (`idSearchContext`),
+  CONSTRAINT `fk_search_names` FOREIGN KEY (`idSearchContext`) REFERENCES `searchcontext` (`idSearchContext`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,4 +383,4 @@ CREATE TABLE `sstatus` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-12 22:22:19
+-- Dump completed on 2022-05-16 11:54:04

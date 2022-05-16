@@ -29,7 +29,7 @@ namespace Server.Controllers.Tech
         private Names? names;
 
         private List<Thread> _threads = new();
-        private const int _threadsMax = 10;
+        private const int _threadsMax = 2;
 
         private List<string> _links = new();
 
