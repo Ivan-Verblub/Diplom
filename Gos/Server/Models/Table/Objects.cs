@@ -10,10 +10,11 @@ namespace Gos.Server.Models.Table
     {
         [Localize("Инвентарный номер")]
         [Key(true)]
+        [Key(false)]
         public string invNumber { get; set; }
 
         [Localize("Название")]
-        [Key(false)]
+        
         public string name { get; set; }
 
         [Localize("Стоимость")]

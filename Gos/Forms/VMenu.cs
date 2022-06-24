@@ -22,11 +22,6 @@ namespace Gos.Forms
             InitializeComponent();
         }
 
-        private void VMenu_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Click(typeof(Scat),typeof(ScatFilter));
@@ -191,8 +186,8 @@ namespace Gos.Forms
                 "5.Заполнить созданный набор данных в пункте " +
                 "\"Загрузка данных с сайта\"(Автоматически) или \"Данные\"(Вручную)\n" +
                 "5.1.Если данные были заполнены Автоматичеки в пункте \"Данные\" " +
-                "укажите признаки\n" +
-                "6.Обучите инструмент в пункте \"Обучить\"\n" +
+                "указать признаки\n" +
+                "6.Обучить инструмент в пункте \"Обучить\"\n" +
                 "7.Создать контекст поиска в пункте \"Контексты поиска\"\n" +
                 "8.Заполнить созданный контекст в пунке \"Содержимое контекстов поиска\"\n" +
                 "9.Связать контекст с обучением в пункте \"Контекстное обучение\"\n" +
@@ -211,11 +206,6 @@ namespace Gos.Forms
                 "11.9 Сформируйте ТЗ и подтвердите его";
             var info = new Info(str);
             info.ShowDialog();
-        }
-
-        public void VMenu_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
         }
 
         public void VMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

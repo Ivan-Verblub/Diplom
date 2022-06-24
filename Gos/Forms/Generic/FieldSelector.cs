@@ -47,10 +47,5 @@ namespace Gos.Forms
                 }
             }
         }
-
-        private void FieldSelector_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

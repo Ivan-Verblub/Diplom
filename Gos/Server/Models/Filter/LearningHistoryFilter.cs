@@ -7,7 +7,7 @@ namespace Gos.Server.Models.Filter
     public class LearningHistoryFilter
     {
 
-        [Localize("Код")]
+        [Localize("Инвентарный номер")]
         [Invisible]
         [Key(true)]
         public int? Id { get; set; }

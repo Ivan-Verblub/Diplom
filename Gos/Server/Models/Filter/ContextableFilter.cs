@@ -6,7 +6,7 @@ namespace Gos.Server.Models.Filter
 {
     public class ContextableFilter
     {
-        [Localize("Код")]
+        [Localize("Инвентарный номер")]
         [Key(true)]
         [Invisible]
         public int? Id { get; set; }

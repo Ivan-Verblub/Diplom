@@ -55,6 +55,7 @@ namespace Gos.Forms.Filter
                         rw["name"] = loc.Name;
                     dt.Rows.Add(rw);
                 }
+                ((ComboBox)Data).DropDownStyle = ComboBoxStyle.DropDownList;
                 ((ComboBox)Data).DataSource = dt;
                 ((ComboBox)Data).ValueMember = "id";
                 ((ComboBox)Data).DisplayMember = "name";
@@ -119,6 +120,7 @@ namespace Gos.Forms.Filter
                 var result = requester.GetType().
                     GetMethod("Select", Type.EmptyTypes).Invoke(requester, null);
                 Data = new ComboBox();
+                ((ComboBox)Data).DropDownStyle = ComboBoxStyle.DropDownList;
                 ((ComboBox)Data).DataSource =
                     (DataTable)typeof(DataTableParser).GetMethod("Parse").
                     MakeGenericMethod(result.GetType().GetElementType())
@@ -151,16 +153,6 @@ namespace Gos.Forms.Filter
                 Data.Width = Width-10;
             };
             flowLayoutPanel1.Controls.Add(Data);
-        }
-
-        private void FilterField_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

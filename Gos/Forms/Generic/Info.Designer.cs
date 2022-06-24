@@ -70,7 +70,6 @@
             this.Name = "Info";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справка";
-            this.Load += new System.EventHandler(this.Info_Load);
             this.ResumeLayout(false);
 
         }

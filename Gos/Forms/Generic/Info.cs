@@ -17,12 +17,6 @@ namespace Gos.Forms.Generic
             InitializeComponent();
             label1.Text = info;
         }
-
-        private void Info_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Close();

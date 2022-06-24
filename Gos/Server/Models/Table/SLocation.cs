@@ -15,7 +15,7 @@ namespace Gos.Server.Models.Table
         public int? idLocation { get; set; }
 
         [Localize("Расположение")]
-        [Key(true)]
+        [Key(false)]
         public string location { get; set; }
     }
 }

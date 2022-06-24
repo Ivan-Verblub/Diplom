@@ -28,11 +28,6 @@ namespace Gos.Forms
             vMenu.Show();
         }
 
-        private void MainF_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void ShowData(Type table,Type filter)
         {
             if(splitContainer4.Panel2.Controls.Count != 0)
@@ -73,15 +68,6 @@ namespace Gos.Forms
             bs.Show();
         }
 
-        private void splitContainer3_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
-
-        private void MainF_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            
-        }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (splitContainer4.Panel1.Controls.Count == 0)

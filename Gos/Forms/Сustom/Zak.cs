@@ -162,11 +162,6 @@ namespace Gos.Forms.Сustom
             }
         }
 
-        private void Zak_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             try
@@ -189,6 +184,18 @@ namespace Gos.Forms.Сustom
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < '0') || (e.KeyChar > '9')) && (e.KeyChar != 8))
+                e.Handled = true;
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < '0') || (e.KeyChar > '9')) && (e.KeyChar != 8))
+                e.Handled = true;
         }
     }
 }

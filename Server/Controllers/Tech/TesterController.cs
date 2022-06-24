@@ -29,7 +29,14 @@ namespace Server.Controllers.Tech
                     }
                     var next = driverInner.FindElement(
                         By.XPath(product.Next));
-                    next.Click();
+                    try
+                    {
+                        next.Click();
+                    }
+                    catch
+                    {
+
+                    }
                 }
                 return true;
             }

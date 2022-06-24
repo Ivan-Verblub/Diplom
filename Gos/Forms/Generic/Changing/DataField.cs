@@ -55,6 +55,7 @@ namespace Gos.Forms.Changing
                         rw["name"] = loc.Name;
                     dt.Rows.Add(rw);
                 }
+                ((ComboBox)Data).DropDownStyle = ComboBoxStyle.DropDownList;
                 ((ComboBox)Data).DataSource = dt;
                 ((ComboBox)Data).ValueMember = "id";
                 ((ComboBox)Data).DisplayMember = "name";
@@ -102,7 +103,7 @@ namespace Gos.Forms.Changing
                 var result = requester.GetType().
                     GetMethod("Select", Type.EmptyTypes).Invoke(requester, null);
                 _data = new ComboBox();
-                
+                ((ComboBox)Data).DropDownStyle = ComboBoxStyle.DropDownList;
                 ((ComboBox)Data).DataSource =
                     (DataTable)typeof(DataTableParser).GetMethod("Parse").
                     MakeGenericMethod(t)
@@ -110,7 +111,8 @@ namespace Gos.Forms.Changing
                 var props = t.GetProperties();
                 foreach (var prop in props)
                 {
-                    var aribute = prop.GetCustomAttribute<Key>(true);
+                    var aributes = prop.GetCustomAttributes<Key>(true);
+                    foreach(var aribute in aributes)
                     if (aribute != null)
                     {
                         if (aribute.IsKey)
@@ -131,6 +133,11 @@ namespace Gos.Forms.Changing
                 _data.Width = Width-20;
             };
             flowLayoutPanel1.Controls.Add(Data);
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

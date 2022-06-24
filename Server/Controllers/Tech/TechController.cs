@@ -236,7 +236,7 @@ namespace Server.Controllers.Tech
                 var dt = st.ContextT.Select(filter);
                 var sFilter = new SearchNamesFilter()
                 {
-                    IdSearch = op[0].Id
+                    IdSearch = names.Id
                 };
                 var sdt = st.SearchNamesT.Select(sFilter);
 
@@ -378,8 +378,14 @@ namespace Server.Controllers.Tech
                                 }
                                 try
                                 {
+                                    var pathFF = new PathsFilter()
+                                    {
+                                        IdContext = context,
+                                        Type = (int)PathType.NEXT
+                                    };
+                                    var pathF2 = st.PathsT.Select(pathFF);
                                     var next = driver.FindElement(
-                                        By.XPath(path.Rows[0].Field<string?>("Path")));
+                                        By.XPath(pathF2.Rows[0].Field<string?>("Path")));
                                     next.Click();
                                     count++;
                                     break;
@@ -681,12 +687,6 @@ namespace Server.Controllers.Tech
             }
 
             return newLink;
-        }
-        private string Parse(string html)
-        {
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(html);
-            return GetLink(doc.DocumentNode);
         }
         private Models.Char[] ContextableSearch(string html, int idContext)
         {

@@ -7,11 +7,20 @@ using System.Text;
 
 namespace Server.MySQL
 {
+    /// <summary>
+    /// Таблица работающая на основе атрибутной системы
+    /// </summary>
+    /// <typeparam name="T">Таблица</typeparam>
+    /// <typeparam name="D">Фильтр</typeparam>
     public class Table<T,D> : ITable<T>,IFilter<D>, IDisposable where T: class where D : class
     {
         private MySqlCommand _command;
         private MySqlDataAdapter _adapter;
         DecryptTable decryptTable;
+        /// <summary>
+        /// Создает экземплер таблицы по структуруе классов
+        /// </summary>
+        /// <param name="connector">Объект подключения</param>
         public Table(Connector connector)
         {
             _command = new MySqlCommand();
@@ -19,6 +28,10 @@ namespace Server.MySQL
             _adapter = new MySqlDataAdapter(_command);
             decryptTable = new DecryptTable(typeof(T),typeof(D));
         }
+        /// <summary>
+        /// Выполняет запрос Select
+        /// </summary>
+        /// <returns>Таблица с результатом запроса, NULL при ошибке</returns>
         public DataTable Select()
         {
             StringBuilder builder = new StringBuilder();
@@ -68,6 +81,11 @@ namespace Server.MySQL
             _command.Parameters.Clear();
             return dt;
         }
+        /// <summary>
+        /// Выполняет запрос Insert
+        /// </summary>
+        /// <param name="obj">Объект таблицы заполненный информацией</param>
+        /// <returns>Результат</returns>
         public string Insert(T obj)
         {
             StringBuilder builder = new StringBuilder();
@@ -144,6 +162,11 @@ namespace Server.MySQL
                 return ex.Message;
             }
         }
+        /// <summary>
+        /// Выполняет запрос Update
+        /// </summary>
+        /// <param name="obj">Объект таблицы заполненный информацией и ключем</param>
+        /// <returns>Результат</returns>
         public string Update(T obj)
         {
             StringBuilder builder = new StringBuilder();
@@ -156,12 +179,9 @@ namespace Server.MySQL
                 {
                     if (field.Name == element.Field)
                     {
-                        if (element.AI)
-                        {
-                            builder.Append(element.DBField);
-                            builder.Append('=');
-                            SetData(builder, field, obj, element);
-                        }
+                        builder.Append(element.DBField);
+                        builder.Append('=');
+                        SetData(builder, field, obj, element);
                         break;
                     }
                 }
@@ -194,12 +214,9 @@ namespace Server.MySQL
                 {
                     if (field.Name == element.Field)
                     {
-                        if (element.AI)
-                        {
-                            builder.Append(element.DBField);
-                            builder.Append('=');
-                            SetData(builder, field, obj, element);
-                        }
+                        builder.Append(element.DBField);
+                        builder.Append('=');
+                        SetData(builder, field, obj, element);
                         break;
                     }
                 }
@@ -225,6 +242,11 @@ namespace Server.MySQL
                 return ex.Message;
             }
         }
+        /// <summary>
+        /// Выполняет запрос Delete
+        /// </summary>
+        /// <param name="obj">Объект таблицы заполненный ключем</param>
+        /// <returns>Результат</returns>
         public string Delete(T obj)
         {
             StringBuilder builder = new StringBuilder();
@@ -237,12 +259,9 @@ namespace Server.MySQL
                 {
                     if (field.Name == element.Field)
                     {
-                        if (element.AI)
-                        {
-                            builder.Append(element.DBField);
-                            builder.Append('=');
-                            SetData(builder, field, obj, element);
-                        }
+                        builder.Append(element.DBField);
+                        builder.Append('=');
+                        SetData(builder, field, obj, element);
                         break;
                     }
                 }
@@ -268,6 +287,11 @@ namespace Server.MySQL
                 return ex.Message;
             }
         }
+        /// <summary>
+        /// Выполняет запрос Select с фильтром
+        /// </summary>
+        /// <param name="obj">Объект фильтра с необходимой информацией</param>
+        /// <returns>Таблицу с результатом запроса, NULL при ошибке</returns>
         public DataTable Select(D obj)
         {
             int k = 0;
@@ -386,18 +410,14 @@ namespace Server.MySQL
                 }
             }
         }
-        bool IsDefault<Tp>(Tp o)
-        {
-            if (o == null)
-                return true;
-            if (Nullable.GetUnderlyingType(typeof(Tp)) != null)
-                return false;
-            var type = o.GetType();
-            if (type.IsClass)
-                return false;
-            else           // => тип-значение, есть конструктор по умолчанию
-                return Activator.CreateInstance(type).Equals(o);
-        }
+        /// <summary>
+        /// Метод заполнения данных в запрос
+        /// </summary>
+        /// <typeparam name="Tp">Тип объекта данных</typeparam>
+        /// <param name="builder">объект строки</param>
+        /// <param name="field">текущее поле</param>
+        /// <param name="obj">объект данных</param>
+        /// <param name="element">информация о поле</param>
         private void SetData<Tp>(StringBuilder builder,
             System.Reflection.PropertyInfo field, Tp obj,
             FieldInfo element)
@@ -431,6 +451,9 @@ namespace Server.MySQL
                     .GetValue(obj)));
             }
         }
+        /// <summary>
+        /// Уничтожение экземляра объекта
+        /// </summary>
         public void Dispose()
         {
             _command.Dispose();

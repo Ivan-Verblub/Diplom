@@ -41,7 +41,7 @@ namespace Gos.Server
     {
         [Localize("Удалить текст со страницы")]
         REMOVE = 1,
-        [Localize("Колличество элементов у базовой ссылки")]
+        [Localize("Количество элементов у базовой ссылки")]
         LINKFORMAT = 2,
         [Localize("Раздел с информацией о товаре")]
         LINKADD = 3,

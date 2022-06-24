@@ -53,7 +53,7 @@ namespace Server.MySQL.Tables.Table
         [OrderAtribute(9)]
         [DataAtribute]
         [FKeyAtribute(table: "request", conection: CType.INNER)]
-        [DBAtribute(hide: false, table: "request", field: "idrequest")]
+        [DBAtribute(hide: false, table: "objects", field: "idrequest")]
         public int? IdRequest { get; set; }
 
         [OrderAtribute(order: 10)]

@@ -70,6 +70,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(22, 118);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -91,6 +92,7 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(22, 234);
             this.comboBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -154,7 +156,6 @@
             this.Name = "LoadDataF";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Загрузка данных";
-            this.Load += new System.EventHandler(this.LoadDataF_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

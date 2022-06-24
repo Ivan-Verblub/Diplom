@@ -84,7 +84,7 @@ namespace Server.Controllers.Tech
                 {
                     Feature = local.SelectNodes(columnTPath)[0].InnerText+
                     ";"+local.SelectNodes(columnVPath)[0].InnerText,
-                    Label = "",
+                    Label = "", 
                     IdDataSet = load.IdDataSet
                 };
                 st.DataT.Insert(dtT);

@@ -52,7 +52,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FieldSelector";
             this.Text = "FieldSelector";
-            this.Load += new System.EventHandler(this.FieldSelector_Load);
             this.ResumeLayout(false);
 
         }

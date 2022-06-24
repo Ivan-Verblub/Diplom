@@ -11,7 +11,7 @@ namespace Gos.Server.Models.Table
     public class Contextable
     {
         [Key(true)]
-        [Localize("Код")]
+        [Localize("Инвентарный номер")]
         [Invisible]
         [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
         public int? id { get; set; }

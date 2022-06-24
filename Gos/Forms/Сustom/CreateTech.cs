@@ -40,11 +40,6 @@ namespace Gos.Forms.Сustom
             dataGridView1.DataSource = dt;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CreateTech_Load(object sender, EventArgs e)
         {
             using (var requster = new
@@ -224,10 +219,11 @@ namespace Gos.Forms.Сustom
                     if(((HttpWebResponse)ex.Response).StatusCode !=
                             HttpStatusCode.BadGateway)
                     {
-                        MessageBox.Show(new 
+                        MessageBox.Show(
+                            "Ошибка поиска", 
+                            new 
                             StreamReader(
                             ex.Response.GetResponseStream()).ReadToEnd(),
-                            "Ошибка поиска",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                         return;
@@ -281,11 +277,6 @@ namespace Gos.Forms.Сustom
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Create(Chars[] chars)
         {
             try
@@ -298,11 +289,6 @@ namespace Gos.Forms.Сustom
                 list.Show();
             }
             list.Create(chars, label3.Text);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void button7_Click_1(object sender, EventArgs e)

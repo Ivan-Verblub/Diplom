@@ -32,11 +32,6 @@ namespace Gos.Forms.Сustom
             }
         }
 
-        private void Learn_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if(comboBox1.SelectedIndex != -1)
@@ -106,7 +101,7 @@ namespace Gos.Forms.Сustom
                 catch
                 {
                     MessageBox.Show(
-                "Обучение прошло не успешно",
+                "Обучение прошло неудачно",
                 "Внимаение",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);

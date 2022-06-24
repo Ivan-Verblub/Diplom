@@ -17,10 +17,11 @@ namespace Gos.Server.Models.Table
         public int? id { get; set; }
 
         [Localize("Инвентарный номер")]
-        [Typeable(typeof(LearningHistory),typeof(LearningHistoryFilter))]
+        [Typeable(typeof(Objects),typeof(ObjectsFilter))]
         public string invNumber { get; set; }
 
         [Localize("Название")]
+        [AI]
         public string name { get; set; }
 
         [Localize("Статус")]

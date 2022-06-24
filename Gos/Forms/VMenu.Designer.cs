@@ -432,8 +432,6 @@
             this.KeyPreview = true;
             this.Name = "VMenu";
             this.Text = "VMenu";
-            this.Load += new System.EventHandler(this.VMenu_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.VMenu_KeyPress);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.VMenu_PreviewKeyDown);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

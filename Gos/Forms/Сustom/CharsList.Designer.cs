@@ -100,9 +100,9 @@
             this.label1.Location = new System.Drawing.Point(18, 447);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 20);
+            this.label1.Size = new System.Drawing.Size(232, 20);
             this.label1.TabIndex = 28;
-            this.label1.Text = "Основание";
+            this.label1.Text = "Обоснование необходимости";
             // 
             // textBox1
             // 
@@ -202,6 +202,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(301, 26);
             this.textBox3.TabIndex = 40;
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // label5
             // 

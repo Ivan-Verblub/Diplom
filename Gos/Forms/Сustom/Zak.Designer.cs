@@ -65,6 +65,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(22, 46);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
@@ -119,6 +120,7 @@
             this.textBox2.Size = new System.Drawing.Size(699, 29);
             this.textBox2.TabIndex = 7;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // label6
             // 
@@ -132,6 +134,7 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(22, 346);
             this.comboBox2.Margin = new System.Windows.Forms.Padding(6);
@@ -141,6 +144,7 @@
             // 
             // comboBox3
             // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(22, 420);
             this.comboBox3.Margin = new System.Windows.Forms.Padding(6);
@@ -160,6 +164,7 @@
             // 
             // comboBox4
             // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(22, 494);
             this.comboBox4.Margin = new System.Windows.Forms.Padding(6);
@@ -196,6 +201,7 @@
             this.textBox3.Size = new System.Drawing.Size(699, 29);
             this.textBox3.TabIndex = 16;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // label9
             // 
@@ -209,6 +215,7 @@
             // 
             // comboBox5
             // 
+            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Location = new System.Drawing.Point(22, 113);
             this.comboBox5.Margin = new System.Windows.Forms.Padding(6);
@@ -297,7 +304,6 @@
             this.Name = "Zak";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Закупить";
-            this.Load += new System.EventHandler(this.Zak_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

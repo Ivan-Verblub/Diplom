@@ -126,10 +126,5 @@ namespace Gos.Forms.Сustom
                     MessageBoxIcon.Warning);
             }
         }
-
-        private void LoadDataF_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

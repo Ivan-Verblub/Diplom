@@ -24,11 +24,6 @@ namespace Gos.Forms
             InitializeComponent();
         }
 
-        private void Load_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private async void Load_Shown(object sender, EventArgs e)
         {
             await Task.Run(() =>
@@ -124,6 +119,11 @@ namespace Gos.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

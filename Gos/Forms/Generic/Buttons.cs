@@ -38,6 +38,14 @@ namespace Gos.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if(df.SelectId() == null)
+            {
+                MessageBox.Show("Запись не выбрана",
+                    "Внимание",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
             var filter = typeof(F).GetConstructor(Type.EmptyTypes).Invoke(null);
             var props = filter.GetType().GetProperties();
             foreach (var prop in props)
@@ -65,6 +73,14 @@ namespace Gos.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (df.SelectId() == null)
+            {
+                MessageBox.Show("Запись не выбрана",
+                    "Внимание",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
             if (MessageBox.Show(
                 "Вы точно хотите удалить запись?",
                 "Удаление",
@@ -117,11 +133,6 @@ namespace Gos.Forms
             var i = new InfoDictionary();
             var info = new Info(i.InfoForm[typeof(T).Name]);
             info.ShowDialog();
-        }
-
-        public void Buttons_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
         }
 
         public void Buttons_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

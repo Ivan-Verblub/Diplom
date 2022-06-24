@@ -103,16 +103,28 @@ namespace Gos.Forms
                                 return ;
                             }
                             string val = ((TextBox)df).Text.Replace("\'", "\\\'").Replace("\"", "\\\"");
-                            if (field.PropertyType == typeof(int))
-                                table.GetType().GetProperty(field.Name).SetValue(table, int.Parse(val));
-                            else if(field.PropertyType == typeof(float))
-                                table.GetType().GetProperty(field.Name).SetValue(table, float.Parse(val.Replace(',','.')));
+                            if (Nullable.GetUnderlyingType(field.PropertyType) == null)
+                            {
+                                if (field.PropertyType == typeof(int))
+                                    table.GetType().GetProperty(field.Name).SetValue(table, int.Parse(val));
+                                else if (field.PropertyType == typeof(float))
+                                    table.GetType().GetProperty(field.Name).SetValue(table, float.Parse(val.Replace(',', '.')));
+                                else
+                                    table.GetType().GetProperty(field.Name).SetValue(table, val);
+                            }
                             else
-                                table.GetType().GetProperty(field.Name).SetValue(table, val);
+                            {
+                                if (Nullable.GetUnderlyingType(field.PropertyType) == typeof(int))
+                                    table.GetType().GetProperty(field.Name).SetValue(table, int.Parse(val));
+                                else if (Nullable.GetUnderlyingType(field.PropertyType) == typeof(float))
+                                    table.GetType().GetProperty(field.Name).SetValue(table, float.Parse(val.Replace(',', '.')));
+                                else
+                                    table.GetType().GetProperty(field.Name).SetValue(table, val);
+                            }
                         }
                         else if (df.GetType() == typeof(DateTimePicker))
                         {
-                            if(((DateTimePicker)df).Checked)
+                            if(!((DateTimePicker)df).Checked)
                             {
                                 MessageBox.Show(
                                     "Заполните все поля",
@@ -233,11 +245,15 @@ namespace Gos.Forms
                                         }
                                         catch
                                         {
-                                            ((ComboBox)((DataField<T, F>)field).Data).SelectedItem =
-                                                ((ComboBox)((DataField<T, F>)field).Data).Items.Cast<DataRowView>().ToList()
-                                                .FirstOrDefault(i => i.Row
-                                                == ((DataTable)((ComboBox)((DataField<T, F>)field).Data).DataSource)
-                                                .Select($"id = {item.GetValue(table[0])}")[0]);
+                                            try
+                                            {
+                                                ((ComboBox)((DataField<T, F>)field).Data).SelectedItem =
+                                                    ((ComboBox)((DataField<T, F>)field).Data).Items.Cast<DataRowView>().ToList()
+                                                    .FirstOrDefault(i => i.Row
+                                                    == ((DataTable)((ComboBox)((DataField<T, F>)field).Data).DataSource)
+                                                    .Select($"id = {item.GetValue(table[0])}")[0]);
+                                            }
+                                            catch { }
                                         }
                                     }
                                     else if (((DataField<T, F>)field).Data.GetType() == typeof(DateTimePicker))
@@ -256,12 +272,12 @@ namespace Gos.Forms
             if (keyData == Keys.F1)
             {
                 var i = new InfoDictionary();
-                var info = new Info(i.InfoForm[typeof(T).Name]);
+                var info = new Info(i.InfoAdd[typeof(T).Name]);
                 info.ShowDialog();
             }
             else if(keyData == Keys.Escape)
             {
-                button2.PerformClick();
+                button3.PerformClick();
             }
             else if(keyData == Keys.Enter)
             {
@@ -269,9 +285,12 @@ namespace Gos.Forms
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-        private void flowLayoutPanel1_SizeChanged(object sender, EventArgs e)
-        {
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var i = new InfoDictionary();
+            var info = new Info(i.InfoAdd[typeof(T).Name]);
+            info.ShowDialog();
         }
     }
 }

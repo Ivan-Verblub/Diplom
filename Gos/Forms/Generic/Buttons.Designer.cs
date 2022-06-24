@@ -89,7 +89,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Buttons";
             this.Text = "Buttons";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Buttons_KeyPress);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Buttons_PreviewKeyDown);
             this.ResumeLayout(false);
 

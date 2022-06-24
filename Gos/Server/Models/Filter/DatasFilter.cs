@@ -10,17 +10,17 @@ namespace Gos.Server.Models.Filter
         [Invisible]
         public int? IdData { get; set; }
 
-        [Localize("Feature")]
+        [Localize("Значение")]
         public string Feature { get; set; }
 
-        [Localize("Частичное feature")]
+        [Localize("Частичное значение")]
         [Atribute.Filter(Filtration.LIKE)]
         public string FeatureL { get; set; }
 
-        [Localize("Label")]
+        [Localize("Признак")]
         public string Label { get; set; }
 
-        [Localize("Частичное label")]
+        [Localize("Частичный признак")]
         [Atribute.Filter(Filtration.LIKE)]
         public string LabelL { get; set; }
 

@@ -9,7 +9,7 @@ namespace Gos.Server.Models.Table
     [Deleteable]
     public class LearningHistory
     {
-        [Localize("Код")]
+        [Localize("Инвентарный номер")]
         [Key(true)]
         [AI]
         [Invisible]
